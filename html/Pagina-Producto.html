@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brei-Box: Producto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <img src="../img/Logo.png" alt="logo">
+        </a>
+        <h1>Brei-Box</h1>
+    </header>
+
+    <main class="row Guitarra">
+        <img id="producto-imagen" class="col-6 imagen" src="" alt="">
+
+        <div class="General col-6">
+            <h2 id="producto-nombre"></h2>
+            <br>
+            <h3 id="producto-precio"></h3>
+            <br><br>
+
+            <div class="accordion" id="accordionProducto">
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapseDescripcion"
+                            aria-expanded="true"
+                            aria-controls="collapseDescripcion">
+                            Descripción
+                        </button>
+                    </h2>
+                    <div id="collapseDescripcion" class="accordion-collapse collapse show"
+                        data-bs-parent="#accordionProducto">
+                        <div class="accordion-body">
+                            <p id="producto-descripcion"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapseCaracteristicas"
+                            aria-expanded="false"
+                            aria-controls="collapseCaracteristicas">
+                            Características
+                        </button>
+                    </h2>
+                    <div id="collapseCaracteristicas" class="accordion-collapse collapse"
+                        data-bs-parent="#accordionProducto">
+                        <div class="accordion-body">
+                            <div id="producto-caracteristicas"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <br>
+            <a href="CreditCard.html">
+                <button type="button" class="btn btn-primary btn-lg">Comprar</button>
+            </a>
+        </div>
+    </main>
+
+    <footer class="container">
+        <form action="">
+            <div class="mb-3 datos">
+                <label for="emailFooter" class="form-label">Correo electrónico</label>
+                <input type="email" class="form-control" id="emailFooter" placeholder="nombre@ejemplo.com">
+            </div>
+            <input class="form-control ENVIAR" type="submit" value="ENVIAR">
+        </form>
+        <a class="datos" href="tel:+34678567876">Teléfono de Contacto</a>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13799.704674040484!2d-8.408104816067125!3d43.35547160691261!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2e7c9ba3b31737%3A0x3c7557c3e9b93042!2sEl%20Corte%20Ingl%C3%A9s%20Coru%C3%B1a!5e0!3m2!1ses!2ses!4v1729609519956!5m2!1ses!2ses" width="300" height="100" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </footer>
+
+    <script src="../js/producto.js"></script>
+</body>
+</html>

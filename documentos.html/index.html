@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brei-Box: Guitarras</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <img id="logo" src="../img/Logo.png" alt="logo">
+        </a>
+        <h1>Brei-Box</h1>
+    </header>
+
+    <main>
+        <p class="Bienvenida">
+            ¡Bienvenido a Brei-Box, tu tienda especializada en guitarras!
+            <br><br>
+            Aquí encontrarás el sonido perfecto que has estado buscando, ya seas principiante o profesional.
+            Explora nuestra selección de guitarras acústicas y eléctricas, todo con la mejor calidad y asesoría personalizada.
+            En Brei-Box, tu pasión por la música encuentra su mejor aliado.
+            <br><br>
+            Échale un vistazo a nuestros productos a continuación.
+        </p>
+
+        <!-- ── CARRUSEL DE MÚSICOS ── -->
+        <section class="carousel-section">
+            <div class="carousel-container">
+                <div class="carousel-track">
+                    <div class="carousel-slide">
+                        <img src="../img/Musicos/hendrix.jpg" alt="Jimi Hendrix">
+                        <div class="carousel-caption">Jimi Hendrix</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="../img/Musicos/Clapton.jpg" alt="Eric Clapton">
+                        <div class="carousel-caption">Eric Clapton</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="../img/Musicos/page.jpg" alt="Jimmy Page">
+                        <div class="carousel-caption">Jimmy Page</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="../img/Musicos/GilmourBlackStrat.jpg" alt="David Gilmour">
+                        <div class="carousel-caption">David Gilmour</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="../img/Musicos/AlbertKing.jpg" alt="Albert King">
+                        <div class="carousel-caption">Albert King</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="../img/Musicos/KevinShields.jpg" alt="Kevin Shields">
+                        <div class="carousel-caption">Kevin Shields</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="../img/Musicos/pageLesPaul.jpg" alt="Jimmy Page Les Paul">
+                        <div class="carousel-caption">Jimmy Page</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="../img/Musicos/danelectroPage.jpg" alt="Jimmy Page Danelectro">
+                        <div class="carousel-caption">Jimmy Page</div>
+                    </div>
+                </div>
+                
+                <!-- Controles del carrusel -->
+                <button class="carousel-btn carousel-btn-prev" aria-label="Anterior">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <button class="carousel-btn carousel-btn-next" aria-label="Siguiente">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+
+                <!-- Indicadores -->
+                <div class="carousel-indicators">
+                    <button class="carousel-indicator active" data-slide="0"></button>
+                    <button class="carousel-indicator" data-slide="1"></button>
+                    <button class="carousel-indicator" data-slide="2"></button>
+                    <button class="carousel-indicator" data-slide="3"></button>
+                    <button class="carousel-indicator" data-slide="4"></button>
+                    <button class="carousel-indicator" data-slide="5"></button>
+                    <button class="carousel-indicator" data-slide="6"></button>
+                    <button class="carousel-indicator" data-slide="7"></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── GUITARRAS ELÉCTRICAS ── -->
+        <h2 class="seccion-titulo">Guitarras Eléctricas</h2>
+        <div class="productos-grid">
+
+            <a class="producto-card" href="Pagina-Producto.html">
+                <img src="../img/Fender-Eléctricas/fender-jimi-hendrix-stratocaster-mn-olympic-white.jpg" alt="Fender Stratocaster Jimi Hendrix">
+                <div class="producto-info">
+                    <p class="producto-nombre">Fender Stratocaster Jimi Hendrix en Olympic White</p>
+                    <p class="producto-precio">1.300,00 €</p>
+                </div>
+            </a>
+
+            <a class="producto-card" href="Pagina-Producto.html">
+                <img src="../img/Gibson-Eléctricas/Gibson Flying V.png" alt="Gibson Flying V">
+                <div class="producto-info">
+                    <p class="producto-nombre">Gibson Flying V</p>
+                    <p class="producto-precio">1.500,00 €</p>
+                </div>
+            </a>
+
+            <a class="producto-card" href="Pagina-Producto.html">
+                <img src="../img/Gibson-Eléctricas/78461f02052fd0a04eb02f6c47cab6bc2de01daa-1000x1000.png" alt="Eric Clapton SG The Fool">
+                <div class="producto-info">
+                    <p class="producto-nombre">Eric Clapton SG "The Fool"</p>
+                    <p class="producto-precio">3.700,00 €</p>
+                </div>
+            </a>
+
+            <a class="producto-card" href="Pagina-Producto.html">
+                <img src="../img/Fender-Eléctricas/guitarra-electrica-fender-troy-van-leeuwen-signature-jazzmaster-bound-rosewood-oxblood.png" alt="Fender Jazzmaster">
+                <div class="producto-info">
+                    <p class="producto-nombre">Fender Jazzmaster Bound Rosewood Oxblood</p>
+                    <p class="producto-precio">2.000,00 €</p>
+                </div>
+            </a>
+
+            <a class="producto-card" href="Pagina-Producto.html">
+                <img src="../img/Gibson-Eléctricas/1989_Gibson_EDS-1275.png" alt="Gibson EDS 1275 Jimmy Page">
+                <div class="producto-info">
+                    <p class="producto-nombre">Gibson EDS 1275 Jimmy Page</p>
+                    <p class="producto-precio">20.000,00 €</p>
+                </div>
+            </a>
+
+            <a class="producto-card" href="Pagina-Producto.html">
+                <img src="../img/Fender-Eléctricas/1502952061Fender_Custom_Shop_David_Gilmour_Stratocaster_NOS.jpg" alt="David Gilmour Stratocaster">
+                <div class="producto-info">
+                    <p class="producto-nombre">David Gilmour Fender Stratocaster</p>
+                    <p class="producto-precio">4.000,00 €</p>
+                </div>
+            </a>
+
+            <a class="producto-card" href="Pagina-Producto.html">
+                <img src="../img/Gibson-Eléctricas/gibson-les-paul-classic-hcs-p-32523.jpg" alt="Gibson Les Paul">
+                <div class="producto-info">
+                    <p class="producto-nombre">Gibson Les Paul</p>
+                    <p class="producto-precio">2.500,00 €</p>
+                </div>
+            </a>
+
+            <a class="producto-card" href="Pagina-Producto.html">
+                <img src="../img/Fender-Eléctricas/Danelectro3021dc59.png" alt="Danelectro 3021 DC59">
+                <div class="producto-info">
+                    <p class="producto-nombre">Danelectro 3021 DC59</p>
+                    <p class="producto-precio">650,00 €</p>
+                </div>
+            </a>
+
+        </div>
+
+        <!-- ── AMPLIFICADORES ── -->
+        <h2 class="seccion-titulo">Amplificadores</h2>
+        <div class="productos-grid">
+
+            <a class="producto-card" href="Pagina-Producto.html">
+                <img src="../img/Amplis/fender-65-deluxe-reverb-amplificador.png" alt="Fender 65 Deluxe Reverb">
+                <div class="producto-info">
+                    <p class="producto-nombre">Fender 65 Deluxe Reverb</p>
+                    <p class="producto-precio">10.000,00 €</p>
+                </div>
+            </a>
+
+            <a class="producto-card" href="Pagina-Producto.html">
+                <img src="../img/Amplis/marshall_plexi_super_lead_1959_gallery_1.png" alt="Marshall Plexi">
+                <div class="producto-info">
+                    <p class="producto-nombre">Marshall 1959 Super Lead Plexi</p>
+                    <p class="producto-precio">3.500,00 €</p>
+                </div>
+            </a>
+
+            <a class="producto-card" href="Pagina-Producto.html">
+                <img src="../img/Amplis/roland-jc-120-jazz-chorus-combo_GIT0000966-000.png" alt="Roland Jazz Chorus">
+                <div class="producto-info">
+                    <p class="producto-nombre">Roland Jazz Chorus JC-120</p>
+                    <p class="producto-precio">1.200,00 €</p>
+                </div>
+            </a>
+
+            <a class="producto-card" href="Pagina-Producto.html">
+                <img src="../img/Amplis/VoxAC30.jpg" alt="Vox AC30">
+                <div class="producto-info">
+                    <p class="producto-nombre">Vox AC30</p>
+                    <p class="producto-precio">899,00 €</p>
+                </div>
+            </a>
+
+        </div>
+
+        <!-- ── PEDALES DE EFECTOS ── -->
+        <h2 class="seccion-titulo">Pedales de Efectos</h2>
+        <div class="productos-grid">
+
+            <a class="producto-card" href="Pagina-Producto.html">
+                <img src="../img/Pedales/BigMuff.png" alt="Big Muff Pi">
+                <div class="producto-info">
+                    <p class="producto-nombre">Big Muff Pi</p>
+                    <p class="producto-precio">95,00 €</p>
+                </div>
+            </a>
+
+            <a class="producto-card" href="Pagina-Producto.html">
+                <img src="../img/Pedales/boss-tr2-tremolo.png" alt="Boss TR-2 Tremolo">
+                <div class="producto-info">
+                    <p class="producto-nombre">Boss TR-2 Tremolo</p>
+                    <p class="producto-precio">115,00 €</p>
+                </div>
+            </a>
+
+            <a class="producto-card" href="Pagina-Producto.html">
+                <img src="../img/Pedales/MemoryMan.png" alt="Memory Man">
+                <div class="producto-info">
+                    <p class="producto-nombre">Electro-Harmonix Vintage Deluxe Memory Man</p>
+                    <p class="producto-precio">900,00 €</p>
+                </div>
+            </a>
+
+            <a class="producto-card" href="Pagina-Producto.html">
+                <img src="../img/Pedales/Wahwah.png" alt="CryBaby Wah">
+                <div class="producto-info">
+                    <p class="producto-nombre">CryBaby Wah</p>
+                    <p class="producto-precio">99,00 €</p>
+                </div>
+            </a>
+
+        </div>
+    </main>
+
+    <footer class="container">
+        <form action="">
+            <div class="mb-3 datos">
+                <label for="emailFooter" class="form-label">Correo electrónico</label>
+                <input type="email" class="form-control" id="emailFooter" placeholder="nombre@ejemplo.com">
+            </div>
+            <input class="form-control ENVIAR" type="submit" value="ENVIAR">
+        </form>
+        <a class="datos" href="tel:+34678567876">Teléfono de Contacto</a>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13799.704674040484!2d-8.408104816067125!3d43.35547160691261!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2e7c9ba3b31737%3A0x3c7557c3e9b93042!2sEl%20Corte%20Ingl%C3%A9s%20Coru%C3%B1a!5e0!3m2!1ses!2ses!4v1729609519956!5m2!1ses!2ses" width="300" height="100" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </footer>
+
+    <script src="../js/carousel.js"></script>
+</body>
+</html>
