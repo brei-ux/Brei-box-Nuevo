@@ -1,0 +1,3335 @@
+================================================================================
+CÓDIGO EXTRAÍDO DEL WORKSPACE
+Total de archivos: 13
+Carpetas raíz: C:\Users\Breixo\Documents\Brei-box-Nuevo
+================================================================================
+
+
+================================================================================
+ARCHIVO 1/13: css\estilos.css
+Ruta completa: C:\Users\Breixo\Documents\Brei-box-Nuevo\css\estilos.css
+================================================================================
+
+/* ============================================================
+   BREI-BOX — ESTILOS GLOBALES
+   Cubre: header, main, footer, productos, tarjeta de pago
+   ============================================================ */
+
+
+/* ── RESET BÁSICO ────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+
+/* ── VARIABLES ───────────────────────────────────────────── */
+
+:root {
+    /* Colores principales */
+    --primary-color:    #2563eb;
+    --primary-dark:     #1e40af;
+    --secondary-color:  #64748b;
+    --success-color:    #10b981;
+    --error-color:      #ef4444;
+
+    /* Gradientes */
+    --card-gradient: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+
+    /* Texto */
+    --text-primary:   #1e293b;
+    --text-secondary: #64748b;
+
+    /* Bordes y fondos */
+    --border-color: #e2e8f0;
+    --input-bg:     #f8fafc;
+    --white:        #ffffff;
+
+    /* Sombras */
+    --shadow-sm:  0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md:  0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg:  0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-xl:  0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+
+/* ── TIPOGRAFÍA BASE ─────────────────────────────────────── */
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+                 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    margin: 0;
+}
+
+/* Evitar que el regla global img { width:100% } rompa el logo y las cards */
+img {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    width: auto;
+}
+
+svg {
+    width: auto;
+}
+
+
+/* ── HEADER ──────────────────────────────────────────────── */
+
+header {
+    display: flex;
+    align-items: center;
+    background-color: lightblue;
+    border-bottom: solid black 2px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    height: 80px;
+    padding: 0 16px;
+    gap: 12px;
+    min-width: 0; /* permite scroll horizontal sin romper layout */
+}
+
+header a {
+    flex-shrink: 0; /* el logo nunca se encoge */
+}
+
+header img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+header h1 {
+    font-size: 2rem; /* tamaño fijo, no relativo al viewport */
+    white-space: nowrap;
+    margin: 0;
+    flex: 1;
+    text-align: center;
+}
+
+
+/* ── MAIN (páginas normales) ─────────────────────────────── */
+
+main {
+    margin-top: 100px;
+    padding: 0 24px 40px;
+}
+
+
+/* ── BIENVENIDA ──────────────────────────────────────────── */
+
+.Bienvenida {
+    text-align: center;
+    padding: 40px 10%;
+    font-size: 1.1rem;
+}
+
+
+/* ── CARRUSEL DE IMÁGENES ────────────────────────────────── */
+
+.carousel-section {
+    margin-bottom: 48px;
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg);
+    background: var(--white);
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-slide {
+    min-width: 100%;
+    position: relative;
+    aspect-ratio: 16/9;
+    background: #1a1a1a; /* fondo oscuro para las fotos */
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* muestra la imagen completa sin distorsionar */
+    object-position: center center;
+    display: block;
+}
+
+/* Ya no necesitamos ajustes individuales con contain */
+
+.carousel-caption {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%);
+    color: var(--white);
+    padding: 16px 24px 32px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* Botones de navegación */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    z-index: 10;
+    color: var(--text-primary);
+}
+
+.carousel-btn:hover {
+    background: var(--white);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-btn-prev {
+    left: 16px;
+}
+
+.carousel-btn-next {
+    right: 16px;
+}
+
+/* Indicadores */
+.carousel-indicators {
+    position: absolute;
+    bottom: 16px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    z-index: 10;
+}
+
+.carousel-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--white);
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s;
+    padding: 0;
+}
+
+.carousel-indicator:hover {
+    background: rgba(255, 255, 255, 0.8);
+    transform: scale(1.2);
+}
+
+.carousel-indicator.active {
+    background: var(--white);
+    width: 32px;
+    border-radius: 6px;
+}
+
+/* Responsive carousel */
+@media (max-width: 768px) {
+    .carousel-btn {
+        width: 36px;
+        height: 36px;
+    }
+
+    .carousel-btn-prev {
+        left: 8px;
+    }
+
+    .carousel-btn-next {
+        right: 8px;
+    }
+
+    .carousel-caption {
+        font-size: 1.2rem;
+        padding: 24px 16px 12px;
+    }
+}
+
+
+/* ── TÍTULOS DE SECCIÓN ──────────────────────────────────── */
+
+.seccion-titulo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+
+/* ── GRID DE PRODUCTOS ───────────────────────────────────── */
+/*
+   Columnas de 260 px fijas:
+     · ≥ 1130 px  → 4 columnas
+     · <  1130 px → 2 columnas
+   El contenido nunca encoge; si hay poco espacio aparece scroll horizontal.
+*/
+
+.productos-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 260px);
+    gap: 24px;
+    margin-bottom: 40px;
+    overflow-x: auto;
+}
+
+@media (max-width: 1130px) {
+    .productos-grid {
+        grid-template-columns: repeat(2, 260px);
+    }
+}
+
+
+/* ── TARJETA DE PRODUCTO ─────────────────────────────────── */
+
+.producto-card {
+    width: 260px;
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.2s;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+}
+
+.producto-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+}
+
+.producto-card img {
+    width: 260px;
+    height: 220px;
+    object-fit: contain;
+    background: var(--input-bg);
+    padding: 12px;
+}
+
+.producto-info {
+    padding: 14px 16px 18px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.producto-nombre {
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0;
+}
+
+.producto-precio {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+
+/* ── PÁGINA DE PRODUCTO INDIVIDUAL ──────────────────────── */
+
+.Guitarra {
+    margin-top: 15%;
+    margin-bottom: 10%;
+}
+
+.imagen {
+    height: min-content;
+}
+
+
+/* ── FOOTER ──────────────────────────────────────────────── */
+
+footer {
+    border-top: 1px solid var(--border-color);
+    padding: 24px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.datos {
+    display: block;
+    width: 50%;
+}
+
+footer .datos {
+    width: auto;
+}
+
+.ENVIAR {
+    width: 10%;
+}
+
+
+/* ============================================================
+   FORMULARIO DE TARJETA DE CRÉDITO
+   (antes en credit-card.css — ahora unificado aquí)
+   ============================================================ */
+
+
+/* ── FONDO DE LA PÁGINA DE PAGO ──────────────────────────── */
+
+.payment-page body,
+body.payment-page {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+}
+
+
+/* ── CONTENEDOR DE PAGO ──────────────────────────────────── */
+
+.payment-container {
+    margin-top: 120px;
+    margin-bottom: 60px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.payment-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    max-width: 1100px;
+    width: 100%;
+    background: var(--white);
+    border-radius: 24px;
+    padding: 50px;
+    box-shadow: var(--shadow-xl);
+    animation: fadeInUp 0.6s ease;
+}
+
+
+/* ── VISTA PREVIA DE LA TARJETA ──────────────────────────── */
+
+.card-preview-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.credit-card {
+    width: 100%;
+    max-width: 380px;
+    aspect-ratio: 1.586;
+    background: var(--card-gradient);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: var(--shadow-xl);
+    position: relative;
+    overflow: hidden;
+    color: var(--white);
+    transition: transform 0.3s ease;
+}
+
+.credit-card:hover {
+    transform: translateY(-5px);
+}
+
+.credit-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.card-chip {
+    margin-bottom: 40px;
+}
+
+.card-number {
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    margin-bottom: 30px;
+    font-family: 'Courier New', monospace;
+}
+
+.card-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.card-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.7;
+    margin-bottom: 5px;
+}
+
+.card-value {
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.card-logo {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+}
+
+
+/* ── FORMULARIO DE PAGO ──────────────────────────────────── */
+
+.payment-form-section {
+    padding: 20px;
+}
+
+.form-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.form-subtitle {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 32px;
+}
+
+.modern-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.form-group {
+    position: relative;
+}
+
+.form-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 14px 16px;
+    padding-right: 48px;
+    font-size: 16px;
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    background: var(--input-bg);
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.form-input:focus {
+    border-color: var(--primary-color);
+    background: var(--white);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+.form-input::placeholder {
+    color: #94a3b8;
+}
+
+.input-icon {
+    position: absolute;
+    right: 16px;
+    top: 42px;
+    color: var(--text-secondary);
+    pointer-events: none;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+
+/* ── CHECKBOX ────────────────────────────────────────────── */
+
+.checkbox-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    cursor: pointer;
+    accent-color: var(--primary-color);
+}
+
+.checkbox-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    cursor: pointer;
+}
+
+.terms-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.terms-link:hover {
+    text-decoration: underline;
+}
+
+
+/* ── BOTONES DEL FORMULARIO DE PAGO ─────────────────────── */
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.btn-submit,
+.btn-cancel {
+    flex: 1;
+    padding: 16px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-submit {
+    background: var(--primary-color);
+    color: var(--white);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-submit:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-submit:active {
+    transform: translateY(0);
+}
+
+.btn-cancel {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 2px solid var(--border-color);
+}
+
+.btn-cancel:hover {
+    background: var(--input-bg);
+    border-color: var(--text-secondary);
+}
+
+
+/* ── BADGES DE SEGURIDAD ─────────────────────────────────── */
+
+.security-badges {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+}
+
+.badge-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+
+/* ── ESTADOS DE VALIDACIÓN ───────────────────────────────── */
+
+.form-input:invalid:not(:placeholder-shown) {
+    border-color: var(--error-color);
+}
+
+.form-input:valid:not(:placeholder-shown) {
+    border-color: var(--success-color);
+}
+
+.form-input:invalid:not(:placeholder-shown):focus {
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
+}
+
+.form-input:valid:not(:placeholder-shown):focus {
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+}
+
+
+/* ── RESPONSIVE: FORMULARIO DE PAGO ─────────────────────── */
+
+@media (max-width: 992px) {
+    .payment-wrapper {
+        grid-template-columns: 1fr;
+        padding: 30px;
+    }
+
+    .card-preview-section {
+        order: -1;
+    }
+
+    .credit-card {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .payment-wrapper {
+        padding: 20px;
+        margin: 0 10px;
+    }
+
+    .form-title {
+        font-size: 24px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .security-badges {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .card-number {
+        font-size: 20px;
+    }
+}
+
+
+/* ── ANIMACIONES ─────────────────────────────────────────── */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+================================================================================
+ARCHIVO 2/13: data\productos.js
+Ruta completa: C:\Users\Breixo\Documents\Brei-box-Nuevo\data\productos.js
+================================================================================
+
+// ============================================================
+// BREI-BOX — js/catalogo.js
+// Sin módulos ES: funciona abriendo el HTML directamente.
+// ============================================================
+
+var catalogo = {
+
+    guitarras: [
+        {
+            id: "fender-stratocaster-hendrix",
+            nombre: "Fender Stratocaster Jimi Hendrix Olympic White",
+            descripcion:
+                "Réplica oficial de la icónica Stratocaster que Jimi Hendrix tocó invertida en su época dorada. " +
+                "Fabricada en la planta de Ensenada, reproduce fielmente los detalles vintage de finales de los 60: " +
+                "mástil en U suave, golpeador de 3 capas blanco y pickups en posición de zurdo montada en diestro, " +
+                "consiguiendo así el tono brillante y agresivo que Hendrix consagró en Woodstock.",
+            caracteristicas: [
+                "Cuerpo de aliso (Alder) con acabado Olympic White",
+                "Mástil de arce en C suave con radio 9.5 pulgadas (241 mm)",
+                "Diapasón de arce con 21 trastes medium jumbo",
+                "Pickups Jimi Hendrix Vintage Noiseless (juego de 3)",
+                "Puente vintage sincronizado de 6 sillas de acero",
+                "Clavijero estilo Fender reversed (zurdo / montaje diestro)",
+                "Electrónica: 1 volumen, 2 tonos, selector de 5 posiciones",
+                "Longitud de escala: 648 mm (25.5 pulgadas)",
+            ],
+            precio: 1300,
+            imagen: "../img/Fender-Eléctricas/fender-jimi-hendrix-stratocaster-mn-olympic-white.jpg",
+        },
+        {
+            id: "gibson-flying-v",
+            nombre: "Gibson Flying V",
+            descripcion:
+                "La Flying V es uno de los diseños más atrevidos de Gibson, presentado en 1958 y rescatado en los 70 " +
+                "por artistas como Albert King y Jimi Hendrix. Su cuerpo en V de caoba proporciona un sustain " +
+                "extraordinario y un acceso sin rival a los trastes más altos. Perfecta para rock clásico, blues y metal.",
+            caracteristicas: [
+                "Cuerpo de caoba (Mahogany) en forma de V",
+                "Mástil de caoba encolado, perfil Slim Taper",
+                "Diapasón de palisandro con radio 12 pulgadas (305 mm)",
+                "Pastillas Gibson 490R (mástil) y 490T (puente)",
+                "Puente ABR-1 y cordal Stop Bar de aluminio",
+                "Clavijero Kluson-style de 3+3",
+                "Electrónica: 2 volúmenes, 1 tono, selector de 3 posiciones",
+                "Longitud de escala: 628 mm (24.75 pulgadas)",
+            ],
+            precio: 1500,
+            imagen: "../img/Gibson-Eléctricas/Gibson Flying V.png",
+        },
+        {
+            id: "gibson-sg-clapton-fool",
+            nombre: "Eric Clapton Gibson SG The Fool",
+            descripcion:
+                "Réplica de la célebre Gibson SG Standard de 1964 que Eric Clapton utilizó durante su etapa con Cream. " +
+                "The Fool es la guitarra más reconocida de Clapton de esa época, decorada por el colectivo holandés " +
+                "The Fool con motivos psicodélicos. Esta versión captura el peso ligero y el punch del diseño " +
+                "original que definió el blues-rock de los 60.",
+            caracteristicas: [
+                "Cuerpo de caoba (Mahogany) con tapa plana",
+                "Mástil de caoba encolado, perfil vintage en C",
+                "Diapasón de palisandro con 22 trastes medium",
+                "Pastillas PAF-style humbuckers de bobina doble",
+                "Puente Tune-o-Matic y cordal Stop Bar",
+                "Doble cutaway de acceso libre hasta el traste 22",
+                "Electrónica: 2 volúmenes, 2 tonos, selector de 3 posiciones",
+                "Longitud de escala: 628 mm (24.75 pulgadas)",
+            ],
+            precio: 3700,
+            imagen: "../img/Gibson-Eléctricas/78461f02052fd0a04eb02f6c47cab6bc2de01daa-1000x1000.png",
+        },
+        {
+            id: "fender-jazzmaster-troy-van-leeuwen",
+            nombre: "Fender Jazzmaster Troy Van Leeuwen Oxblood",
+            descripcion:
+                "Firma del guitarrista de Queens of the Stone Age, Troy Van Leeuwen, esta Jazzmaster combina la " +
+                "estética offset original de los 60 con modificaciones modernas pensadas para la acción en directo. " +
+                "El acabado Oxblood sobre caoba la distingue de cualquier Jazzmaster estándar y la convierte en una " +
+                "pieza tan coleccionable como funcional.",
+            caracteristicas: [
+                "Cuerpo de caoba (Mahogany) con acabado Oxblood",
+                "Mástil de arce con diapasón de palisandro bound (radio 9.5 pulgadas)",
+                "22 trastes medium jumbo",
+                "Pastillas Troy Van Leeuwen Jazzmaster (custom CuNiFe)",
+                "Sistema de vibrato Jazzmaster rhythm/lead circuit",
+                "Puente ajustable de barril con cordal de rodillo",
+                "Botones Dunlop Straplock de serie",
+                "Longitud de escala: 648 mm (25.5 pulgadas)",
+            ],
+            precio: 2000,
+            imagen: "../img/Fender-Eléctricas/guitarra-electrica-fender-troy-van-leeuwen-signature-jazzmaster-bound-rosewood-oxblood.png",
+        },
+        {
+            id: "gibson-eds-1275-jimmy-page",
+            nombre: "Gibson EDS-1275 Jimmy Page Double Neck",
+            descripcion:
+                "Réplica de la doble mástil que Jimmy Page inmortalizó en la interpretación en directo de Stairway to Heaven. " +
+                "La EDS-1275 combina un mástil de 6 cuerdas y uno de 12 cuerdas en un solo cuerpo SG, " +
+                "permitiendo cambiar instantáneamente de registro sin cambiar de instrumento. Una joya de ingeniería " +
+                "lutherie y uno de los iconos absolutos del rock.",
+            caracteristicas: [
+                "Cuerpo doble de caoba (Mahogany), estilo SG",
+                "Mástil 6 cuerdas + mástil 12 cuerdas (ambos caoba encolados)",
+                "Diapasones de palisandro, perfil vintage en C",
+                "4 pastillas humbuckers 490R/490T (dos por mástil)",
+                "Controles individuales por mástil: 2 volúmenes + 2 tonos",
+                "Selector de mástil activo de 3 posiciones",
+                "Puente Tune-o-Matic y cordal Stop Bar en cada mástil",
+                "Longitud de escala: 628 mm (24.75 pulgadas) en ambos mástiles",
+            ],
+            precio: 20000,
+            imagen: "../img/Gibson-Eléctricas/1989_Gibson_EDS-1275.png",
+        },
+        {
+            id: "fender-stratocaster-gilmour",
+            nombre: "David Gilmour Fender Custom Shop Stratocaster NOS",
+            descripcion:
+                "Réplica exacta de la legendaria Black Strat de David Gilmour, la guitarra que definió el sonido " +
+                "de Pink Floyd en discos como The Dark Side of the Moon, Wish You Were Here y The Wall. " +
+                "Fabricada en el Custom Shop de Fender con las especificaciones que el propio Gilmour aprobó: " +
+                "cuerpo de aliso negro, mástil de arce de los 70 y la combinación de pastillas única que él configuró.",
+            caracteristicas: [
+                "Cuerpo de aliso (Alder) con acabado negro NOS (New Old Stock)",
+                "Mástil de arce de un solo trozo, perfil de los 70 (tipo C/U)",
+                "Diapasón de arce con 21 trastes vintage narrow-tall",
+                "Pastillas: EMG-DG20 (set exclusivo David Gilmour)",
+                "Puente Fender vintage 2-pivot de 6 sillas de acero inox",
+                "Clavijero Sperzel Trim-Lok de bloqueo",
+                "Golpeador de 1 capa negro (sin bisel blanco)",
+                "Longitud de escala: 648 mm (25.5 pulgadas)",
+            ],
+            precio: 4000,
+            imagen: "../img/Fender-Eléctricas/1502952061Fender_Custom_Shop_David_Gilmour_Stratocaster_NOS.jpg",
+        },
+        {
+            id: "gibson-les-paul-classic",
+            nombre: "Gibson Les Paul Classic",
+            descripcion:
+                "La Les Paul Classic recupera el espíritu de las legendarias Burst de 1959 con detalles modernos " +
+                "para el guitarrista contemporáneo. Uno de los diseños más influyentes de la historia, utilizado " +
+                "por artistas como Slash, Jimmy Page o Joe Perry. Combina el calor y el sustain ilimitado de su " +
+                "construcción de caoba con la precisión de sus pastillas 57 Classic.",
+            caracteristicas: [
+                "Cuerpo de caoba (Mahogany) con tapa de arce flameado",
+                "Mástil de caoba encolado, perfil 60s Slim Taper en D",
+                "Diapasón de palisandro con radio 12 pulgadas y 22 trastes medium jumbo",
+                "Pastillas Gibson 57 Classic (mástil) y 57 Classic Plus (puente)",
+                "Puente Tune-o-Matic Nashville y cordal Stop Bar aluminio",
+                "Clavijero Grover Rotomatic de 18:1",
+                "Electrónica: 2 volúmenes CTS push-pull (coil-split), 2 tonos, selector 3 posiciones",
+                "Longitud de escala: 628 mm (24.75 pulgadas)",
+            ],
+            precio: 2500,
+            imagen: "../img/Gibson-Eléctricas/gibson-les-paul-classic-hcs-p-32523.jpg",
+        },
+        {
+            id: "danelectro-dc59",
+            nombre: "Danelectro 3021 DC59",
+            descripcion:
+                "La Danelectro DC59 es una de las guitarras con más carácter y personalidad del mercado. Originaria " +
+                "de los 50, fue utilizada por artistas como Jimmy Page en sesiones de estudio y por Syd Barrett. " +
+                "Su construcción semisólida de masonite le da un tono nasal y twangy único, imposible de replicar " +
+                "con una guitarra convencional. Una opción fantástica para cualquier amante del sonido vintage.",
+            caracteristicas: [
+                "Cuerpo semisólido de masonite sobre bastidor de chopo",
+                "Mástil de arce de un solo trozo con diapasón de palisandro",
+                "21 trastes vintage medium",
+                "Pastillas Lipstick Tube de simple bobina (x2)",
+                "Puente ajustable estilo Danelectro vintage",
+                "Clavijero con botones de nacar (vintage style)",
+                "Electrónica: 2 volúmenes, 1 tono, selector de 3 posiciones",
+                "Longitud de escala: 648 mm (25.5 pulgadas)",
+            ],
+            precio: 650,
+            imagen: "../img/Fender-Eléctricas/Danelectro3021dc59.png",
+        },
+    ],
+
+    amplificadores: [
+        {
+            id: "fender-65-deluxe-reverb",
+            nombre: "Fender 65 Deluxe Reverb",
+            descripcion:
+                "Reissue del amplificador combo que definió el sonido del surf y el blues americano en los años 60. " +
+                "El Fender 65 Deluxe Reverb tiene 22 vatios de pura electrónica de válvulas, reverb de muelle y " +
+                "vibrato incorporados, y el glorioso clean que hizo famoso a Fender. Favorito de Neil Young, " +
+                "Billy Gibbons y referencia en estudios de grabación de todo el mundo.",
+            caracteristicas: [
+                "Potencia: 22 W RMS en clase A/B",
+                "Tecnología: todo válvulas (4x 6V6, 5x 12AX7, 2x 12AT7, 1x GZ34)",
+                "Altavoz: 1x 12 pulgadas Jensen C-12K (8 ohmios)",
+                "Reverb de muelle de tanque largo (circuito Accutronics)",
+                "Vibrato con velocidad e intensidad regulables",
+                "Canales: Normal + Vibrato (con entrada de alta y baja impedancia)",
+                "Controles: volumen, graves, agudos, reverb, velocidad, intensidad",
+                "Dimensiones: 60 x 48 x 24 cm — Peso: 19.5 kg",
+            ],
+            precio: 10000,
+            imagen: "../img/Amplis/fender-65-deluxe-reverb-amplificador.png",
+        },
+        {
+            id: "marshall-1959-plexi",
+            nombre: "Marshall 1959 Super Lead Plexi",
+            descripcion:
+                "El amplificador que inventó el rock clásico. El Marshall Plexi de 100 vatios fue el sonido de Jimi " +
+                "Hendrix, Eric Clapton, Pete Townshend y Jimmy Page en la segunda mitad de los 60. Su nombre proviene " +
+                "del panel frontal de plexiglás y su sonido sucio, cargado de armónicos, es el blueprint del rock " +
+                "clásico y el metal de los 70. Esta reissue reproduce el circuito original al detalle.",
+            caracteristicas: [
+                "Potencia: 100 W RMS en clase A/B",
+                "Tecnología: todo válvulas (4x EL34, 4x 12AX7)",
+                "Configuración de cabezal (head) — sin altavoz incluido",
+                "Salidas de altavoz: 16, 8 y 4 ohmios (para caja 4x12)",
+                "2 canales de alta y baja ganancia con 4 entradas jack",
+                "Controles: presencia, graves, medios, agudos, volumen (x2)",
+                "Panel frontal de aluminio estilo gold plexi original",
+                "Peso: 19 kg",
+            ],
+            precio: 3500,
+            imagen: "../img/Amplis/marshall_plexi_super_lead_1959_gallery_1.png",
+        },
+        {
+            id: "roland-jc-120",
+            nombre: "Roland Jazz Chorus JC-120",
+            descripcion:
+                "Desde 1975, el Roland JC-120 es sinónimo de clean perfecto y chorus cristalino. Amplificador de " +
+                "estado sólido, sus 120 W estéreo a través de dos altavoces de 12 pulgadas producen el limpio " +
+                "más nítido y presente de la historia. Imprescindible en el new wave, el pop y el jazz, lo usaron " +
+                "Andy Summers (The Police), Robert Smith (The Cure) y Jonny Greenwood.",
+            caracteristicas: [
+                "Potencia: 120 W estéreo (60 W + 60 W) en estado sólido",
+                "2 altavoces Jensen JC-120 de 12 pulgadas (8 ohmios cada uno)",
+                "Chorus estéreo incorporado (velocidad e intensidad)",
+                "Vibrato incorporado con intensidad y velocidad",
+                "Reverb de muelle de 3 pistas",
+                "2 canales (Normal y Brillante) con 4 entradas",
+                "Bucle de efectos estéreo en serie",
+                "Dimensiones: 67 x 52 x 26 cm — Peso: 32 kg",
+            ],
+            precio: 1200,
+            imagen: "../img/Amplis/roland-jc-120-jazz-chorus-combo_GIT0000966-000.png",
+        },
+        {
+            id: "vox-ac30",
+            nombre: "Vox AC30",
+            descripcion:
+                "El sonido del British Invasion. El Vox AC30 fue el amplificador de The Beatles, The Rolling Stones " +
+                "y The Kinks en los 60, y sigue siendo uno de los combos de válvulas más valorados del mundo. " +
+                "Sus 30 W de clase A producen un overdrive natural y brillante al subir el volumen, con un carácter " +
+                "tonal inconfundible que ningún pedal ha conseguido replicar del todo.",
+            caracteristicas: [
+                "Potencia: 30 W RMS en clase A pura",
+                "Tecnología: todo válvulas (4x EL84, 3x 12AX7, 1x EZ81)",
+                "2 altavoces Celestion Greenback de 12 pulgadas (16 ohmios)",
+                "Canal Normal + canal Top Boost con EQ independiente",
+                "Reverb de muelle y tremolo incorporados",
+                "Salida de altavoz adicional para extensión de caja",
+                "Carcasa basket-weave grille cloth original estilo 60s",
+                "Dimensiones: 70 x 54 x 27 cm — Peso: 30 kg",
+            ],
+            precio: 899,
+            imagen: "../img/Amplis/VoxAC30.jpg",
+        },
+    ],
+
+    pedales: [
+        {
+            id: "big-muff-pi",
+            nombre: "Electro-Harmonix Big Muff Pi",
+            descripcion:
+                "El pedal de distorsión más icónico de la historia. Desde 1969 el Big Muff Pi ha sido el secreto " +
+                "detrás del tono sustanado y cremoso de Carlos Santana, David Gilmour, Kurt Cobain y J Mascis. " +
+                "Su circuito de cuatro etapas de recorte en silicio produce una distorsión suave, musical y " +
+                "con un sustain prácticamente infinito. Un imprescindible absoluto.",
+            caracteristicas: [
+                "Tipo de efecto: Fuzz / Distorsión sustanada",
+                "Controles: Volumen, Tono, Sustain",
+                "Circuito: 4 etapas de recorte en diodos de silicio",
+                "Alimentación: 9 V DC (centro negativo) o pila 9 V",
+                "Consumo: 3.5 mA",
+                "Entradas / Salidas: 1x jack TS de 6.3 mm (mono)",
+                "True Bypass",
+                "Dimensiones: 92 x 51 x 47 mm — Peso: 280 g",
+            ],
+            precio: 95,
+            imagen: "../img/Pedales/BigMuff.png",
+        },
+        {
+            id: "boss-tr2-tremolo",
+            nombre: "Boss TR-2 Tremolo",
+            descripcion:
+                "El TR-2 lleva más de 25 años siendo la referencia en trémolo compacto. Reproduce con fidelidad el " +
+                "trémolo clásico de los amplificadores vintage de los 50 y 60. Su circuito analógico crea una " +
+                "modulación de amplitud suave y musical que va desde un suave cabeceo a pulsos profundos de tipo " +
+                "helicopter. Favorito de Radiohead, Wilco y Sonic Youth.",
+            caracteristicas: [
+                "Tipo de efecto: Tremolo (modulación de amplitud)",
+                "Controles: Wave (forma de onda), Rate (velocidad), Depth (profundidad)",
+                "Circuito analógico puro (sin conversión digital)",
+                "Alimentación: 9 V DC Boss PSA o pila 9 V",
+                "Consumo: 20 mA",
+                "Entradas / Salidas: 1x jack TS de 6.3 mm mono",
+                "Construcción Boss ABS con interruptor de metal",
+                "Dimensiones: 70 x 120 x 55 mm — Peso: 395 g",
+            ],
+            precio: 115,
+            imagen: "../img/Pedales/boss-tr2-tremolo.png",
+        },
+        {
+            id: "ehx-memory-man",
+            nombre: "Electro-Harmonix Vintage Deluxe Memory Man",
+            descripcion:
+                "El delay analógico más buscado por coleccionistas y guitarristas tonales. El Deluxe Memory Man " +
+                "combina un delay BBD (Bucket Brigade Device) de cálido sonido analógico con chorus y vibrato " +
+                "incorporados. The Edge de U2 construyó todo su sonido alrededor de este pedal en los 80. " +
+                "Esta versión vintage recaptura el circuito original con chips NOS.",
+            caracteristicas: [
+                "Tipo de efecto: Delay analógico BBD + Chorus/Vibrato",
+                "Tiempo de delay: hasta 550 ms (analógico)",
+                "Controles: Blend, Level, Delay, Feedback, Chorus/Vibrato switch",
+                "Chips: MN3005 BBD (circuito original vintage)",
+                "Alimentación: 24 V DC (adaptador incluido)",
+                "Consumo: 70 mA",
+                "Entradas / Salidas: 1x jack TS mono I/O",
+                "Dimensiones: 140 x 112 x 55 mm — Peso: 650 g",
+            ],
+            precio: 900,
+            imagen: "../img/Pedales/MemoryMan.png",
+        },
+        {
+            id: "crybaby-wah",
+            nombre: "Dunlop CryBaby Wah GCB95",
+            descripcion:
+                "El pedal wah más vendido de la historia. El CryBaby GCB95 es el estándar absoluto del wah " +
+                "desde 1967. Jimi Hendrix, Slash, Kirk Hammett y Eric Clapton han hecho de él una extensión de " +
+                "su voz en guitarra. Su circuito inductivo basado en el mítico inductor Fasel produce ese barrido " +
+                "vocal inconfundible que ha definido décadas de rock, funk y blues.",
+            caracteristicas: [
+                "Tipo de efecto: Wah-Wah (filtro de barrido)",
+                "Inductor: Fasel rojo (bobina original)",
+                "Circuito: analógico inductivo basado en el diseño original de Vox",
+                "Alimentación: 9 V DC (centro negativo) o pila 9 V",
+                "Consumo: 1 mA",
+                "Carcasa de metal fundido a presión (die-cast zinc)",
+                "Interruptor de activación por presión de talón",
+                "Dimensiones: 107 x 64 x 115 mm — Peso: 520 g",
+            ],
+            precio: 99,
+            imagen: "../img/Pedales/Wahwah.png",
+        },
+    ],
+};
+
+// ── Helpers ───────────────────────────────────────────────────
+
+function formatearPrecio(precio) {
+    return precio.toLocaleString("es-ES", {
+        style: "currency",
+        currency: "EUR",
+        minimumFractionDigits: 2,
+    });
+}
+
+function crearCard(p) {
+    return '<a class="producto-card" href="Pagina-Producto.html?id=' + p.id + '">' +
+               '<img src="' + p.imagen + '" alt="' + p.nombre + '" loading="lazy">' +
+               '<div class="producto-info">' +
+                   '<p class="producto-nombre">' + p.nombre + '</p>' +
+                   '<p class="producto-precio">' + formatearPrecio(p.precio) + '</p>' +
+               '</div>' +
+           '</a>';
+}
+
+function renderGrid(gridId, productos) {
+    var el = document.getElementById(gridId);
+    if (!el) return;
+    el.innerHTML = productos.map(crearCard).join("");
+}
+
+// ── Punto de entrada ──────────────────────────────────────────
+
+document.addEventListener("DOMContentLoaded", function () {
+    renderGrid("grid-guitarras",      catalogo.guitarras);
+    renderGrid("grid-amplificadores", catalogo.amplificadores);
+    renderGrid("grid-pedales",        catalogo.pedales);
+});
+
+
+================================================================================
+ARCHIVO 3/13: documentos.html\index.html
+Ruta completa: C:\Users\Breixo\Documents\Brei-box-Nuevo\documentos.html\index.html
+================================================================================
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brei-Box: Guitarras</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <img id="logo" src="../img/Logo.png" alt="logo">
+        </a>
+        <h1>Brei-Box</h1>
+    </header>
+
+    <main>
+        <p class="Bienvenida">
+            ¡Bienvenido a Brei-Box, tu tienda especializada en guitarras!
+            <br><br>
+            Aquí encontrarás el sonido perfecto que has estado buscando, ya seas principiante o profesional.
+            Explora nuestra selección de guitarras acústicas y eléctricas, todo con la mejor calidad y asesoría personalizada.
+            En Brei-Box, tu pasión por la música encuentra su mejor aliado.
+            <br><br>
+            Échale un vistazo a nuestros productos a continuación.
+        </p>
+
+        <!-- ── CARRUSEL DE MÚSICOS ── -->
+        <section class="carousel-section">
+            <div class="carousel-container">
+                <div class="carousel-track">
+                    <div class="carousel-slide">
+                        <img src="../img/Musicos/hendrix.jpg" alt="Jimi Hendrix">
+                        <div class="carousel-caption">Jimi Hendrix</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="../img/Musicos/Clapton.jpg" alt="Eric Clapton">
+                        <div class="carousel-caption">Eric Clapton</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="../img/Musicos/page.jpg" alt="Jimmy Page">
+                        <div class="carousel-caption">Jimmy Page</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="../img/Musicos/GilmourBlackStrat.jpg" alt="David Gilmour">
+                        <div class="carousel-caption">David Gilmour</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="../img/Musicos/AlbertKing.jpg" alt="Albert King">
+                        <div class="carousel-caption">Albert King</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="../img/Musicos/KevinShields.jpg" alt="Kevin Shields">
+                        <div class="carousel-caption">Kevin Shields</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="../img/Musicos/pageLesPaul.jpg" alt="Jimmy Page Les Paul">
+                        <div class="carousel-caption">Jimmy Page</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="../img/Musicos/danelectroPage.jpg" alt="Jimmy Page Danelectro">
+                        <div class="carousel-caption">Jimmy Page</div>
+                    </div>
+                </div>
+                
+                <!-- Controles del carrusel -->
+                <button class="carousel-btn carousel-btn-prev" aria-label="Anterior">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <button class="carousel-btn carousel-btn-next" aria-label="Siguiente">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+
+                <!-- Indicadores -->
+                <div class="carousel-indicators">
+                    <button class="carousel-indicator active" data-slide="0"></button>
+                    <button class="carousel-indicator" data-slide="1"></button>
+                    <button class="carousel-indicator" data-slide="2"></button>
+                    <button class="carousel-indicator" data-slide="3"></button>
+                    <button class="carousel-indicator" data-slide="4"></button>
+                    <button class="carousel-indicator" data-slide="5"></button>
+                    <button class="carousel-indicator" data-slide="6"></button>
+                    <button class="carousel-indicator" data-slide="7"></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── GUITARRAS ELÉCTRICAS ── -->
+        <h2 class="seccion-titulo">Guitarras Eléctricas</h2>
+        <div class="productos-grid">
+
+            <a class="producto-card" href="Pagina-Producto.html">
+                <img src="../img/Fender-Eléctricas/fender-jimi-hendrix-stratocaster-mn-olympic-white.jpg" alt="Fender Stratocaster Jimi Hendrix">
+                <div class="producto-info">
+                    <p class="producto-nombre">Fender Stratocaster Jimi Hendrix en Olympic White</p>
+                    <p class="producto-precio">1.300,00 €</p>
+                </div>
+            </a>
+
+            <a class="producto-card" href="Pagina-Producto.html">
+                <img src="../img/Gibson-Eléctricas/Gibson Flying V.png" alt="Gibson Flying V">
+                <div class="producto-info">
+                    <p class="producto-nombre">Gibson Flying V</p>
+                    <p class="producto-precio">1.500,00 €</p>
+                </div>
+            </a>
+
+            <a class="producto-card" href="Pagina-Producto.html">
+                <img src="../img/Gibson-Eléctricas/78461f02052fd0a04eb02f6c47cab6bc2de01daa-1000x1000.png" alt="Eric Clapton SG The Fool">
+                <div class="producto-info">
+                    <p class="producto-nombre">Eric Clapton SG "The Fool"</p>
+                    <p class="producto-precio">3.700,00 €</p>
+                </div>
+            </a>
+
+            <a class="producto-card" href="Pagina-Producto.html">
+                <img src="../img/Fender-Eléctricas/guitarra-electrica-fender-troy-van-leeuwen-signature-jazzmaster-bound-rosewood-oxblood.png" alt="Fender Jazzmaster">
+                <div class="producto-info">
+                    <p class="producto-nombre">Fender Jazzmaster Bound Rosewood Oxblood</p>
+                    <p class="producto-precio">2.000,00 €</p>
+                </div>
+            </a>
+
+            <a class="producto-card" href="Pagina-Producto.html">
+                <img src="../img/Gibson-Eléctricas/1989_Gibson_EDS-1275.png" alt="Gibson EDS 1275 Jimmy Page">
+                <div class="producto-info">
+                    <p class="producto-nombre">Gibson EDS 1275 Jimmy Page</p>
+                    <p class="producto-precio">20.000,00 €</p>
+                </div>
+            </a>
+
+            <a class="producto-card" href="Pagina-Producto.html">
+                <img src="../img/Fender-Eléctricas/1502952061Fender_Custom_Shop_David_Gilmour_Stratocaster_NOS.jpg" alt="David Gilmour Stratocaster">
+                <div class="producto-info">
+                    <p class="producto-nombre">David Gilmour Fender Stratocaster</p>
+                    <p class="producto-precio">4.000,00 €</p>
+                </div>
+            </a>
+
+            <a class="producto-card" href="Pagina-Producto.html">
+                <img src="../img/Gibson-Eléctricas/gibson-les-paul-classic-hcs-p-32523.jpg" alt="Gibson Les Paul">
+                <div class="producto-info">
+                    <p class="producto-nombre">Gibson Les Paul</p>
+                    <p class="producto-precio">2.500,00 €</p>
+                </div>
+            </a>
+
+            <a class="producto-card" href="Pagina-Producto.html">
+                <img src="../img/Fender-Eléctricas/Danelectro3021dc59.png" alt="Danelectro 3021 DC59">
+                <div class="producto-info">
+                    <p class="producto-nombre">Danelectro 3021 DC59</p>
+                    <p class="producto-precio">650,00 €</p>
+                </div>
+            </a>
+
+        </div>
+
+        <!-- ── AMPLIFICADORES ── -->
+        <h2 class="seccion-titulo">Amplificadores</h2>
+        <div class="productos-grid">
+
+            <a class="producto-card" href="Pagina-Producto.html">
+                <img src="../img/Amplis/fender-65-deluxe-reverb-amplificador.png" alt="Fender 65 Deluxe Reverb">
+                <div class="producto-info">
+                    <p class="producto-nombre">Fender 65 Deluxe Reverb</p>
+                    <p class="producto-precio">10.000,00 €</p>
+                </div>
+            </a>
+
+            <a class="producto-card" href="Pagina-Producto.html">
+                <img src="../img/Amplis/marshall_plexi_super_lead_1959_gallery_1.png" alt="Marshall Plexi">
+                <div class="producto-info">
+                    <p class="producto-nombre">Marshall 1959 Super Lead Plexi</p>
+                    <p class="producto-precio">3.500,00 €</p>
+                </div>
+            </a>
+
+            <a class="producto-card" href="Pagina-Producto.html">
+                <img src="../img/Amplis/roland-jc-120-jazz-chorus-combo_GIT0000966-000.png" alt="Roland Jazz Chorus">
+                <div class="producto-info">
+                    <p class="producto-nombre">Roland Jazz Chorus JC-120</p>
+                    <p class="producto-precio">1.200,00 €</p>
+                </div>
+            </a>
+
+            <a class="producto-card" href="Pagina-Producto.html">
+                <img src="../img/Amplis/VoxAC30.jpg" alt="Vox AC30">
+                <div class="producto-info">
+                    <p class="producto-nombre">Vox AC30</p>
+                    <p class="producto-precio">899,00 €</p>
+                </div>
+            </a>
+
+        </div>
+
+        <!-- ── PEDALES DE EFECTOS ── -->
+        <h2 class="seccion-titulo">Pedales de Efectos</h2>
+        <div class="productos-grid">
+
+            <a class="producto-card" href="Pagina-Producto.html">
+                <img src="../img/Pedales/BigMuff.png" alt="Big Muff Pi">
+                <div class="producto-info">
+                    <p class="producto-nombre">Big Muff Pi</p>
+                    <p class="producto-precio">95,00 €</p>
+                </div>
+            </a>
+
+            <a class="producto-card" href="Pagina-Producto.html">
+                <img src="../img/Pedales/boss-tr2-tremolo.png" alt="Boss TR-2 Tremolo">
+                <div class="producto-info">
+                    <p class="producto-nombre">Boss TR-2 Tremolo</p>
+                    <p class="producto-precio">115,00 €</p>
+                </div>
+            </a>
+
+            <a class="producto-card" href="Pagina-Producto.html">
+                <img src="../img/Pedales/MemoryMan.png" alt="Memory Man">
+                <div class="producto-info">
+                    <p class="producto-nombre">Electro-Harmonix Vintage Deluxe Memory Man</p>
+                    <p class="producto-precio">900,00 €</p>
+                </div>
+            </a>
+
+            <a class="producto-card" href="Pagina-Producto.html">
+                <img src="../img/Pedales/Wahwah.png" alt="CryBaby Wah">
+                <div class="producto-info">
+                    <p class="producto-nombre">CryBaby Wah</p>
+                    <p class="producto-precio">99,00 €</p>
+                </div>
+            </a>
+
+        </div>
+    </main>
+
+    <footer class="container">
+        <form action="">
+            <div class="mb-3 datos">
+                <label for="emailFooter" class="form-label">Correo electrónico</label>
+                <input type="email" class="form-control" id="emailFooter" placeholder="nombre@ejemplo.com">
+            </div>
+            <input class="form-control ENVIAR" type="submit" value="ENVIAR">
+        </form>
+        <a class="datos" href="tel:+34678567876">Teléfono de Contacto</a>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13799.704674040484!2d-8.408104816067125!3d43.35547160691261!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2e7c9ba3b31737%3A0x3c7557c3e9b93042!2sEl%20Corte%20Ingl%C3%A9s%20Coru%C3%B1a!5e0!3m2!1ses!2ses!4v1729609519956!5m2!1ses!2ses" width="300" height="100" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </footer>
+
+    <script src="../js/carousel.js"></script>
+</body>
+</html>
+
+
+================================================================================
+ARCHIVO 4/13: extractor_codigo.py
+Ruta completa: C:\Users\Breixo\Documents\Brei-box-Nuevo\extractor_codigo.py
+================================================================================
+
+#!/usr/bin/env python3
+"""
+Script para extraer todo el código de un workspace de VSCode
+y compilarlo en un solo archivo con indicadores de origen.
+"""
+
+import os
+import json
+from pathlib import Path
+from typing import List, Set
+
+# Extensiones de archivos de código comunes
+CODE_EXTENSIONS = {
+    '.py', '.js', '.ts', '.tsx', '.jsx', '.java', '.c', '.cpp', '.h', '.hpp',
+    '.cs', '.rb', '.go', '.rs', '.php', '.swift', '.kt', '.scala', '.r',
+    '.m', '.mm', '.dart', '.vue', '.svelte', '.astro', '.html', '.css', '.scss', '.sass',
+    '.less', '.sql', '.sh', '.bash', '.zsh', '.ps1', '.bat', '.cmd', '.json',
+    '.xml', '.yaml', '.yml', '.toml', '.ini', '.cfg', '.conf', '.md', '.rst',
+    '.tex', '.lua', '.perl', '.pl', '.asm', '.s', '.vhdl', '.v', '.sv', '.prisma'
+}
+
+# Carpetas a ignorar
+IGNORE_FOLDERS = {
+    'node_modules', '.git', '__pycache__', '.vscode', '.idea', 'dist', 'build',
+    'out', 'bin', 'obj', 'target', '.next', '.nuxt', 'venv', 'env', '.env',
+    'coverage', '.pytest_cache', '.mypy_cache', 'vendor', 'packages'
+}
+
+# Archivos específicos a ignorar
+IGNORE_FILES = {
+    'pnpm-lock.yaml', 'package-lock.json', 'yarn.lock'
+}
+
+def find_workspace_folders(workspace_file: str = None) -> List[Path]:
+    """
+    Encuentra las carpetas del workspace desde el archivo .code-workspace
+    o usa el directorio actual si no se especifica.
+    """
+    if workspace_file and os.path.exists(workspace_file):
+        with open(workspace_file, 'r', encoding='utf-8') as f:
+            workspace_data = json.load(f)
+            folders = []
+            for folder in workspace_data.get('folders', []):
+                folder_path = Path(folder['path'])
+                # Si la ruta es relativa, hacerla absoluta respecto al workspace
+                if not folder_path.is_absolute():
+                    workspace_dir = Path(workspace_file).parent
+                    folder_path = (workspace_dir / folder_path).resolve()
+                folders.append(folder_path)
+            return folders
+    else:
+        # Si no hay archivo workspace, usar el directorio actual
+        return [Path.cwd()]
+
+def should_ignore_folder(folder_name: str) -> bool:
+    """Verifica si una carpeta debe ser ignorada."""
+    return folder_name in IGNORE_FOLDERS or folder_name.startswith('.')
+
+def is_code_file(file_path: Path) -> bool:
+    """Verifica si un archivo es un archivo de código y no debe ser ignorado."""
+    return (file_path.suffix.lower() in CODE_EXTENSIONS and 
+            file_path.name not in IGNORE_FILES)
+
+def collect_code_files(root_folders: List[Path]) -> List[Path]:
+    """Recopila todos los archivos de código de las carpetas raíz."""
+    code_files = []
+    
+    for root_folder in root_folders:
+        if not root_folder.exists():
+            print(f"⚠️  Advertencia: La carpeta {root_folder} no existe")
+            continue
+            
+        for dirpath, dirnames, filenames in os.walk(root_folder):
+            # Filtrar carpetas a ignorar
+            dirnames[:] = [d for d in dirnames if not should_ignore_folder(d)]
+            
+            for filename in filenames:
+                file_path = Path(dirpath) / filename
+                if is_code_file(file_path):
+                    code_files.append(file_path)
+    
+    return sorted(code_files)
+
+def extract_code_to_file(code_files: List[Path], output_file: str, root_folders: List[Path]):
+    """Extrae el código de todos los archivos y lo escribe en un archivo de salida."""
+    
+    with open(output_file, 'w', encoding='utf-8') as out:
+        out.write("=" * 80 + "\n")
+        out.write("CÓDIGO EXTRAÍDO DEL WORKSPACE\n")
+        out.write(f"Total de archivos: {len(code_files)}\n")
+        out.write(f"Carpetas raíz: {', '.join(str(f) for f in root_folders)}\n")
+        out.write("=" * 80 + "\n\n")
+        
+        for i, file_path in enumerate(code_files, 1):
+            # Encontrar la carpeta raíz correspondiente
+            relative_path = None
+            for root in root_folders:
+                try:
+                    relative_path = file_path.relative_to(root)
+                    break
+                except ValueError:
+                    continue
+            
+            if relative_path is None:
+                relative_path = file_path
+            
+            # Escribir encabezado del archivo
+            out.write("\n" + "=" * 80 + "\n")
+            out.write(f"ARCHIVO {i}/{len(code_files)}: {relative_path}\n")
+            out.write(f"Ruta completa: {file_path}\n")
+            out.write("=" * 80 + "\n\n")
+            
+            # Leer y escribir el contenido del archivo
+            try:
+                with open(file_path, 'r', encoding='utf-8') as code_file:
+                    content = code_file.read()
+                    out.write(content)
+                    if not content.endswith('\n'):
+                        out.write('\n')
+            except UnicodeDecodeError:
+                out.write("[ERROR: No se pudo decodificar el archivo - posiblemente es binario]\n")
+            except Exception as e:
+                out.write(f"[ERROR al leer archivo: {str(e)}]\n")
+            
+            out.write("\n")
+
+def main():
+    print("🔍 Extractor de Código del Workspace\n")
+    
+    # Buscar archivo .code-workspace en el directorio actual
+    workspace_files = list(Path.cwd().glob("*.code-workspace"))
+    
+    if workspace_files:
+        workspace_file = workspace_files[0]
+        print(f"📁 Encontrado workspace: {workspace_file.name}")
+        root_folders = find_workspace_folders(str(workspace_file))
+    else:
+        print("ℹ️  No se encontró archivo .code-workspace, usando directorio actual")
+        root_folders = find_workspace_folders()
+    
+    print(f"\n📂 Carpetas a procesar:")
+    for folder in root_folders:
+        print(f"   • {folder}")
+    
+    # Recopilar archivos
+    print("\n🔎 Buscando archivos de código...")
+    code_files = collect_code_files(root_folders)
+    
+    if not code_files:
+        print("❌ No se encontraron archivos de código")
+        return
+    
+    print(f"✅ Encontrados {len(code_files)} archivos de código")
+    
+    # Generar archivo de salida
+    output_file = "workspace_code_extraction.txt"
+    print(f"\n📝 Generando archivo: {output_file}")
+    
+    extract_code_to_file(code_files, output_file, root_folders)
+    
+    print(f"✅ ¡Completado! Código extraído en: {output_file}")
+    print(f"📊 Total de archivos procesados: {len(code_files)}")
+
+if __name__ == "__main__":
+    main()
+
+
+================================================================================
+ARCHIVO 5/13: html\CreditCard.html
+Ruta completa: C:\Users\Breixo\Documents\Brei-box-Nuevo\html\CreditCard.html
+================================================================================
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brei-Box: Pago Seguro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <img src="../img/Logo.png" alt="logo">
+        </a>
+        <h1>Brei-Box</h1>
+    </header>
+
+    <main class="payment-container">
+        <div class="payment-wrapper">
+
+            <!-- Vista previa de la tarjeta -->
+            <div class="card-preview-section">
+                <div class="credit-card">
+                    <div class="card-chip">
+                        <svg width="50" height="40" viewBox="0 0 50 40">
+                            <rect x="5" y="5" width="40" height="30" rx="5" fill="#FFD700"/>
+                            <line x1="15" y1="10" x2="15" y2="30" stroke="#B8860B" stroke-width="2"/>
+                            <line x1="25" y1="10" x2="25" y2="30" stroke="#B8860B" stroke-width="2"/>
+                            <line x1="35" y1="10" x2="35" y2="30" stroke="#B8860B" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div class="card-number" id="displayCardNumber">•••• •••• •••• ••••</div>
+                    <div class="card-details">
+                        <div class="card-holder">
+                            <div class="card-label">Titular</div>
+                            <div class="card-value" id="displayCardHolder">NOMBRE APELLIDOS</div>
+                        </div>
+                        <div class="card-expiry">
+                            <div class="card-label">Válida hasta</div>
+                            <div class="card-value" id="displayCardExpiry">MM/AA</div>
+                        </div>
+                    </div>
+                    <div class="card-logo">
+                        <svg width="60" height="40" viewBox="0 0 60 40">
+                            <circle cx="20" cy="20" r="15" fill="#EB001B" opacity="0.8"/>
+                            <circle cx="40" cy="20" r="15" fill="#F79E1B" opacity="0.8"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formulario de pago -->
+            <div class="payment-form-section">
+                <h2 class="form-title">Información de Pago</h2>
+                <p class="form-subtitle">Completa los datos de tu tarjeta de forma segura</p>
+
+                <form id="paymentForm" class="modern-form">
+                    <div class="form-group">
+                        <label for="cardNumber" class="form-label">Número de Tarjeta</label>
+                        <input
+                            type="text"
+                            id="cardNumber"
+                            name="cardNumber"
+                            class="form-input"
+                            placeholder="1234 5678 9012 3456"
+                            maxlength="19"
+                            required
+                        >
+                        <div class="input-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect x="2" y="5" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <path d="M2 10h20" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cardHolder" class="form-label">Nombre del Titular</label>
+                        <input
+                            type="text"
+                            id="cardHolder"
+                            name="cardHolder"
+                            class="form-input"
+                            placeholder="Como aparece en la tarjeta"
+                            required
+                        >
+                        <div class="input-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
+                                <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cardExpiry" class="form-label">Fecha de Expiración</label>
+                            <input
+                                type="text"
+                                id="cardExpiry"
+                                name="cardExpiry"
+                                class="form-input"
+                                placeholder="MM/AA"
+                                maxlength="5"
+                                required
+                            >
+                            <div class="input-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect x="3" y="6" width="18" height="15" rx="2" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M3 10h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cardCVV" class="form-label">CVV</label>
+                            <input
+                                type="text"
+                                id="cardCVV"
+                                name="cardCVV"
+                                class="form-input"
+                                placeholder="123"
+                                maxlength="3"
+                                required
+                            >
+                            <div class="input-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect x="2" y="5" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2"/>
+                                    <circle cx="12" cy="12" r="2" fill="currentColor"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="termsAccept" name="termsAccept" required>
+                        <label for="termsAccept" class="checkbox-label">
+                            Acepto los <a href="#" class="terms-link">términos y condiciones</a> y la <a href="#" class="terms-link">política de privacidad</a>
+                        </label>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                            Confirmar Pago
+                        </button>
+                        <button type="button" class="btn-cancel" onclick="window.history.back()">Cancelar</button>
+                    </div>
+
+                    <div class="security-badges">
+                        <div class="badge-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2L3 7v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V7l-9-5z" stroke="#10b981" stroke-width="2"/>
+                                <path d="M9 12l2 2 4-4" stroke="#10b981" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                            Pago seguro SSL
+                        </div>
+                        <div class="badge-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <rect x="3" y="11" width="18" height="11" rx="2" stroke="#10b981" stroke-width="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke="#10b981" stroke-width="2"/>
+                            </svg>
+                            Datos encriptados
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="container">
+        <form action="">
+            <div class="mb-3 datos">
+                <label for="emailFooter" class="form-label">Correo electrónico</label>
+                <input type="email" class="form-control" id="emailFooter" placeholder="nombre@ejemplo.com">
+            </div>
+            <input class="form-control ENVIAR" type="submit" value="ENVIAR">
+        </form>
+        <a class="datos" href="tel:+34678567876">Teléfono de Contacto</a>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13799.704674040484!2d-8.408104816067125!3d43.35547160691261!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2e7c9ba3b31737%3A0x3c7557c3e9b93042!2sEl%20Corte%20Ingl%C3%A9s%20Coru%C3%B1a!5e0!3m2!1ses!2ses!4v1729609519956!5m2!1ses!2ses" width="300" height="100" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </footer>
+
+    <script src="../js/credit-card.js"></script>
+</body>
+</html>
+
+
+================================================================================
+ARCHIVO 6/13: html\index.html
+Ruta completa: C:\Users\Breixo\Documents\Brei-box-Nuevo\html\index.html
+================================================================================
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brei-Box: Guitarras</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <img id="logo" src="../img/Logo.png" alt="logo">
+        </a>
+        <h1>Brei-Box</h1>
+    </header>
+
+    <main>
+        <p class="Bienvenida">
+            ¡Bienvenido a Brei-Box, tu tienda especializada en guitarras!
+            <br><br>
+            Aquí encontrarás el sonido perfecto que has estado buscando, ya seas principiante o profesional.
+            Explora nuestra selección de guitarras acústicas y eléctricas, todo con la mejor calidad y asesoría personalizada.
+            En Brei-Box, tu pasión por la música encuentra su mejor aliado.
+            <br><br>
+            Échale un vistazo a nuestros productos a continuación.
+        </p>
+
+        <!-- ── CARRUSEL DE ESTRELLAS DEL ROCK ── -->
+        <section class="carousel-section">
+            <div class="carousel-container">
+                <div class="carousel-track">
+                    <div class="carousel-slide">
+                        <img src="../img/Musicos/hendrix.jpg" alt="Jimi Hendrix">
+                        <div class="carousel-caption">Jimi Hendrix</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="../img/Musicos/Clapton.jpg" alt="Eric Clapton">
+                        <div class="carousel-caption">Eric Clapton</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="../img/Musicos/page.jpg" alt="Jimmy Page">
+                        <div class="carousel-caption">Jimmy Page</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="../img/Musicos/GilmourBlackStrat.jpg" alt="David Gilmour">
+                        <div class="carousel-caption">David Gilmour</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="../img/Musicos/AlbertKing.jpg" alt="Albert King">
+                        <div class="carousel-caption">Albert King</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="../img/Musicos/KevinShields.jpg" alt="Kevin Shields">
+                        <div class="carousel-caption">Kevin Shields</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="../img/Musicos/pageLesPaul.jpg" alt="Jimmy Page Les Paul">
+                        <div class="carousel-caption">Jimmy Page</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="../img/Musicos/danelectroPage.jpg" alt="Jimmy Page Danelectro">
+                        <div class="carousel-caption">Jimmy Page</div>
+                    </div>
+                </div>
+
+                <!-- Controles -->
+                <button class="carousel-btn carousel-btn-prev" aria-label="Anterior">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <button class="carousel-btn carousel-btn-next" aria-label="Siguiente">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+
+                <!-- Indicadores -->
+                <div class="carousel-indicators">
+                    <button class="carousel-indicator active" data-slide="0"></button>
+                    <button class="carousel-indicator" data-slide="1"></button>
+                    <button class="carousel-indicator" data-slide="2"></button>
+                    <button class="carousel-indicator" data-slide="3"></button>
+                    <button class="carousel-indicator" data-slide="4"></button>
+                    <button class="carousel-indicator" data-slide="5"></button>
+                    <button class="carousel-indicator" data-slide="6"></button>
+                    <button class="carousel-indicator" data-slide="7"></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── GUITARRAS ELÉCTRICAS ── -->
+        <h2 class="seccion-titulo">Guitarras Eléctricas</h2>
+        <div id="grid-guitarras" class="productos-grid"></div>
+
+        <!-- ── AMPLIFICADORES ── -->
+        <h2 class="seccion-titulo">Amplificadores</h2>
+        <div id="grid-amplificadores" class="productos-grid"></div>
+
+        <!-- ── PEDALES DE EFECTOS ── -->
+        <h2 class="seccion-titulo">Pedales de Efectos</h2>
+        <div id="grid-pedales" class="productos-grid"></div>
+    </main>
+
+    <footer class="container">
+        <form action="">
+            <div class="mb-3 datos">
+                <label for="emailFooter" class="form-label">Correo electrónico</label>
+                <input type="email" class="form-control" id="emailFooter" placeholder="nombre@ejemplo.com">
+            </div>
+            <input class="form-control ENVIAR" type="submit" value="ENVIAR">
+        </form>
+        <a class="datos" href="tel:+34678567876">Teléfono de Contacto</a>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13799.704674040484!2d-8.408104816067125!3d43.35547160691261!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2e7c9ba3b31737%3A0x3c7557c3e9b93042!2sEl%20Corte%20Ingl%C3%A9s%20Coru%C3%B1a!5e0!3m2!1ses!2ses!4v1729609519956!5m2!1ses!2ses" width="300" height="100" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </footer>
+
+    <!-- carrusel.js primero (solo toca el DOM del carrusel) -->
+    <!-- catalogo.js después (rellena las grids de productos) -->
+    <script src="../js/carrusel.js"></script>
+    <script src="../js/catalogo.js"></script>
+</body>
+</html>
+
+
+================================================================================
+ARCHIVO 7/13: html\Pagina-Producto.html
+Ruta completa: C:\Users\Breixo\Documents\Brei-box-Nuevo\html\Pagina-Producto.html
+================================================================================
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brei-Box: Producto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <img src="../img/Logo.png" alt="logo">
+        </a>
+        <h1>Brei-Box</h1>
+    </header>
+
+    <main class="row Guitarra">
+        <img id="producto-imagen" class="col-6 imagen" src="" alt="">
+
+        <div class="General col-6">
+            <h2 id="producto-nombre"></h2>
+            <br>
+            <h3 id="producto-precio"></h3>
+            <br><br>
+
+            <div class="accordion" id="accordionProducto">
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapseDescripcion"
+                            aria-expanded="true"
+                            aria-controls="collapseDescripcion">
+                            Descripción
+                        </button>
+                    </h2>
+                    <div id="collapseDescripcion" class="accordion-collapse collapse show"
+                        data-bs-parent="#accordionProducto">
+                        <div class="accordion-body">
+                            <p id="producto-descripcion"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapseCaracteristicas"
+                            aria-expanded="false"
+                            aria-controls="collapseCaracteristicas">
+                            Características
+                        </button>
+                    </h2>
+                    <div id="collapseCaracteristicas" class="accordion-collapse collapse"
+                        data-bs-parent="#accordionProducto">
+                        <div class="accordion-body">
+                            <div id="producto-caracteristicas"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <br>
+            <a href="CreditCard.html">
+                <button type="button" class="btn btn-primary btn-lg">Comprar</button>
+            </a>
+        </div>
+    </main>
+
+    <footer class="container">
+        <form action="">
+            <div class="mb-3 datos">
+                <label for="emailFooter" class="form-label">Correo electrónico</label>
+                <input type="email" class="form-control" id="emailFooter" placeholder="nombre@ejemplo.com">
+            </div>
+            <input class="form-control ENVIAR" type="submit" value="ENVIAR">
+        </form>
+        <a class="datos" href="tel:+34678567876">Teléfono de Contacto</a>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13799.704674040484!2d-8.408104816067125!3d43.35547160691261!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2e7c9ba3b31737%3A0x3c7557c3e9b93042!2sEl%20Corte%20Ingl%C3%A9s%20Coru%C3%B1a!5e0!3m2!1ses!2ses!4v1729609519956!5m2!1ses!2ses" width="300" height="100" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </footer>
+
+    <script src="../js/producto.js"></script>
+</body>
+</html>
+
+
+================================================================================
+ARCHIVO 8/13: js\carousel.js
+Ruta completa: C:\Users\Breixo\Documents\Brei-box-Nuevo\js\carousel.js
+================================================================================
+
+// ============================================
+// CARRUSEL AUTOMÁTICO DE IMÁGENES
+// ============================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    const track = document.querySelector('.carousel-track');
+    const slides = document.querySelectorAll('.carousel-slide');
+    const prevBtn = document.querySelector('.carousel-btn-prev');
+    const nextBtn = document.querySelector('.carousel-btn-next');
+    const indicators = document.querySelectorAll('.carousel-indicator');
+    
+    let currentIndex = 0;
+    let autoplayInterval;
+    const AUTOPLAY_DELAY = 4000; // 4 segundos
+    
+    // Función para actualizar la posición del carrusel
+    function updateCarousel(index) {
+        // Asegurar que el índice esté en el rango válido
+        if (index < 0) {
+            index = slides.length - 1;
+        } else if (index >= slides.length) {
+            index = 0;
+        }
+        
+        currentIndex = index;
+        
+        // Mover el track
+        const offset = -currentIndex * 100;
+        track.style.transform = `translateX(${offset}%)`;
+        
+        // Actualizar indicadores
+        indicators.forEach((indicator, i) => {
+            if (i === currentIndex) {
+                indicator.classList.add('active');
+            } else {
+                indicator.classList.remove('active');
+            }
+        });
+    }
+    
+    // Función para ir a la siguiente diapositiva
+    function nextSlide() {
+        updateCarousel(currentIndex + 1);
+    }
+    
+    // Función para ir a la diapositiva anterior
+    function prevSlide() {
+        updateCarousel(currentIndex - 1);
+    }
+    
+    // Función para iniciar la reproducción automática
+    function startAutoplay() {
+        autoplayInterval = setInterval(nextSlide, AUTOPLAY_DELAY);
+    }
+    
+    // Función para detener la reproducción automática
+    function stopAutoplay() {
+        clearInterval(autoplayInterval);
+    }
+    
+    // Función para reiniciar el autoplay
+    function resetAutoplay() {
+        stopAutoplay();
+        startAutoplay();
+    }
+    
+    // Event listeners para los botones
+    prevBtn.addEventListener('click', function() {
+        prevSlide();
+        resetAutoplay();
+    });
+    
+    nextBtn.addEventListener('click', function() {
+        nextSlide();
+        resetAutoplay();
+    });
+    
+    // Event listeners para los indicadores
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', function() {
+            updateCarousel(index);
+            resetAutoplay();
+        });
+    });
+    
+    // Pausar autoplay cuando el ratón está sobre el carrusel
+    const carouselContainer = document.querySelector('.carousel-container');
+    
+    carouselContainer.addEventListener('mouseenter', stopAutoplay);
+    carouselContainer.addEventListener('mouseleave', startAutoplay);
+    
+    // Soporte para gestos táctiles en móviles
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    carouselContainer.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+        stopAutoplay();
+    });
+    
+    carouselContainer.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+        startAutoplay();
+    });
+    
+    function handleSwipe() {
+        const swipeThreshold = 50; // mínimo de píxeles para considerar un swipe
+        
+        if (touchStartX - touchEndX > swipeThreshold) {
+            // Swipe a la izquierda - siguiente
+            nextSlide();
+        } else if (touchEndX - touchStartX > swipeThreshold) {
+            // Swipe a la derecha - anterior
+            prevSlide();
+        }
+    }
+    
+    // Soporte para navegación con teclado
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') {
+            prevSlide();
+            resetAutoplay();
+        } else if (e.key === 'ArrowRight') {
+            nextSlide();
+            resetAutoplay();
+        }
+    });
+    
+    // Iniciar el autoplay cuando se carga la página
+    startAutoplay();
+    
+    // Pausar cuando la pestaña no está visible
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            stopAutoplay();
+        } else {
+            startAutoplay();
+        }
+    });
+});
+
+
+================================================================================
+ARCHIVO 9/13: js\carrusel.js
+Ruta completa: C:\Users\Breixo\Documents\Brei-box-Nuevo\js\carrusel.js
+================================================================================
+
+// ============================================================
+// BREI-BOX — js/carrusel.js
+// Carrusel automático de imágenes
+// ============================================================
+
+document.addEventListener('DOMContentLoaded', function () {
+    var track      = document.querySelector('.carousel-track');
+    var slides     = document.querySelectorAll('.carousel-slide');
+    var prevBtn    = document.querySelector('.carousel-btn-prev');
+    var nextBtn    = document.querySelector('.carousel-btn-next');
+    var indicators = document.querySelectorAll('.carousel-indicator');
+    var container  = document.querySelector('.carousel-container');
+
+    var currentIndex    = 0;
+    var autoplayInterval;
+    var AUTOPLAY_DELAY  = 4000;
+
+    // ── Mover el carrusel a un índice concreto ────────────────
+
+    function updateCarousel(index) {
+        if (index < 0) {
+            index = slides.length - 1;
+        } else if (index >= slides.length) {
+            index = 0;
+        }
+
+        currentIndex = index;
+        track.style.transform = 'translateX(' + (-currentIndex * 100) + '%)';
+
+        indicators.forEach(function (dot, i) {
+            dot.classList.toggle('active', i === currentIndex);
+        });
+    }
+
+    function nextSlide() { updateCarousel(currentIndex + 1); }
+    function prevSlide() { updateCarousel(currentIndex - 1); }
+
+    // ── Autoplay ──────────────────────────────────────────────
+
+    function startAutoplay()  { autoplayInterval = setInterval(nextSlide, AUTOPLAY_DELAY); }
+    function stopAutoplay()   { clearInterval(autoplayInterval); }
+    function resetAutoplay()  { stopAutoplay(); startAutoplay(); }
+
+    // ── Controles ─────────────────────────────────────────────
+
+    prevBtn.addEventListener('click', function () { prevSlide(); resetAutoplay(); });
+    nextBtn.addEventListener('click', function () { nextSlide(); resetAutoplay(); });
+
+    indicators.forEach(function (dot, i) {
+        dot.addEventListener('click', function () { updateCarousel(i); resetAutoplay(); });
+    });
+
+    // Pausa al pasar el ratón
+    container.addEventListener('mouseenter', stopAutoplay);
+    container.addEventListener('mouseleave', startAutoplay);
+
+    // ── Gestos táctiles ───────────────────────────────────────
+
+    var touchStartX = 0;
+
+    container.addEventListener('touchstart', function (e) {
+        touchStartX = e.changedTouches[0].screenX;
+        stopAutoplay();
+    });
+
+    container.addEventListener('touchend', function (e) {
+        var diff = touchStartX - e.changedTouches[0].screenX;
+        if (diff > 50)       nextSlide();
+        else if (diff < -50) prevSlide();
+        startAutoplay();
+    });
+
+    // ── Teclado ───────────────────────────────────────────────
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft')  { prevSlide(); resetAutoplay(); }
+        if (e.key === 'ArrowRight') { nextSlide(); resetAutoplay(); }
+    });
+
+    // ── Visibilidad de la pestaña ─────────────────────────────
+
+    document.addEventListener('visibilitychange', function () {
+        document.hidden ? stopAutoplay() : startAutoplay();
+    });
+
+    // ── Arranque ──────────────────────────────────────────────
+    startAutoplay();
+});
+
+
+================================================================================
+ARCHIVO 10/13: js\catalogo.js
+Ruta completa: C:\Users\Breixo\Documents\Brei-box-Nuevo\js\catalogo.js
+================================================================================
+
+// ============================================================
+// BREI-BOX — js/catalogo.js
+// Sin módulos ES: funciona abriendo el HTML directamente.
+// ============================================================
+
+var catalogo = {
+
+    guitarras: [
+        {
+            id: "fender-stratocaster-hendrix",
+            nombre: "Fender Stratocaster Jimi Hendrix Olympic White",
+            descripcion:
+                "Réplica oficial de la icónica Stratocaster que Jimi Hendrix tocó invertida en su época dorada. " +
+                "Fabricada en la planta de Ensenada, reproduce fielmente los detalles vintage de finales de los 60: " +
+                "mástil en U suave, golpeador de 3 capas blanco y pickups en posición de zurdo montada en diestro, " +
+                "consiguiendo así el tono brillante y agresivo que Hendrix consagró en Woodstock.",
+            caracteristicas: [
+                "Cuerpo de aliso (Alder) con acabado Olympic White",
+                "Mástil de arce en C suave con radio 9.5 pulgadas (241 mm)",
+                "Diapasón de arce con 21 trastes medium jumbo",
+                "Pickups Jimi Hendrix Vintage Noiseless (juego de 3)",
+                "Puente vintage sincronizado de 6 sillas de acero",
+                "Clavijero estilo Fender reversed (zurdo / montaje diestro)",
+                "Electrónica: 1 volumen, 2 tonos, selector de 5 posiciones",
+                "Longitud de escala: 648 mm (25.5 pulgadas)",
+            ],
+            precio: 1300,
+            imagen: "../img/Fender-Eléctricas/fender-jimi-hendrix-stratocaster-mn-olympic-white.jpg",
+        },
+        {
+            id: "gibson-flying-v",
+            nombre: "Gibson Flying V",
+            descripcion:
+                "La Flying V es uno de los diseños más atrevidos de Gibson, presentado en 1958 y rescatado en los 70 " +
+                "por artistas como Albert King y Jimi Hendrix. Su cuerpo en V de caoba proporciona un sustain " +
+                "extraordinario y un acceso sin rival a los trastes más altos. Perfecta para rock clásico, blues y metal.",
+            caracteristicas: [
+                "Cuerpo de caoba (Mahogany) en forma de V",
+                "Mástil de caoba encolado, perfil Slim Taper",
+                "Diapasón de palisandro con radio 12 pulgadas (305 mm)",
+                "Pastillas Gibson 490R (mástil) y 490T (puente)",
+                "Puente ABR-1 y cordal Stop Bar de aluminio",
+                "Clavijero Kluson-style de 3+3",
+                "Electrónica: 2 volúmenes, 1 tono, selector de 3 posiciones",
+                "Longitud de escala: 628 mm (24.75 pulgadas)",
+            ],
+            precio: 1500,
+            imagen: "../img/Gibson-Eléctricas/Gibson Flying V.png",
+        },
+        {
+            id: "gibson-sg-clapton-fool",
+            nombre: "Eric Clapton Gibson SG The Fool",
+            descripcion:
+                "Réplica de la célebre Gibson SG Standard de 1964 que Eric Clapton utilizó durante su etapa con Cream. " +
+                "The Fool es la guitarra más reconocida de Clapton de esa época, decorada por el colectivo holandés " +
+                "The Fool con motivos psicodélicos. Esta versión captura el peso ligero y el punch del diseño " +
+                "original que definió el blues-rock de los 60.",
+            caracteristicas: [
+                "Cuerpo de caoba (Mahogany) con tapa plana",
+                "Mástil de caoba encolado, perfil vintage en C",
+                "Diapasón de palisandro con 22 trastes medium",
+                "Pastillas PAF-style humbuckers de bobina doble",
+                "Puente Tune-o-Matic y cordal Stop Bar",
+                "Doble cutaway de acceso libre hasta el traste 22",
+                "Electrónica: 2 volúmenes, 2 tonos, selector de 3 posiciones",
+                "Longitud de escala: 628 mm (24.75 pulgadas)",
+            ],
+            precio: 3700,
+            imagen: "../img/Gibson-Eléctricas/78461f02052fd0a04eb02f6c47cab6bc2de01daa-1000x1000.png",
+        },
+        {
+            id: "fender-jazzmaster-troy-van-leeuwen",
+            nombre: "Fender Jazzmaster Troy Van Leeuwen Oxblood",
+            descripcion:
+                "Firma del guitarrista de Queens of the Stone Age, Troy Van Leeuwen, esta Jazzmaster combina la " +
+                "estética offset original de los 60 con modificaciones modernas pensadas para la acción en directo. " +
+                "El acabado Oxblood sobre caoba la distingue de cualquier Jazzmaster estándar y la convierte en una " +
+                "pieza tan coleccionable como funcional.",
+            caracteristicas: [
+                "Cuerpo de caoba (Mahogany) con acabado Oxblood",
+                "Mástil de arce con diapasón de palisandro bound (radio 9.5 pulgadas)",
+                "22 trastes medium jumbo",
+                "Pastillas Troy Van Leeuwen Jazzmaster (custom CuNiFe)",
+                "Sistema de vibrato Jazzmaster rhythm/lead circuit",
+                "Puente ajustable de barril con cordal de rodillo",
+                "Botones Dunlop Straplock de serie",
+                "Longitud de escala: 648 mm (25.5 pulgadas)",
+            ],
+            precio: 2000,
+            imagen: "../img/Fender-Eléctricas/guitarra-electrica-fender-troy-van-leeuwen-signature-jazzmaster-bound-rosewood-oxblood.png",
+        },
+        {
+            id: "gibson-eds-1275-jimmy-page",
+            nombre: "Gibson EDS-1275 Jimmy Page Double Neck",
+            descripcion:
+                "Réplica de la doble mástil que Jimmy Page inmortalizó en la interpretación en directo de Stairway to Heaven. " +
+                "La EDS-1275 combina un mástil de 6 cuerdas y uno de 12 cuerdas en un solo cuerpo SG, " +
+                "permitiendo cambiar instantáneamente de registro sin cambiar de instrumento. Una joya de ingeniería " +
+                "lutherie y uno de los iconos absolutos del rock.",
+            caracteristicas: [
+                "Cuerpo doble de caoba (Mahogany), estilo SG",
+                "Mástil 6 cuerdas + mástil 12 cuerdas (ambos caoba encolados)",
+                "Diapasones de palisandro, perfil vintage en C",
+                "4 pastillas humbuckers 490R/490T (dos por mástil)",
+                "Controles individuales por mástil: 2 volúmenes + 2 tonos",
+                "Selector de mástil activo de 3 posiciones",
+                "Puente Tune-o-Matic y cordal Stop Bar en cada mástil",
+                "Longitud de escala: 628 mm (24.75 pulgadas) en ambos mástiles",
+            ],
+            precio: 20000,
+            imagen: "../img/Gibson-Eléctricas/1989_Gibson_EDS-1275.png",
+        },
+        {
+            id: "fender-stratocaster-gilmour",
+            nombre: "David Gilmour Fender Custom Shop Stratocaster NOS",
+            descripcion:
+                "Réplica exacta de la legendaria Black Strat de David Gilmour, la guitarra que definió el sonido " +
+                "de Pink Floyd en discos como The Dark Side of the Moon, Wish You Were Here y The Wall. " +
+                "Fabricada en el Custom Shop de Fender con las especificaciones que el propio Gilmour aprobó: " +
+                "cuerpo de aliso negro, mástil de arce de los 70 y la combinación de pastillas única que él configuró.",
+            caracteristicas: [
+                "Cuerpo de aliso (Alder) con acabado negro NOS (New Old Stock)",
+                "Mástil de arce de un solo trozo, perfil de los 70 (tipo C/U)",
+                "Diapasón de arce con 21 trastes vintage narrow-tall",
+                "Pastillas: EMG-DG20 (set exclusivo David Gilmour)",
+                "Puente Fender vintage 2-pivot de 6 sillas de acero inox",
+                "Clavijero Sperzel Trim-Lok de bloqueo",
+                "Golpeador de 1 capa negro (sin bisel blanco)",
+                "Longitud de escala: 648 mm (25.5 pulgadas)",
+            ],
+            precio: 4000,
+            imagen: "../img/Fender-Eléctricas/1502952061Fender_Custom_Shop_David_Gilmour_Stratocaster_NOS.jpg",
+        },
+        {
+            id: "gibson-les-paul-classic",
+            nombre: "Gibson Les Paul Classic",
+            descripcion:
+                "La Les Paul Classic recupera el espíritu de las legendarias Burst de 1959 con detalles modernos " +
+                "para el guitarrista contemporáneo. Uno de los diseños más influyentes de la historia, utilizado " +
+                "por artistas como Slash, Jimmy Page o Joe Perry. Combina el calor y el sustain ilimitado de su " +
+                "construcción de caoba con la precisión de sus pastillas 57 Classic.",
+            caracteristicas: [
+                "Cuerpo de caoba (Mahogany) con tapa de arce flameado",
+                "Mástil de caoba encolado, perfil 60s Slim Taper en D",
+                "Diapasón de palisandro con radio 12 pulgadas y 22 trastes medium jumbo",
+                "Pastillas Gibson 57 Classic (mástil) y 57 Classic Plus (puente)",
+                "Puente Tune-o-Matic Nashville y cordal Stop Bar aluminio",
+                "Clavijero Grover Rotomatic de 18:1",
+                "Electrónica: 2 volúmenes CTS push-pull (coil-split), 2 tonos, selector 3 posiciones",
+                "Longitud de escala: 628 mm (24.75 pulgadas)",
+            ],
+            precio: 2500,
+            imagen: "../img/Gibson-Eléctricas/gibson-les-paul-classic-hcs-p-32523.jpg",
+        },
+        {
+            id: "danelectro-dc59",
+            nombre: "Danelectro 3021 DC59",
+            descripcion:
+                "La Danelectro DC59 es una de las guitarras con más carácter y personalidad del mercado. Originaria " +
+                "de los 50, fue utilizada por artistas como Jimmy Page en sesiones de estudio y por Syd Barrett. " +
+                "Su construcción semisólida de masonite le da un tono nasal y twangy único, imposible de replicar " +
+                "con una guitarra convencional. Una opción fantástica para cualquier amante del sonido vintage.",
+            caracteristicas: [
+                "Cuerpo semisólido de masonite sobre bastidor de chopo",
+                "Mástil de arce de un solo trozo con diapasón de palisandro",
+                "21 trastes vintage medium",
+                "Pastillas Lipstick Tube de simple bobina (x2)",
+                "Puente ajustable estilo Danelectro vintage",
+                "Clavijero con botones de nacar (vintage style)",
+                "Electrónica: 2 volúmenes, 1 tono, selector de 3 posiciones",
+                "Longitud de escala: 648 mm (25.5 pulgadas)",
+            ],
+            precio: 650,
+            imagen: "../img/Fender-Eléctricas/Danelectro3021dc59.png",
+        },
+    ],
+
+    amplificadores: [
+        {
+            id: "fender-65-deluxe-reverb",
+            nombre: "Fender 65 Deluxe Reverb",
+            descripcion:
+                "Reissue del amplificador combo que definió el sonido del surf y el blues americano en los años 60. " +
+                "El Fender 65 Deluxe Reverb tiene 22 vatios de pura electrónica de válvulas, reverb de muelle y " +
+                "vibrato incorporados, y el glorioso clean que hizo famoso a Fender. Favorito de Neil Young, " +
+                "Billy Gibbons y referencia en estudios de grabación de todo el mundo.",
+            caracteristicas: [
+                "Potencia: 22 W RMS en clase A/B",
+                "Tecnología: todo válvulas (4x 6V6, 5x 12AX7, 2x 12AT7, 1x GZ34)",
+                "Altavoz: 1x 12 pulgadas Jensen C-12K (8 ohmios)",
+                "Reverb de muelle de tanque largo (circuito Accutronics)",
+                "Vibrato con velocidad e intensidad regulables",
+                "Canales: Normal + Vibrato (con entrada de alta y baja impedancia)",
+                "Controles: volumen, graves, agudos, reverb, velocidad, intensidad",
+                "Dimensiones: 60 x 48 x 24 cm — Peso: 19.5 kg",
+            ],
+            precio: 10000,
+            imagen: "../img/Amplis/fender-65-deluxe-reverb-amplificador.png",
+        },
+        {
+            id: "marshall-1959-plexi",
+            nombre: "Marshall 1959 Super Lead Plexi",
+            descripcion:
+                "El amplificador que inventó el rock clásico. El Marshall Plexi de 100 vatios fue el sonido de Jimi " +
+                "Hendrix, Eric Clapton, Pete Townshend y Jimmy Page en la segunda mitad de los 60. Su nombre proviene " +
+                "del panel frontal de plexiglás y su sonido sucio, cargado de armónicos, es el blueprint del rock " +
+                "clásico y el metal de los 70. Esta reissue reproduce el circuito original al detalle.",
+            caracteristicas: [
+                "Potencia: 100 W RMS en clase A/B",
+                "Tecnología: todo válvulas (4x EL34, 4x 12AX7)",
+                "Configuración de cabezal (head) — sin altavoz incluido",
+                "Salidas de altavoz: 16, 8 y 4 ohmios (para caja 4x12)",
+                "2 canales de alta y baja ganancia con 4 entradas jack",
+                "Controles: presencia, graves, medios, agudos, volumen (x2)",
+                "Panel frontal de aluminio estilo gold plexi original",
+                "Peso: 19 kg",
+            ],
+            precio: 3500,
+            imagen: "../img/Amplis/marshall_plexi_super_lead_1959_gallery_1.png",
+        },
+        {
+            id: "roland-jc-120",
+            nombre: "Roland Jazz Chorus JC-120",
+            descripcion:
+                "Desde 1975, el Roland JC-120 es sinónimo de clean perfecto y chorus cristalino. Amplificador de " +
+                "estado sólido, sus 120 W estéreo a través de dos altavoces de 12 pulgadas producen el limpio " +
+                "más nítido y presente de la historia. Imprescindible en el new wave, el pop y el jazz, lo usaron " +
+                "Andy Summers (The Police), Robert Smith (The Cure) y Jonny Greenwood.",
+            caracteristicas: [
+                "Potencia: 120 W estéreo (60 W + 60 W) en estado sólido",
+                "2 altavoces Jensen JC-120 de 12 pulgadas (8 ohmios cada uno)",
+                "Chorus estéreo incorporado (velocidad e intensidad)",
+                "Vibrato incorporado con intensidad y velocidad",
+                "Reverb de muelle de 3 pistas",
+                "2 canales (Normal y Brillante) con 4 entradas",
+                "Bucle de efectos estéreo en serie",
+                "Dimensiones: 67 x 52 x 26 cm — Peso: 32 kg",
+            ],
+            precio: 1200,
+            imagen: "../img/Amplis/roland-jc-120-jazz-chorus-combo_GIT0000966-000.png",
+        },
+        {
+            id: "vox-ac30",
+            nombre: "Vox AC30",
+            descripcion:
+                "El sonido del British Invasion. El Vox AC30 fue el amplificador de The Beatles, The Rolling Stones " +
+                "y The Kinks en los 60, y sigue siendo uno de los combos de válvulas más valorados del mundo. " +
+                "Sus 30 W de clase A producen un overdrive natural y brillante al subir el volumen, con un carácter " +
+                "tonal inconfundible que ningún pedal ha conseguido replicar del todo.",
+            caracteristicas: [
+                "Potencia: 30 W RMS en clase A pura",
+                "Tecnología: todo válvulas (4x EL84, 3x 12AX7, 1x EZ81)",
+                "2 altavoces Celestion Greenback de 12 pulgadas (16 ohmios)",
+                "Canal Normal + canal Top Boost con EQ independiente",
+                "Reverb de muelle y tremolo incorporados",
+                "Salida de altavoz adicional para extensión de caja",
+                "Carcasa basket-weave grille cloth original estilo 60s",
+                "Dimensiones: 70 x 54 x 27 cm — Peso: 30 kg",
+            ],
+            precio: 899,
+            imagen: "../img/Amplis/VoxAC30.jpg",
+        },
+    ],
+
+    pedales: [
+        {
+            id: "big-muff-pi",
+            nombre: "Electro-Harmonix Big Muff Pi",
+            descripcion:
+                "El pedal de distorsión más icónico de la historia. Desde 1969 el Big Muff Pi ha sido el secreto " +
+                "detrás del tono sustanado y cremoso de Carlos Santana, David Gilmour, Kurt Cobain y J Mascis. " +
+                "Su circuito de cuatro etapas de recorte en silicio produce una distorsión suave, musical y " +
+                "con un sustain prácticamente infinito. Un imprescindible absoluto.",
+            caracteristicas: [
+                "Tipo de efecto: Fuzz / Distorsión sustanada",
+                "Controles: Volumen, Tono, Sustain",
+                "Circuito: 4 etapas de recorte en diodos de silicio",
+                "Alimentación: 9 V DC (centro negativo) o pila 9 V",
+                "Consumo: 3.5 mA",
+                "Entradas / Salidas: 1x jack TS de 6.3 mm (mono)",
+                "True Bypass",
+                "Dimensiones: 92 x 51 x 47 mm — Peso: 280 g",
+            ],
+            precio: 95,
+            imagen: "../img/Pedales/BigMuff.png",
+        },
+        {
+            id: "boss-tr2-tremolo",
+            nombre: "Boss TR-2 Tremolo",
+            descripcion:
+                "El TR-2 lleva más de 25 años siendo la referencia en trémolo compacto. Reproduce con fidelidad el " +
+                "trémolo clásico de los amplificadores vintage de los 50 y 60. Su circuito analógico crea una " +
+                "modulación de amplitud suave y musical que va desde un suave cabeceo a pulsos profundos de tipo " +
+                "helicopter. Favorito de Radiohead, Wilco y Sonic Youth.",
+            caracteristicas: [
+                "Tipo de efecto: Tremolo (modulación de amplitud)",
+                "Controles: Wave (forma de onda), Rate (velocidad), Depth (profundidad)",
+                "Circuito analógico puro (sin conversión digital)",
+                "Alimentación: 9 V DC Boss PSA o pila 9 V",
+                "Consumo: 20 mA",
+                "Entradas / Salidas: 1x jack TS de 6.3 mm mono",
+                "Construcción Boss ABS con interruptor de metal",
+                "Dimensiones: 70 x 120 x 55 mm — Peso: 395 g",
+            ],
+            precio: 115,
+            imagen: "../img/Pedales/boss-tr2-tremolo.png",
+        },
+        {
+            id: "ehx-memory-man",
+            nombre: "Electro-Harmonix Vintage Deluxe Memory Man",
+            descripcion:
+                "El delay analógico más buscado por coleccionistas y guitarristas tonales. El Deluxe Memory Man " +
+                "combina un delay BBD (Bucket Brigade Device) de cálido sonido analógico con chorus y vibrato " +
+                "incorporados. The Edge de U2 construyó todo su sonido alrededor de este pedal en los 80. " +
+                "Esta versión vintage recaptura el circuito original con chips NOS.",
+            caracteristicas: [
+                "Tipo de efecto: Delay analógico BBD + Chorus/Vibrato",
+                "Tiempo de delay: hasta 550 ms (analógico)",
+                "Controles: Blend, Level, Delay, Feedback, Chorus/Vibrato switch",
+                "Chips: MN3005 BBD (circuito original vintage)",
+                "Alimentación: 24 V DC (adaptador incluido)",
+                "Consumo: 70 mA",
+                "Entradas / Salidas: 1x jack TS mono I/O",
+                "Dimensiones: 140 x 112 x 55 mm — Peso: 650 g",
+            ],
+            precio: 900,
+            imagen: "../img/Pedales/MemoryMan.png",
+        },
+        {
+            id: "crybaby-wah",
+            nombre: "Dunlop CryBaby Wah GCB95",
+            descripcion:
+                "El pedal wah más vendido de la historia. El CryBaby GCB95 es el estándar absoluto del wah " +
+                "desde 1967. Jimi Hendrix, Slash, Kirk Hammett y Eric Clapton han hecho de él una extensión de " +
+                "su voz en guitarra. Su circuito inductivo basado en el mítico inductor Fasel produce ese barrido " +
+                "vocal inconfundible que ha definido décadas de rock, funk y blues.",
+            caracteristicas: [
+                "Tipo de efecto: Wah-Wah (filtro de barrido)",
+                "Inductor: Fasel rojo (bobina original)",
+                "Circuito: analógico inductivo basado en el diseño original de Vox",
+                "Alimentación: 9 V DC (centro negativo) o pila 9 V",
+                "Consumo: 1 mA",
+                "Carcasa de metal fundido a presión (die-cast zinc)",
+                "Interruptor de activación por presión de talón",
+                "Dimensiones: 107 x 64 x 115 mm — Peso: 520 g",
+            ],
+            precio: 99,
+            imagen: "../img/Pedales/Wahwah.png",
+        },
+    ],
+};
+
+// ── Helpers ───────────────────────────────────────────────────
+
+function formatearPrecio(precio) {
+    return precio.toLocaleString("es-ES", {
+        style: "currency",
+        currency: "EUR",
+        minimumFractionDigits: 2,
+    });
+}
+
+function crearCard(p) {
+    return '<a class="producto-card" href="Pagina-Producto.html?id=' + p.id + '">' +
+               '<img src="' + p.imagen + '" alt="' + p.nombre + '" loading="lazy">' +
+               '<div class="producto-info">' +
+                   '<p class="producto-nombre">' + p.nombre + '</p>' +
+                   '<p class="producto-precio">' + formatearPrecio(p.precio) + '</p>' +
+               '</div>' +
+           '</a>';
+}
+
+function renderGrid(gridId, productos) {
+    var el = document.getElementById(gridId);
+    if (!el) return;
+    el.innerHTML = productos.map(crearCard).join("");
+}
+
+// ── Punto de entrada ──────────────────────────────────────────
+
+document.addEventListener("DOMContentLoaded", function () {
+    renderGrid("grid-guitarras",      catalogo.guitarras);
+    renderGrid("grid-amplificadores", catalogo.amplificadores);
+    renderGrid("grid-pedales",        catalogo.pedales);
+});
+
+
+================================================================================
+ARCHIVO 11/13: js\credit-card.js
+Ruta completa: C:\Users\Breixo\Documents\Brei-box-Nuevo\js\credit-card.js
+================================================================================
+
+// ============================================
+// CREDIT CARD FORM - INTERACTIVE PREVIEW
+// ============================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Get form elements
+    const cardNumberInput = document.getElementById('cardNumber');
+    const cardHolderInput = document.getElementById('cardHolder');
+    const cardExpiryInput = document.getElementById('cardExpiry');
+    const cardCVVInput = document.getElementById('cardCVV');
+
+    // Get display elements
+    const displayCardNumber = document.getElementById('displayCardNumber');
+    const displayCardHolder = document.getElementById('displayCardHolder');
+    const displayCardExpiry = document.getElementById('displayCardExpiry');
+
+    // Get form
+    const paymentForm = document.getElementById('paymentForm');
+
+    // ============================================
+    // FORMAT AND UPDATE CARD NUMBER
+    // ============================================
+    cardNumberInput.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\s/g, ''); // Remove spaces
+        let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value; // Add space every 4 digits
+        
+        e.target.value = formattedValue;
+        
+        // Update display
+        if (value.length === 0) {
+            displayCardNumber.textContent = '•••• •••• •••• ••••';
+        } else {
+            // Show entered numbers and fill rest with dots
+            let displayValue = formattedValue;
+            let remaining = 19 - formattedValue.length; // 16 digits + 3 spaces = 19 chars
+            
+            if (remaining > 0) {
+                displayValue += ' ' + '•'.repeat(Math.min(remaining, 4));
+            }
+            
+            displayCardNumber.textContent = displayValue;
+        }
+    });
+
+    // Only allow numbers in card number
+    cardNumberInput.addEventListener('keypress', function(e) {
+        if (!/[0-9]/.test(e.key) && e.key !== 'Backspace' && e.key !== 'Delete') {
+            e.preventDefault();
+        }
+    });
+
+    // ============================================
+    // UPDATE CARD HOLDER NAME
+    // ============================================
+    cardHolderInput.addEventListener('input', function(e) {
+        let value = e.target.value.toUpperCase();
+        
+        if (value.length === 0) {
+            displayCardHolder.textContent = 'NOMBRE APELLIDOS';
+        } else {
+            displayCardHolder.textContent = value;
+        }
+    });
+
+    // Only allow letters and spaces in cardholder name
+    cardHolderInput.addEventListener('keypress', function(e) {
+        if (!/[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/.test(e.key)) {
+            e.preventDefault();
+        }
+    });
+
+    // ============================================
+    // FORMAT AND UPDATE EXPIRY DATE
+    // ============================================
+    cardExpiryInput.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, ''); // Remove non-digits
+        
+        if (value.length >= 2) {
+            value = value.substring(0, 2) + '/' + value.substring(2, 4);
+        }
+        
+        e.target.value = value;
+        
+        // Update display
+        if (value.length === 0) {
+            displayCardExpiry.textContent = 'MM/AA';
+        } else {
+            displayCardExpiry.textContent = value;
+        }
+    });
+
+    // Simplified validation for school project
+    cardExpiryInput.addEventListener('blur', function(e) {
+        let value = e.target.value;
+        
+        if (value.length === 5) {
+            let month = parseInt(value.substring(0, 2));
+            
+            // Just check if month is valid (1-12)
+            if (month < 1 || month > 12) {
+                alert('Mes inválido. Debe estar entre 01 y 12.');
+                e.target.value = '';
+                displayCardExpiry.textContent = 'MM/AA';
+            }
+        }
+    });
+
+    // ============================================
+    // FORMAT CVV
+    // ============================================
+    cardCVVInput.addEventListener('input', function(e) {
+        e.target.value = e.target.value.replace(/\D/g, '').substring(0, 3);
+    });
+
+    // Only allow numbers in CVV
+    cardCVVInput.addEventListener('keypress', function(e) {
+        if (!/[0-9]/.test(e.key)) {
+            e.preventDefault();
+        }
+    });
+
+    // ============================================
+    // FORM SUBMISSION (SIMPLIFIED FOR SCHOOL PROJECT)
+    // ============================================
+    paymentForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Basic validation - accepts any card for demo purposes
+        const cardNumber = cardNumberInput.value.replace(/\s/g, '');
+        const cardHolder = cardHolderInput.value.trim();
+        const cardExpiry = cardExpiryInput.value;
+        const cardCVV = cardCVVInput.value;
+        const termsAccept = document.getElementById('termsAccept').checked;
+        
+        // Simple validation - just check if fields are filled
+        if (cardNumber.length < 13) {
+            alert('Por favor, ingresa un número de tarjeta (mínimo 13 dígitos).');
+            cardNumberInput.focus();
+            return;
+        }
+        
+        // Validate cardholder name
+        if (cardHolder.length < 3) {
+            alert('Por favor, ingresa el nombre del titular.');
+            cardHolderInput.focus();
+            return;
+        }
+        
+        // Validate expiry format
+        if (cardExpiry.length !== 5 || !cardExpiry.includes('/')) {
+            alert('Fecha de expiración inválida. Usa el formato MM/AA.');
+            cardExpiryInput.focus();
+            return;
+        }
+        
+        // Validate CVV
+        if (cardCVV.length < 3) {
+            alert('CVV inválido. Debe tener al menos 3 dígitos.');
+            cardCVVInput.focus();
+            return;
+        }
+        
+        // Validate terms
+        if (!termsAccept) {
+            alert('Debes aceptar los términos y condiciones.');
+            return;
+        }
+        
+        // Show success message - accepts any card for demo
+        showSuccessMessage();
+    });
+
+    // ============================================
+    // SUCCESS MESSAGE
+    // ============================================
+    function showSuccessMessage() {
+        // Create overlay
+        const overlay = document.createElement('div');
+        overlay.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            animation: fadeIn 0.3s ease;
+        `;
+        
+        // Create success card
+        const successCard = document.createElement('div');
+        successCard.style.cssText = `
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 400px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            animation: scaleIn 0.3s ease;
+        `;
+        
+        successCard.innerHTML = `
+            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" style="margin: 0 auto 20px;">
+                <circle cx="12" cy="12" r="10" fill="#10b981"/>
+                <path d="M8 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <h2 style="color: #1e293b; margin-bottom: 12px; font-size: 24px;">¡Pago Exitoso!</h2>
+            <p style="color: #64748b; margin-bottom: 24px;">Tu pedido ha sido procesado correctamente.</p>
+            <button onclick="window.location.href='1 index.html'" style="
+                background: #2563eb;
+                color: white;
+                border: none;
+                padding: 12px 32px;
+                border-radius: 10px;
+                font-size: 16px;
+                font-weight: 600;
+                cursor: pointer;
+            ">Volver a la Tienda</button>
+        `;
+        
+        overlay.appendChild(successCard);
+        document.body.appendChild(overlay);
+        
+        // Add CSS animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            @keyframes scaleIn {
+                from { transform: scale(0.9); opacity: 0; }
+                to { transform: scale(1); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+});
+
+
+================================================================================
+ARCHIVO 12/13: js\producto.js
+Ruta completa: C:\Users\Breixo\Documents\Brei-box-Nuevo\js\producto.js
+================================================================================
+
+// ============================================================
+// BREI-BOX — js/producto.js
+// Sin módulos ES: funciona abriendo el HTML directamente.
+// ============================================================
+
+var catalogo = {
+
+    guitarras: [
+        {
+            id: "fender-stratocaster-hendrix",
+            nombre: "Fender Stratocaster Jimi Hendrix Olympic White",
+            descripcion:
+                "Réplica oficial de la icónica Stratocaster que Jimi Hendrix tocó invertida en su época dorada. " +
+                "Fabricada en la planta de Ensenada, reproduce fielmente los detalles vintage de finales de los 60: " +
+                "mástil en U suave, golpeador de 3 capas blanco y pickups en posición de zurdo montada en diestro, " +
+                "consiguiendo así el tono brillante y agresivo que Hendrix consagró en Woodstock.",
+            caracteristicas: [
+                "Cuerpo de aliso (Alder) con acabado Olympic White",
+                "Mástil de arce en C suave con radio 9.5 pulgadas (241 mm)",
+                "Diapasón de arce con 21 trastes medium jumbo",
+                "Pickups Jimi Hendrix Vintage Noiseless (juego de 3)",
+                "Puente vintage sincronizado de 6 sillas de acero",
+                "Clavijero estilo Fender reversed (zurdo / montaje diestro)",
+                "Electrónica: 1 volumen, 2 tonos, selector de 5 posiciones",
+                "Longitud de escala: 648 mm (25.5 pulgadas)",
+            ],
+            precio: 1300,
+            imagen: "../img/Fender-Eléctricas/fender-jimi-hendrix-stratocaster-mn-olympic-white.jpg",
+        },
+        {
+            id: "gibson-flying-v",
+            nombre: "Gibson Flying V",
+            descripcion:
+                "La Flying V es uno de los diseños más atrevidos de Gibson, presentado en 1958 y rescatado en los 70 " +
+                "por artistas como Albert King y Jimi Hendrix. Su cuerpo en V de caoba proporciona un sustain " +
+                "extraordinario y un acceso sin rival a los trastes más altos. Perfecta para rock clásico, blues y metal.",
+            caracteristicas: [
+                "Cuerpo de caoba (Mahogany) en forma de V",
+                "Mástil de caoba encolado, perfil Slim Taper",
+                "Diapasón de palisandro con radio 12 pulgadas (305 mm)",
+                "Pastillas Gibson 490R (mástil) y 490T (puente)",
+                "Puente ABR-1 y cordal Stop Bar de aluminio",
+                "Clavijero Kluson-style de 3+3",
+                "Electrónica: 2 volúmenes, 1 tono, selector de 3 posiciones",
+                "Longitud de escala: 628 mm (24.75 pulgadas)",
+            ],
+            precio: 1500,
+            imagen: "../img/Gibson-Eléctricas/Gibson Flying V.png",
+        },
+        {
+            id: "gibson-sg-clapton-fool",
+            nombre: "Eric Clapton Gibson SG The Fool",
+            descripcion:
+                "Réplica de la célebre Gibson SG Standard de 1964 que Eric Clapton utilizó durante su etapa con Cream. " +
+                "The Fool es la guitarra más reconocida de Clapton de esa época, decorada por el colectivo holandés " +
+                "The Fool con motivos psicodélicos. Esta versión captura el peso ligero y el punch del diseño " +
+                "original que definió el blues-rock de los 60.",
+            caracteristicas: [
+                "Cuerpo de caoba (Mahogany) con tapa plana",
+                "Mástil de caoba encolado, perfil vintage en C",
+                "Diapasón de palisandro con 22 trastes medium",
+                "Pastillas PAF-style humbuckers de bobina doble",
+                "Puente Tune-o-Matic y cordal Stop Bar",
+                "Doble cutaway de acceso libre hasta el traste 22",
+                "Electrónica: 2 volúmenes, 2 tonos, selector de 3 posiciones",
+                "Longitud de escala: 628 mm (24.75 pulgadas)",
+            ],
+            precio: 3700,
+            imagen: "../img/Gibson-Eléctricas/78461f02052fd0a04eb02f6c47cab6bc2de01daa-1000x1000.png",
+        },
+        {
+            id: "fender-jazzmaster-troy-van-leeuwen",
+            nombre: "Fender Jazzmaster Troy Van Leeuwen Oxblood",
+            descripcion:
+                "Firma del guitarrista de Queens of the Stone Age, Troy Van Leeuwen, esta Jazzmaster combina la " +
+                "estética offset original de los 60 con modificaciones modernas pensadas para la acción en directo. " +
+                "El acabado Oxblood sobre caoba la distingue de cualquier Jazzmaster estándar y la convierte en una " +
+                "pieza tan coleccionable como funcional.",
+            caracteristicas: [
+                "Cuerpo de caoba (Mahogany) con acabado Oxblood",
+                "Mástil de arce con diapasón de palisandro bound (radio 9.5 pulgadas)",
+                "22 trastes medium jumbo",
+                "Pastillas Troy Van Leeuwen Jazzmaster (custom CuNiFe)",
+                "Sistema de vibrato Jazzmaster rhythm/lead circuit",
+                "Puente ajustable de barril con cordal de rodillo",
+                "Botones Dunlop Straplock de serie",
+                "Longitud de escala: 648 mm (25.5 pulgadas)",
+            ],
+            precio: 2000,
+            imagen: "../img/Fender-Eléctricas/guitarra-electrica-fender-troy-van-leeuwen-signature-jazzmaster-bound-rosewood-oxblood.png",
+        },
+        {
+            id: "gibson-eds-1275-jimmy-page",
+            nombre: "Gibson EDS-1275 Jimmy Page Double Neck",
+            descripcion:
+                "Réplica de la doble mástil que Jimmy Page inmortalizó en la interpretación en directo de Stairway to Heaven. " +
+                "La EDS-1275 combina un mástil de 6 cuerdas y uno de 12 cuerdas en un solo cuerpo SG, " +
+                "permitiendo cambiar instantáneamente de registro sin cambiar de instrumento. Una joya de ingeniería " +
+                "lutherie y uno de los iconos absolutos del rock.",
+            caracteristicas: [
+                "Cuerpo doble de caoba (Mahogany), estilo SG",
+                "Mástil 6 cuerdas + mástil 12 cuerdas (ambos caoba encolados)",
+                "Diapasones de palisandro, perfil vintage en C",
+                "4 pastillas humbuckers 490R/490T (dos por mástil)",
+                "Controles individuales por mástil: 2 volúmenes + 2 tonos",
+                "Selector de mástil activo de 3 posiciones",
+                "Puente Tune-o-Matic y cordal Stop Bar en cada mástil",
+                "Longitud de escala: 628 mm (24.75 pulgadas) en ambos mástiles",
+            ],
+            precio: 20000,
+            imagen: "../img/Gibson-Eléctricas/1989_Gibson_EDS-1275.png",
+        },
+        {
+            id: "fender-stratocaster-gilmour",
+            nombre: "David Gilmour Fender Custom Shop Stratocaster NOS",
+            descripcion:
+                "Réplica exacta de la legendaria Black Strat de David Gilmour, la guitarra que definió el sonido " +
+                "de Pink Floyd en discos como The Dark Side of the Moon, Wish You Were Here y The Wall. " +
+                "Fabricada en el Custom Shop de Fender con las especificaciones que el propio Gilmour aprobó: " +
+                "cuerpo de aliso negro, mástil de arce de los 70 y la combinación de pastillas única que él configuró.",
+            caracteristicas: [
+                "Cuerpo de aliso (Alder) con acabado negro NOS (New Old Stock)",
+                "Mástil de arce de un solo trozo, perfil de los 70 (tipo C/U)",
+                "Diapasón de arce con 21 trastes vintage narrow-tall",
+                "Pastillas: EMG-DG20 (set exclusivo David Gilmour)",
+                "Puente Fender vintage 2-pivot de 6 sillas de acero inox",
+                "Clavijero Sperzel Trim-Lok de bloqueo",
+                "Golpeador de 1 capa negro (sin bisel blanco)",
+                "Longitud de escala: 648 mm (25.5 pulgadas)",
+            ],
+            precio: 4000,
+            imagen: "../img/Fender-Eléctricas/1502952061Fender_Custom_Shop_David_Gilmour_Stratocaster_NOS.jpg",
+        },
+        {
+            id: "gibson-les-paul-classic",
+            nombre: "Gibson Les Paul Classic",
+            descripcion:
+                "La Les Paul Classic recupera el espíritu de las legendarias Burst de 1959 con detalles modernos " +
+                "para el guitarrista contemporáneo. Uno de los diseños más influyentes de la historia, utilizado " +
+                "por artistas como Slash, Jimmy Page o Joe Perry. Combina el calor y el sustain ilimitado de su " +
+                "construcción de caoba con la precisión de sus pastillas 57 Classic.",
+            caracteristicas: [
+                "Cuerpo de caoba (Mahogany) con tapa de arce flameado",
+                "Mástil de caoba encolado, perfil 60s Slim Taper en D",
+                "Diapasón de palisandro con radio 12 pulgadas y 22 trastes medium jumbo",
+                "Pastillas Gibson 57 Classic (mástil) y 57 Classic Plus (puente)",
+                "Puente Tune-o-Matic Nashville y cordal Stop Bar aluminio",
+                "Clavijero Grover Rotomatic de 18:1",
+                "Electrónica: 2 volúmenes CTS push-pull (coil-split), 2 tonos, selector 3 posiciones",
+                "Longitud de escala: 628 mm (24.75 pulgadas)",
+            ],
+            precio: 2500,
+            imagen: "../img/Gibson-Eléctricas/gibson-les-paul-classic-hcs-p-32523.jpg",
+        },
+        {
+            id: "danelectro-dc59",
+            nombre: "Danelectro 3021 DC59",
+            descripcion:
+                "La Danelectro DC59 es una de las guitarras con más carácter y personalidad del mercado. Originaria " +
+                "de los 50, fue utilizada por artistas como Jimmy Page en sesiones de estudio y por Syd Barrett. " +
+                "Su construcción semisólida de masonite le da un tono nasal y twangy único, imposible de replicar " +
+                "con una guitarra convencional. Una opción fantástica para cualquier amante del sonido vintage.",
+            caracteristicas: [
+                "Cuerpo semisólido de masonite sobre bastidor de chopo",
+                "Mástil de arce de un solo trozo con diapasón de palisandro",
+                "21 trastes vintage medium",
+                "Pastillas Lipstick Tube de simple bobina (x2)",
+                "Puente ajustable estilo Danelectro vintage",
+                "Clavijero con botones de nacar (vintage style)",
+                "Electrónica: 2 volúmenes, 1 tono, selector de 3 posiciones",
+                "Longitud de escala: 648 mm (25.5 pulgadas)",
+            ],
+            precio: 650,
+            imagen: "../img/Fender-Eléctricas/Danelectro3021dc59.png",
+        },
+    ],
+
+    amplificadores: [
+        {
+            id: "fender-65-deluxe-reverb",
+            nombre: "Fender 65 Deluxe Reverb",
+            descripcion:
+                "Reissue del amplificador combo que definió el sonido del surf y el blues americano en los años 60. " +
+                "El Fender 65 Deluxe Reverb tiene 22 vatios de pura electrónica de válvulas, reverb de muelle y " +
+                "vibrato incorporados, y el glorioso clean que hizo famoso a Fender. Favorito de Neil Young, " +
+                "Billy Gibbons y referencia en estudios de grabación de todo el mundo.",
+            caracteristicas: [
+                "Potencia: 22 W RMS en clase A/B",
+                "Tecnología: todo válvulas (4x 6V6, 5x 12AX7, 2x 12AT7, 1x GZ34)",
+                "Altavoz: 1x 12 pulgadas Jensen C-12K (8 ohmios)",
+                "Reverb de muelle de tanque largo (circuito Accutronics)",
+                "Vibrato con velocidad e intensidad regulables",
+                "Canales: Normal + Vibrato (con entrada de alta y baja impedancia)",
+                "Controles: volumen, graves, agudos, reverb, velocidad, intensidad",
+                "Dimensiones: 60 x 48 x 24 cm — Peso: 19.5 kg",
+            ],
+            precio: 10000,
+            imagen: "../img/Amplis/fender-65-deluxe-reverb-amplificador.png",
+        },
+        {
+            id: "marshall-1959-plexi",
+            nombre: "Marshall 1959 Super Lead Plexi",
+            descripcion:
+                "El amplificador que inventó el rock clásico. El Marshall Plexi de 100 vatios fue el sonido de Jimi " +
+                "Hendrix, Eric Clapton, Pete Townshend y Jimmy Page en la segunda mitad de los 60. Su nombre proviene " +
+                "del panel frontal de plexiglás y su sonido sucio, cargado de armónicos, es el blueprint del rock " +
+                "clásico y el metal de los 70. Esta reissue reproduce el circuito original al detalle.",
+            caracteristicas: [
+                "Potencia: 100 W RMS en clase A/B",
+                "Tecnología: todo válvulas (4x EL34, 4x 12AX7)",
+                "Configuración de cabezal (head) — sin altavoz incluido",
+                "Salidas de altavoz: 16, 8 y 4 ohmios (para caja 4x12)",
+                "2 canales de alta y baja ganancia con 4 entradas jack",
+                "Controles: presencia, graves, medios, agudos, volumen (x2)",
+                "Panel frontal de aluminio estilo gold plexi original",
+                "Peso: 19 kg",
+            ],
+            precio: 3500,
+            imagen: "../img/Amplis/marshall_plexi_super_lead_1959_gallery_1.png",
+        },
+        {
+            id: "roland-jc-120",
+            nombre: "Roland Jazz Chorus JC-120",
+            descripcion:
+                "Desde 1975, el Roland JC-120 es sinónimo de clean perfecto y chorus cristalino. Amplificador de " +
+                "estado sólido, sus 120 W estéreo a través de dos altavoces de 12 pulgadas producen el limpio " +
+                "más nítido y presente de la historia. Imprescindible en el new wave, el pop y el jazz, lo usaron " +
+                "Andy Summers (The Police), Robert Smith (The Cure) y Jonny Greenwood.",
+            caracteristicas: [
+                "Potencia: 120 W estéreo (60 W + 60 W) en estado sólido",
+                "2 altavoces Jensen JC-120 de 12 pulgadas (8 ohmios cada uno)",
+                "Chorus estéreo incorporado (velocidad e intensidad)",
+                "Vibrato incorporado con intensidad y velocidad",
+                "Reverb de muelle de 3 pistas",
+                "2 canales (Normal y Brillante) con 4 entradas",
+                "Bucle de efectos estéreo en serie",
+                "Dimensiones: 67 x 52 x 26 cm — Peso: 32 kg",
+            ],
+            precio: 1200,
+            imagen: "../img/Amplis/roland-jc-120-jazz-chorus-combo_GIT0000966-000.png",
+        },
+        {
+            id: "vox-ac30",
+            nombre: "Vox AC30",
+            descripcion:
+                "El sonido del British Invasion. El Vox AC30 fue el amplificador de The Beatles, The Rolling Stones " +
+                "y The Kinks en los 60, y sigue siendo uno de los combos de válvulas más valorados del mundo. " +
+                "Sus 30 W de clase A producen un overdrive natural y brillante al subir el volumen, con un carácter " +
+                "tonal inconfundible que ningún pedal ha conseguido replicar del todo.",
+            caracteristicas: [
+                "Potencia: 30 W RMS en clase A pura",
+                "Tecnología: todo válvulas (4x EL84, 3x 12AX7, 1x EZ81)",
+                "2 altavoces Celestion Greenback de 12 pulgadas (16 ohmios)",
+                "Canal Normal + canal Top Boost con EQ independiente",
+                "Reverb de muelle y tremolo incorporados",
+                "Salida de altavoz adicional para extensión de caja",
+                "Carcasa basket-weave grille cloth original estilo 60s",
+                "Dimensiones: 70 x 54 x 27 cm — Peso: 30 kg",
+            ],
+            precio: 899,
+            imagen: "../img/Amplis/VoxAC30.jpg",
+        },
+    ],
+
+    pedales: [
+        {
+            id: "big-muff-pi",
+            nombre: "Electro-Harmonix Big Muff Pi",
+            descripcion:
+                "El pedal de distorsión más icónico de la historia. Desde 1969 el Big Muff Pi ha sido el secreto " +
+                "detrás del tono sustanado y cremoso de Carlos Santana, David Gilmour, Kurt Cobain y J Mascis. " +
+                "Su circuito de cuatro etapas de recorte en silicio produce una distorsión suave, musical y " +
+                "con un sustain prácticamente infinito. Un imprescindible absoluto.",
+            caracteristicas: [
+                "Tipo de efecto: Fuzz / Distorsión sustanada",
+                "Controles: Volumen, Tono, Sustain",
+                "Circuito: 4 etapas de recorte en diodos de silicio",
+                "Alimentación: 9 V DC (centro negativo) o pila 9 V",
+                "Consumo: 3.5 mA",
+                "Entradas / Salidas: 1x jack TS de 6.3 mm (mono)",
+                "True Bypass",
+                "Dimensiones: 92 x 51 x 47 mm — Peso: 280 g",
+            ],
+            precio: 95,
+            imagen: "../img/Pedales/BigMuff.png",
+        },
+        {
+            id: "boss-tr2-tremolo",
+            nombre: "Boss TR-2 Tremolo",
+            descripcion:
+                "El TR-2 lleva más de 25 años siendo la referencia en trémolo compacto. Reproduce con fidelidad el " +
+                "trémolo clásico de los amplificadores vintage de los 50 y 60. Su circuito analógico crea una " +
+                "modulación de amplitud suave y musical que va desde un suave cabeceo a pulsos profundos de tipo " +
+                "helicopter. Favorito de Radiohead, Wilco y Sonic Youth.",
+            caracteristicas: [
+                "Tipo de efecto: Tremolo (modulación de amplitud)",
+                "Controles: Wave (forma de onda), Rate (velocidad), Depth (profundidad)",
+                "Circuito analógico puro (sin conversión digital)",
+                "Alimentación: 9 V DC Boss PSA o pila 9 V",
+                "Consumo: 20 mA",
+                "Entradas / Salidas: 1x jack TS de 6.3 mm mono",
+                "Construcción Boss ABS con interruptor de metal",
+                "Dimensiones: 70 x 120 x 55 mm — Peso: 395 g",
+            ],
+            precio: 115,
+            imagen: "../img/Pedales/boss-tr2-tremolo.png",
+        },
+        {
+            id: "ehx-memory-man",
+            nombre: "Electro-Harmonix Vintage Deluxe Memory Man",
+            descripcion:
+                "El delay analógico más buscado por coleccionistas y guitarristas tonales. El Deluxe Memory Man " +
+                "combina un delay BBD (Bucket Brigade Device) de cálido sonido analógico con chorus y vibrato " +
+                "incorporados. The Edge de U2 construyó todo su sonido alrededor de este pedal en los 80. " +
+                "Esta versión vintage recaptura el circuito original con chips NOS.",
+            caracteristicas: [
+                "Tipo de efecto: Delay analógico BBD + Chorus/Vibrato",
+                "Tiempo de delay: hasta 550 ms (analógico)",
+                "Controles: Blend, Level, Delay, Feedback, Chorus/Vibrato switch",
+                "Chips: MN3005 BBD (circuito original vintage)",
+                "Alimentación: 24 V DC (adaptador incluido)",
+                "Consumo: 70 mA",
+                "Entradas / Salidas: 1x jack TS mono I/O",
+                "Dimensiones: 140 x 112 x 55 mm — Peso: 650 g",
+            ],
+            precio: 900,
+            imagen: "../img/Pedales/MemoryMan.png",
+        },
+        {
+            id: "crybaby-wah",
+            nombre: "Dunlop CryBaby Wah GCB95",
+            descripcion:
+                "El pedal wah más vendido de la historia. El CryBaby GCB95 es el estándar absoluto del wah " +
+                "desde 1967. Jimi Hendrix, Slash, Kirk Hammett y Eric Clapton han hecho de él una extensión de " +
+                "su voz en guitarra. Su circuito inductivo basado en el mítico inductor Fasel produce ese barrido " +
+                "vocal inconfundible que ha definido décadas de rock, funk y blues.",
+            caracteristicas: [
+                "Tipo de efecto: Wah-Wah (filtro de barrido)",
+                "Inductor: Fasel rojo (bobina original)",
+                "Circuito: analógico inductivo basado en el diseño original de Vox",
+                "Alimentación: 9 V DC (centro negativo) o pila 9 V",
+                "Consumo: 1 mA",
+                "Carcasa de metal fundido a presión (die-cast zinc)",
+                "Interruptor de activación por presión de talón",
+                "Dimensiones: 107 x 64 x 115 mm — Peso: 520 g",
+            ],
+            precio: 99,
+            imagen: "../img/Pedales/Wahwah.png",
+        },
+    ],
+};
+
+// ── Helpers ───────────────────────────────────────────────────
+
+function formatearPrecio(precio) {
+    return precio.toLocaleString("es-ES", {
+        style: "currency",
+        currency: "EUR",
+        minimumFractionDigits: 2,
+    });
+}
+
+function buscarProducto(id) {
+    var todos = catalogo.guitarras.concat(catalogo.amplificadores, catalogo.pedales);
+    for (var i = 0; i < todos.length; i++) {
+        if (todos[i].id === id) return todos[i];
+    }
+    return null;
+}
+
+// ── Punto de entrada ──────────────────────────────────────────
+
+document.addEventListener("DOMContentLoaded", function () {
+    var params  = new URLSearchParams(window.location.search);
+    var id      = params.get("id");
+    var p       = id ? buscarProducto(id) : null;
+
+    if (!p) {
+        document.getElementById("producto-nombre").textContent = "Producto no encontrado";
+        return;
+    }
+
+    document.title = "Brei-Box: " + p.nombre;
+
+    document.getElementById("producto-imagen").src = p.imagen;
+    document.getElementById("producto-imagen").alt = p.nombre;
+    document.getElementById("producto-nombre").textContent = p.nombre;
+    document.getElementById("producto-precio").textContent = formatearPrecio(p.precio);
+    document.getElementById("producto-descripcion").textContent = p.descripcion;
+
+    var items = p.caracteristicas.map(function (c) { return "<li>" + c + "</li>"; }).join("");
+    document.getElementById("producto-caracteristicas").innerHTML = "<ul>" + items + "</ul>";
+});
+
+
+================================================================================
+ARCHIVO 13/13: types\productos.js
+Ruta completa: C:\Users\Breixo\Documents\Brei-box-Nuevo\types\productos.js
+================================================================================
+
+// ============================================================
+// BREI-BOX — TIPADO DE PRODUCTOS (JSDoc)
+// ============================================================
+
+/**
+ * @typedef {"guitarra" | "amplificador" | "pedal"} CategoriaProducto
+ */
+
+/**
+ * @typedef {Object} Producto
+ * @property {string}            id              - Slug único (ej. "gibson-les-paul-classic").
+ * @property {string}            nombre          - Nombre completo del producto.
+ * @property {string}            descripcion     - Texto descriptivo para el accordion.
+ * @property {string[]}          caracteristicas - Especificaciones técnicas para el accordion.
+ * @property {number}            precio          - Precio en euros (número sin formato).
+ * @property {string}            imagen          - Ruta relativa desde html/ (ej. "../img/…/foto.jpg").
+ * @property {CategoriaProducto} categoria       - Categoría del producto.
+ */
+
+/**
+ * @typedef {Object} CatalogoCategorias
+ * @property {Producto[]} guitarras
+ * @property {Producto[]} amplificadores
+ * @property {Producto[]} pedales
+ */
+
