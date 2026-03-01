@@ -1,7 +1,10 @@
 // ============================================================
-// BREI-BOX — js/producto.js
-// Sin módulos ES: funciona abriendo el HTML directamente.
+// BREI-BOX — js/producto.js  (versión actualizada)
+// Página de detalle de producto — carga datos y gestiona
+// el botón "Añadir al carrito".
 // ============================================================
+
+// ── Catálogo de productos ─────────────────────────────────
 
 var catalogo = {
 
@@ -202,9 +205,7 @@ var catalogo = {
             nombre: "Marshall 1959 Super Lead Plexi",
             descripcion:
                 "El amplificador que inventó el rock clásico. El Marshall Plexi de 100 vatios fue el sonido de Jimi " +
-                "Hendrix, Eric Clapton, Pete Townshend y Jimmy Page en la segunda mitad de los 60. Su nombre proviene " +
-                "del panel frontal de plexiglás y su sonido sucio, cargado de armónicos, es el blueprint del rock " +
-                "clásico y el metal de los 70. Esta reissue reproduce el circuito original al detalle.",
+                "Hendrix, Eric Clapton, Pete Townshend y Jimmy Page en la segunda mitad de los 60.",
             caracteristicas: [
                 "Potencia: 100 W RMS en clase A/B",
                 "Tecnología: todo válvulas (4x EL34, 4x 12AX7)",
@@ -222,10 +223,7 @@ var catalogo = {
             id: "roland-jc-120",
             nombre: "Roland Jazz Chorus JC-120",
             descripcion:
-                "Desde 1975, el Roland JC-120 es sinónimo de clean perfecto y chorus cristalino. Amplificador de " +
-                "estado sólido, sus 120 W estéreo a través de dos altavoces de 12 pulgadas producen el limpio " +
-                "más nítido y presente de la historia. Imprescindible en el new wave, el pop y el jazz, lo usaron " +
-                "Andy Summers (The Police), Robert Smith (The Cure) y Jonny Greenwood.",
+                "Desde 1975, el Roland JC-120 es sinónimo de clean perfecto y chorus cristalino.",
             caracteristicas: [
                 "Potencia: 120 W estéreo (60 W + 60 W) en estado sólido",
                 "2 altavoces Jensen JC-120 de 12 pulgadas (8 ohmios cada uno)",
@@ -244,9 +242,7 @@ var catalogo = {
             nombre: "Vox AC30",
             descripcion:
                 "El sonido del British Invasion. El Vox AC30 fue el amplificador de The Beatles, The Rolling Stones " +
-                "y The Kinks en los 60, y sigue siendo uno de los combos de válvulas más valorados del mundo. " +
-                "Sus 30 W de clase A producen un overdrive natural y brillante al subir el volumen, con un carácter " +
-                "tonal inconfundible que ningún pedal ha conseguido replicar del todo.",
+                "y The Kinks en los 60.",
             caracteristicas: [
                 "Potencia: 30 W RMS en clase A pura",
                 "Tecnología: todo válvulas (4x EL84, 3x 12AX7, 1x EZ81)",
@@ -268,9 +264,7 @@ var catalogo = {
             nombre: "Electro-Harmonix Big Muff Pi",
             descripcion:
                 "El pedal de distorsión más icónico de la historia. Desde 1969 el Big Muff Pi ha sido el secreto " +
-                "detrás del tono sustanado y cremoso de Carlos Santana, David Gilmour, Kurt Cobain y J Mascis. " +
-                "Su circuito de cuatro etapas de recorte en silicio produce una distorsión suave, musical y " +
-                "con un sustain prácticamente infinito. Un imprescindible absoluto.",
+                "detrás del tono sustanado y cremoso de Carlos Santana, David Gilmour, Kurt Cobain y J Mascis.",
             caracteristicas: [
                 "Tipo de efecto: Fuzz / Distorsión sustanada",
                 "Controles: Volumen, Tono, Sustain",
@@ -288,10 +282,7 @@ var catalogo = {
             id: "boss-tr2-tremolo",
             nombre: "Boss TR-2 Tremolo",
             descripcion:
-                "El TR-2 lleva más de 25 años siendo la referencia en trémolo compacto. Reproduce con fidelidad el " +
-                "trémolo clásico de los amplificadores vintage de los 50 y 60. Su circuito analógico crea una " +
-                "modulación de amplitud suave y musical que va desde un suave cabeceo a pulsos profundos de tipo " +
-                "helicopter. Favorito de Radiohead, Wilco y Sonic Youth.",
+                "El TR-2 lleva más de 25 años siendo la referencia en trémolo compacto.",
             caracteristicas: [
                 "Tipo de efecto: Tremolo (modulación de amplitud)",
                 "Controles: Wave (forma de onda), Rate (velocidad), Depth (profundidad)",
@@ -309,10 +300,7 @@ var catalogo = {
             id: "ehx-memory-man",
             nombre: "Electro-Harmonix Vintage Deluxe Memory Man",
             descripcion:
-                "El delay analógico más buscado por coleccionistas y guitarristas tonales. El Deluxe Memory Man " +
-                "combina un delay BBD (Bucket Brigade Device) de cálido sonido analógico con chorus y vibrato " +
-                "incorporados. The Edge de U2 construyó todo su sonido alrededor de este pedal en los 80. " +
-                "Esta versión vintage recaptura el circuito original con chips NOS.",
+                "El delay analógico más buscado por coleccionistas y guitarristas tonales.",
             caracteristicas: [
                 "Tipo de efecto: Delay analógico BBD + Chorus/Vibrato",
                 "Tiempo de delay: hasta 550 ms (analógico)",
@@ -330,10 +318,8 @@ var catalogo = {
             id: "crybaby-wah",
             nombre: "Dunlop CryBaby Wah GCB95",
             descripcion:
-                "El pedal wah más vendido de la historia. El CryBaby GCB95 es el estándar absoluto del wah " +
-                "desde 1967. Jimi Hendrix, Slash, Kirk Hammett y Eric Clapton han hecho de él una extensión de " +
-                "su voz en guitarra. Su circuito inductivo basado en el mítico inductor Fasel produce ese barrido " +
-                "vocal inconfundible que ha definido décadas de rock, funk y blues.",
+                "El pedal wah más vendido de la historia. Jimi Hendrix, Slash, Kirk Hammett y Eric Clapton lo han " +
+                "convertido en extensión de su voz.",
             caracteristicas: [
                 "Tipo de efecto: Wah-Wah (filtro de barrido)",
                 "Inductor: Fasel rojo (bobina original)",
@@ -371,23 +357,57 @@ function buscarProducto(id) {
 // ── Punto de entrada ──────────────────────────────────────────
 
 document.addEventListener("DOMContentLoaded", function () {
-    var params  = new URLSearchParams(window.location.search);
-    var id      = params.get("id");
-    var p       = id ? buscarProducto(id) : null;
+    var params = new URLSearchParams(window.location.search);
+    var id     = params.get("id");
+    var p      = id ? buscarProducto(id) : null;
 
     if (!p) {
-        document.getElementById("producto-nombre").textContent = "Producto no encontrado";
+        var nombreEl = document.getElementById("producto-nombre");
+        if (nombreEl) nombreEl.textContent = "Producto no encontrado";
         return;
     }
 
+    // Actualizar el título de la pestaña
     document.title = "Brei-Box: " + p.nombre;
 
-    document.getElementById("producto-imagen").src = p.imagen;
-    document.getElementById("producto-imagen").alt = p.nombre;
-    document.getElementById("producto-nombre").textContent = p.nombre;
-    document.getElementById("producto-precio").textContent = formatearPrecio(p.precio);
+    // Rellenar datos en el DOM
+    var imgEl = document.getElementById("producto-imagen");
+    if (imgEl) { imgEl.src = p.imagen; imgEl.alt = p.nombre; }
+    document.getElementById("producto-nombre").textContent  = p.nombre;
+    document.getElementById("producto-precio").textContent  = formatearPrecio(p.precio);
     document.getElementById("producto-descripcion").textContent = p.descripcion;
 
     var items = p.caracteristicas.map(function (c) { return "<li>" + c + "</li>"; }).join("");
     document.getElementById("producto-caracteristicas").innerHTML = "<ul>" + items + "</ul>";
+
+    // ── Botón "Añadir al carrito" ─────────────────────────────
+    var btn = document.getElementById("btn-añadir-carrito");
+    if (!btn) return;
+
+    btn.addEventListener("click", function () {
+        if (typeof window.BreiBoxCarrito === "undefined") {
+            console.warn("carrito.js no está cargado.");
+            return;
+        }
+        window.BreiBoxCarrito.añadir(p);
+
+        // Feedback visual en el botón
+        btn.classList.add("añadido");
+        btn.innerHTML =
+            '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">' +
+                '<polyline points="20 6 9 17 4 12"/>' +
+            '</svg>' +
+            '¡Añadido!';
+
+        setTimeout(function () {
+            btn.classList.remove("añadido");
+            btn.innerHTML =
+                '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+                    '<path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>' +
+                    '<line x1="3" y1="6" x2="21" y2="6"/>' +
+                    '<path d="M16 10a4 4 0 0 1-8 0"/>' +
+                '</svg>' +
+                'Añadir al carrito';
+        }, 2000);
+    });
 });
