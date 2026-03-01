@@ -767,17 +767,38 @@ body.payment-page {
     pointer-events: none;
 }
 
+/* ============================================================
+   BREI-BOX — FIX: Vista previa de la tarjeta de crédito
+   
+   El problema: .card-chip y .card-number tenían márgenes
+   demasiado grandes, por lo que .card-details quedaba
+   fuera del área visible (overflow: hidden del .credit-card).
+   
+   Busca estas reglas en estilos.css y REEMPLÁZALAS por
+   las que aparecen a continuación.
+   ============================================================ */
+
+
+/* ── CHIP (antes margin-bottom: 40px → ahora 20px) ─────────── */
+
 .card-chip {
-    margin-bottom: 40px;
+    margin-bottom: 20px;   /* ← era 40px */
 }
 
+
+/* ── NÚMERO (antes margin-bottom: 30px → ahora 16px) ────────── */
+
 .card-number {
-    font-size: 24px;
+    font-size: 22px;       /* ligero ajuste para que quepa en 1 línea */
     font-weight: 500;
     letter-spacing: 3px;
-    margin-bottom: 30px;
+    margin-bottom: 16px;   /* ← era 30px */
     font-family: 'Courier New', monospace;
 }
+
+
+/* ── DETALLES (titular / válida hasta) ───────────────────────── */
+/* Asegurar que el texto siempre sea visible */
 
 .card-details {
     display: flex;
@@ -786,17 +807,21 @@ body.payment-page {
 }
 
 .card-label {
-    font-size: 10px;
+    font-size: 9px;            /* compacto */
     text-transform: uppercase;
     letter-spacing: 1px;
     opacity: 0.7;
-    margin-bottom: 5px;
+    margin-bottom: 4px;        /* ← era 5px, mínima reducción */
 }
 
 .card-value {
-    font-size: 16px;
+    font-size: 14px;           /* ← era 16px, un pelín más pequeño */
     font-weight: 500;
     text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 160px;          /* evita que un nombre muy largo rompa la tarjeta */
 }
 
 .card-logo {

@@ -1,241 +1,194 @@
-// ============================================
-// CREDIT CARD FORM - INTERACTIVE PREVIEW
-// ============================================
+// ============================================================
+// BREI-BOX — js/credit-card.js
+// Formulario de tarjeta de crédito con preview interactivo
+// ============================================================
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Get form elements
-    const cardNumberInput = document.getElementById('cardNumber');
-    const cardHolderInput = document.getElementById('cardHolder');
-    const cardExpiryInput = document.getElementById('cardExpiry');
-    const cardCVVInput = document.getElementById('cardCVV');
+document.addEventListener('DOMContentLoaded', function () {
 
-    // Get display elements
-    const displayCardNumber = document.getElementById('displayCardNumber');
-    const displayCardHolder = document.getElementById('displayCardHolder');
-    const displayCardExpiry = document.getElementById('displayCardExpiry');
+    // ── Elementos del formulario ─────────────────────────────
+    var cardNumberInput = document.getElementById('cardNumber');
+    var cardHolderInput = document.getElementById('cardHolder');
+    var cardExpiryInput = document.getElementById('cardExpiry');
+    var cardCVVInput    = document.getElementById('cardCVV');
+    var paymentForm     = document.getElementById('paymentForm');
 
-    // Get form
-    const paymentForm = document.getElementById('paymentForm');
+    // ── Elementos de la vista previa de la tarjeta ───────────
+    var displayCardNumber = document.getElementById('displayCardNumber');
+    var displayCardHolder = document.getElementById('displayCardHolder');
+    var displayCardExpiry = document.getElementById('displayCardExpiry');
 
-    // ============================================
-    // FORMAT AND UPDATE CARD NUMBER
-    // ============================================
-    cardNumberInput.addEventListener('input', function(e) {
-        let value = e.target.value.replace(/\s/g, ''); // Remove spaces
-        let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value; // Add space every 4 digits
-        
-        e.target.value = formattedValue;
-        
-        // Update display
-        if (value.length === 0) {
+    // Comprobación de seguridad: si algún elemento no existe, salir
+    if (!cardNumberInput || !cardHolderInput || !cardExpiryInput || !cardCVVInput) {
+        console.warn('credit-card.js: no se encontraron los campos del formulario.');
+        return;
+    }
+    if (!displayCardNumber || !displayCardHolder || !displayCardExpiry) {
+        console.warn('credit-card.js: no se encontraron los elementos de la vista previa.');
+        return;
+    }
+
+    // ── NÚMERO DE TARJETA ────────────────────────────────────
+
+    cardNumberInput.addEventListener('input', function () {
+        var raw       = this.value.replace(/\D/g, '').substring(0, 16);
+        var formatted = raw.match(/.{1,4}/g) ? raw.match(/.{1,4}/g).join(' ') : raw;
+        this.value    = formatted;
+
+        if (raw.length === 0) {
             displayCardNumber.textContent = '•••• •••• •••• ••••';
         } else {
-            // Show entered numbers and fill rest with dots
-            let displayValue = formattedValue;
-            let remaining = 19 - formattedValue.length; // 16 digits + 3 spaces = 19 chars
-            
-            if (remaining > 0) {
-                displayValue += ' ' + '•'.repeat(Math.min(remaining, 4));
+            // Rellena los dígitos restantes con puntos
+            var padded = formatted;
+            var missing = 19 - formatted.length;
+            if (missing > 0) {
+                padded += '•'.repeat(missing);
             }
-            
-            displayCardNumber.textContent = displayValue;
+            displayCardNumber.textContent = padded;
         }
     });
 
-    // Only allow numbers in card number
-    cardNumberInput.addEventListener('keypress', function(e) {
-        if (!/[0-9]/.test(e.key) && e.key !== 'Backspace' && e.key !== 'Delete') {
-            e.preventDefault();
-        }
+    cardNumberInput.addEventListener('keypress', function (e) {
+        if (!/[0-9]/.test(e.key)) e.preventDefault();
     });
 
-    // ============================================
-    // UPDATE CARD HOLDER NAME
-    // ============================================
-    cardHolderInput.addEventListener('input', function(e) {
-        let value = e.target.value.toUpperCase();
-        
-        if (value.length === 0) {
-            displayCardHolder.textContent = 'NOMBRE APELLIDOS';
-        } else {
-            displayCardHolder.textContent = value;
-        }
+
+    // ── NOMBRE DEL TITULAR ───────────────────────────────────
+
+    cardHolderInput.addEventListener('input', function () {
+        var val = this.value.toUpperCase().trim();
+        displayCardHolder.textContent = val.length > 0 ? val : 'NOMBRE APELLIDOS';
     });
 
-    // Only allow letters and spaces in cardholder name
-    cardHolderInput.addEventListener('keypress', function(e) {
-        if (!/[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/.test(e.key)) {
-            e.preventDefault();
-        }
+    // Actualizar también al salir del campo (por si el usuario pegó texto con Ctrl+V)
+    cardHolderInput.addEventListener('change', function () {
+        var val = this.value.toUpperCase().trim();
+        displayCardHolder.textContent = val.length > 0 ? val : 'NOMBRE APELLIDOS';
     });
 
-    // ============================================
-    // FORMAT AND UPDATE EXPIRY DATE
-    // ============================================
-    cardExpiryInput.addEventListener('input', function(e) {
-        let value = e.target.value.replace(/\D/g, ''); // Remove non-digits
-        
-        if (value.length >= 2) {
-            value = value.substring(0, 2) + '/' + value.substring(2, 4);
-        }
-        
-        e.target.value = value;
-        
-        // Update display
-        if (value.length === 0) {
-            displayCardExpiry.textContent = 'MM/AA';
-        } else {
-            displayCardExpiry.textContent = value;
-        }
+    cardHolderInput.addEventListener('keypress', function (e) {
+        if (!/[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]/.test(e.key)) e.preventDefault();
     });
 
-    // Simplified validation for school project
-    cardExpiryInput.addEventListener('blur', function(e) {
-        let value = e.target.value;
-        
-        if (value.length === 5) {
-            let month = parseInt(value.substring(0, 2));
-            
-            // Just check if month is valid (1-12)
+
+    // ── FECHA DE EXPIRACIÓN ──────────────────────────────────
+
+    cardExpiryInput.addEventListener('input', function () {
+        var raw = this.value.replace(/\D/g, '').substring(0, 4);
+        var formatted = raw.length >= 3 ? raw.substring(0, 2) + '/' + raw.substring(2) : raw;
+        this.value = formatted;
+        displayCardExpiry.textContent = formatted.length > 0 ? formatted : 'MM/AA';
+    });
+
+    cardExpiryInput.addEventListener('change', function () {
+        var val = this.value;
+        displayCardExpiry.textContent = val.length > 0 ? val : 'MM/AA';
+    });
+
+    cardExpiryInput.addEventListener('blur', function () {
+        var val = this.value;
+        if (val.length === 5) {
+            var month = parseInt(val.substring(0, 2), 10);
             if (month < 1 || month > 12) {
                 alert('Mes inválido. Debe estar entre 01 y 12.');
-                e.target.value = '';
+                this.value = '';
                 displayCardExpiry.textContent = 'MM/AA';
             }
         }
     });
 
-    // ============================================
-    // FORMAT CVV
-    // ============================================
-    cardCVVInput.addEventListener('input', function(e) {
-        e.target.value = e.target.value.replace(/\D/g, '').substring(0, 3);
+
+    // ── CVV ──────────────────────────────────────────────────
+
+    cardCVVInput.addEventListener('input', function () {
+        this.value = this.value.replace(/\D/g, '').substring(0, 3);
     });
 
-    // Only allow numbers in CVV
-    cardCVVInput.addEventListener('keypress', function(e) {
-        if (!/[0-9]/.test(e.key)) {
-            e.preventDefault();
-        }
+    cardCVVInput.addEventListener('keypress', function (e) {
+        if (!/[0-9]/.test(e.key)) e.preventDefault();
     });
 
-    // ============================================
-    // FORM SUBMISSION (SIMPLIFIED FOR SCHOOL PROJECT)
-    // ============================================
-    paymentForm.addEventListener('submit', function(e) {
+
+    // ── ENVÍO DEL FORMULARIO ─────────────────────────────────
+
+    paymentForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        
-        // Basic validation - accepts any card for demo purposes
-        const cardNumber = cardNumberInput.value.replace(/\s/g, '');
-        const cardHolder = cardHolderInput.value.trim();
-        const cardExpiry = cardExpiryInput.value;
-        const cardCVV = cardCVVInput.value;
-        const termsAccept = document.getElementById('termsAccept').checked;
-        
-        // Simple validation - just check if fields are filled
+
+        var cardNumber = cardNumberInput.value.replace(/\s/g, '');
+        var cardHolder = cardHolderInput.value.trim();
+        var cardExpiry = cardExpiryInput.value;
+        var cardCVV    = cardCVVInput.value;
+        var terms      = document.getElementById('termsAccept');
+
         if (cardNumber.length < 13) {
-            alert('Por favor, ingresa un número de tarjeta (mínimo 13 dígitos).');
+            alert('Por favor, introduce un número de tarjeta válido (mínimo 13 dígitos).');
             cardNumberInput.focus();
             return;
         }
-        
-        // Validate cardholder name
         if (cardHolder.length < 3) {
-            alert('Por favor, ingresa el nombre del titular.');
+            alert('Por favor, introduce el nombre del titular.');
             cardHolderInput.focus();
             return;
         }
-        
-        // Validate expiry format
         if (cardExpiry.length !== 5 || !cardExpiry.includes('/')) {
-            alert('Fecha de expiración inválida. Usa el formato MM/AA.');
+            alert('Fecha de expiración inválida. Formato: MM/AA');
             cardExpiryInput.focus();
             return;
         }
-        
-        // Validate CVV
         if (cardCVV.length < 3) {
-            alert('CVV inválido. Debe tener al menos 3 dígitos.');
+            alert('CVV inválido. Debe tener 3 dígitos.');
             cardCVVInput.focus();
             return;
         }
-        
-        // Validate terms
-        if (!termsAccept) {
+        if (terms && !terms.checked) {
             alert('Debes aceptar los términos y condiciones.');
             return;
         }
-        
-        // Show success message - accepts any card for demo
-        showSuccessMessage();
+
+        mostrarExito();
     });
 
-    // ============================================
-    // SUCCESS MESSAGE
-    // ============================================
-    function showSuccessMessage() {
-        // Create overlay
-        const overlay = document.createElement('div');
-        overlay.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-            animation: fadeIn 0.3s ease;
-        `;
-        
-        // Create success card
-        const successCard = document.createElement('div');
-        successCard.style.cssText = `
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            max-width: 400px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-            animation: scaleIn 0.3s ease;
-        `;
-        
-        successCard.innerHTML = `
-            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" style="margin: 0 auto 20px;">
-                <circle cx="12" cy="12" r="10" fill="#10b981"/>
-                <path d="M8 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-            <h2 style="color: #1e293b; margin-bottom: 12px; font-size: 24px;">¡Pago Exitoso!</h2>
-            <p style="color: #64748b; margin-bottom: 24px;">Tu pedido ha sido procesado correctamente.</p>
-            <button onclick="window.location.href='1 index.html'" style="
-                background: #2563eb;
-                color: white;
-                border: none;
-                padding: 12px 32px;
-                border-radius: 10px;
-                font-size: 16px;
-                font-weight: 600;
-                cursor: pointer;
-            ">Volver a la Tienda</button>
-        `;
-        
-        overlay.appendChild(successCard);
+
+    // ── MODAL DE ÉXITO ───────────────────────────────────────
+
+    function mostrarExito() {
+        var overlay = document.createElement('div');
+        overlay.style.cssText = [
+            'position:fixed', 'inset:0',
+            'background:rgba(0,0,0,.55)',
+            'display:flex', 'align-items:center', 'justify-content:center',
+            'z-index:9999', 'animation:ccFadeIn .3s ease'
+        ].join(';');
+
+        var card = document.createElement('div');
+        card.style.cssText = [
+            'background:#fff', 'padding:48px 40px',
+            'border-radius:20px', 'text-align:center',
+            'max-width:400px', 'width:90%',
+            'box-shadow:0 20px 40px rgba(0,0,0,.15)',
+            'animation:ccScaleIn .3s ease'
+        ].join(';');
+
+        card.innerHTML =
+            '<svg width="72" height="72" viewBox="0 0 24 24" fill="none" style="margin:0 auto 20px;">' +
+                '<circle cx="12" cy="12" r="10" fill="#10b981"/>' +
+                '<path d="M8 12l2 2 4-4" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+            '</svg>' +
+            '<h2 style="color:#1e293b;margin:0 0 10px;font-size:1.5rem;font-weight:700;">¡Pago realizado!</h2>' +
+            '<p style="color:#64748b;margin:0 0 28px;line-height:1.5;">Tu pedido ha sido procesado correctamente.<br>Recibirás un email de confirmación.</p>' +
+            '<button onclick="window.location.href=\'index.html\'" style="' +
+                'background:#2563eb;color:#fff;border:none;' +
+                'padding:13px 32px;border-radius:10px;' +
+                'font-size:1rem;font-weight:600;cursor:pointer;' +
+                'transition:background .2s' +
+            '">Volver a la tienda</button>';
+
+        overlay.appendChild(card);
         document.body.appendChild(overlay);
-        
-        // Add CSS animations
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes fadeIn {
-                from { opacity: 0; }
-                to { opacity: 1; }
-            }
-            @keyframes scaleIn {
-                from { transform: scale(0.9); opacity: 0; }
-                to { transform: scale(1); opacity: 1; }
-            }
-        `;
+
+        var style = document.createElement('style');
+        style.textContent =
+            '@keyframes ccFadeIn  { from{opacity:0} to{opacity:1} }' +
+            '@keyframes ccScaleIn { from{transform:scale(.9);opacity:0} to{transform:scale(1);opacity:1} }';
         document.head.appendChild(style);
     }
 });
