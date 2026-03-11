@@ -269,6 +269,19 @@ main {
     margin: 32px 0 16px;
     padding-bottom: 8px;
     border-bottom: 2px solid var(--border-color);
+
+    /* ── NUEVO: alinear con la grid ── */
+    /* 4 columnas × 260px + 3 huecos × 24px = 1112px          */
+    max-width: 1112px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Versión de 2 columnas (misma anchura que la grid pequeña)   */
+@media (max-width: 1130px) {
+    .seccion-titulo {
+        max-width: 544px;   /* 2 × 260px + 1 × 24px */
+    }
 }
 
 
