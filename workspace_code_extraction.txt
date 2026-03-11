@@ -1955,6 +1955,7 @@ Ruta completa: C:\Users\Breixo\Desktop\Brei-box-Nuevo\html\Confirmacion.html
             /* Limitar a 2 líneas */
             display: -webkit-box;
             -webkit-line-clamp: 2;
+            line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
