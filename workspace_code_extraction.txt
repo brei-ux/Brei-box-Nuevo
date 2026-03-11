@@ -1,13 +1,13 @@
 ================================================================================
 CÓDIGO EXTRAÍDO DEL WORKSPACE
-Total de archivos: 13
-Carpetas raíz: C:\Users\Breixo\Documents\Brei-box-Nuevo
+Total de archivos: 14
+Carpetas raíz: C:\Users\Breixo\Desktop\Brei-box-Nuevo
 ================================================================================
 
 
 ================================================================================
-ARCHIVO 1/13: css\estilos.css
-Ruta completa: C:\Users\Breixo\Documents\Brei-box-Nuevo\css\estilos.css
+ARCHIVO 1/14: css\estilos.css
+Ruta completa: C:\Users\Breixo\Desktop\Brei-box-Nuevo\css\estilos.css
 ================================================================================
 
 /* ============================================================
@@ -281,6 +281,19 @@ main {
     margin: 32px 0 16px;
     padding-bottom: 8px;
     border-bottom: 2px solid var(--border-color);
+
+    /* ── NUEVO: alinear con la grid ── */
+    /* 4 columnas × 260px + 3 huecos × 24px = 1112px          */
+    max-width: 1112px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Versión de 2 columnas (misma anchura que la grid pequeña)   */
+@media (max-width: 1130px) {
+    .seccion-titulo {
+        max-width: 544px;   /* 2 × 260px + 1 × 24px */
+    }
 }
 
 
@@ -298,11 +311,13 @@ main {
     gap: 24px;
     margin-bottom: 40px;
     overflow-x: auto;
+    justify-content: center;
 }
 
 @media (max-width: 1130px) {
     .productos-grid {
         grid-template-columns: repeat(2, 260px);
+        justify-content: center;   /* ← AÑADIR esta línea */
     }
 }
 
@@ -370,28 +385,313 @@ main {
 }
 
 
-/* ── FOOTER ──────────────────────────────────────────────── */
+/* ══════════════════════════════════════════════════════════
+   BREI-BOX — FOOTER COMPLETO
+   Reemplaza el bloque "── FOOTER ──" existente en estilos.css
+   ══════════════════════════════════════════════════════════ */
 
-footer {
-    border-top: 1px solid var(--border-color);
-    padding: 24px 0;
+
+/* ── FOOTER BASE ─────────────────────────────────────────── */
+
+.site-footer {
+    background: #1e293b;          /* misma tonalidad que --text-primary */
+    color: #94a3b8;               /* gris suave para el texto secundario */
+    margin-top: 60px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+
+/* ── FRANJA PRINCIPAL (4 columnas) ───────────────────────── */
+
+.footer-main {
+    display: grid;
+    grid-template-columns: 1.4fr 1.2fr 1fr 1.2fr;
+    gap: 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 56px 40px 48px;
+}
+
+@media (max-width: 1024px) {
+    .footer-main {
+        grid-template-columns: 1fr 1fr;
+        gap: 36px;
+        padding: 48px 32px 40px;
+    }
+}
+
+@media (max-width: 600px) {
+    .footer-main {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 40px 24px 32px;
+    }
+}
+
+
+/* ── COLUMNA MARCA ───────────────────────────────────────── */
+
+.footer-logo-link {
     display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    margin-bottom: 16px;
+}
+
+.footer-logo {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 4px;
+}
+
+.footer-brand-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #f1f5f9;
+    letter-spacing: -0.02em;
+}
+
+.footer-tagline {
+    color: #94a3b8;
+    font-size: 0.875rem;
+    line-height: 1.65;
+    margin: 0 0 20px;
+}
+
+/* Redes sociales */
+.footer-socials {
+    display: flex;
+    gap: 10px;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.07);
+    color: #94a3b8;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.social-btn:hover {
+    background: #2563eb;
+    color: #ffffff;
+    transform: translateY(-2px);
+    border-color: transparent;
+}
+
+
+/* ── ENCABEZADOS DE COLUMNA ──────────────────────────────── */
+
+.footer-heading {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #f1f5f9;
+    margin: 0 0 18px;
+}
+
+
+/* ── LISTA DE CONTACTO ───────────────────────────────────── */
+
+.footer-contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footer-contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: color 0.2s;
+    line-height: 1.5;
+}
+
+a.footer-contact-item:hover {
+    color: #2563eb;
+}
+
+.footer-address {
+    cursor: default;
+}
+
+.contact-icon {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: #2563eb;
+    display: flex;
+}
+
+
+/* ── LISTA DE LINKS ──────────────────────────────────────── */
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-links a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: color 0.2s, padding-left 0.2s;
+    display: inline-block;
+}
+
+.footer-links a:hover {
+    color: #f1f5f9;
+    padding-left: 4px;
+}
+
+
+/* ── NEWSLETTER ──────────────────────────────────────────── */
+
+.footer-newsletter {
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.newsletter-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #f1f5f9;
+    margin: 0 0 10px;
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.newsletter-input {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    color: #f1f5f9;
+    outline: none;
+    transition: background 0.2s;
+}
+
+.newsletter-input::placeholder {
+    color: #64748b;
+}
+
+.newsletter-input:focus {
+    background: rgba(255, 255, 255, 0.09);
+}
+
+.newsletter-btn {
+    flex-shrink: 0;
+    padding: 10px 14px;
+    background: #2563eb;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.newsletter-btn:hover {
+    background: #1e40af;
+}
+
+
+/* ── FRANJA INFERIOR ─────────────────────────────────────── */
+
+.footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     flex-wrap: wrap;
     gap: 16px;
-    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 40px;
 }
 
-.datos {
-    display: block;
-    width: 50%;
+@media (max-width: 600px) {
+    .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px 24px;
+    }
 }
 
-footer .datos {
-    width: auto;
+.footer-copy {
+    color: #64748b;
+    font-size: 0.8rem;
+    margin: 0;
 }
 
-.ENVIAR {
-    width: 10%;
+.footer-payment-methods {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.payment-label {
+    color: #64748b;
+    font-size: 0.75rem;
+    margin-right: 4px;
+}
+
+.payment-badge {
+    display: inline-flex;
+    border-radius: 5px;
+    overflow: hidden;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.payment-badge:hover {
+    opacity: 1;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   ELIMINAR / SOBREESCRIBIR LOS ESTILOS VIEJOS DEL FOOTER
+   (las reglas footer, .datos y .ENVIAR que ya no se usan)
+   ══════════════════════════════════════════════════════════ */
+
+/* Anulamos las reglas heredadas para que no interfieran */
+footer.site-footer .datos,
+footer.site-footer .ENVIAR {
+    all: unset;
+    display: none;  /* oculta cualquier restos del HTML antiguo si los hubiera */
 }
 
 
@@ -473,17 +773,38 @@ body.payment-page {
     pointer-events: none;
 }
 
+/* ============================================================
+   BREI-BOX — FIX: Vista previa de la tarjeta de crédito
+   
+   El problema: .card-chip y .card-number tenían márgenes
+   demasiado grandes, por lo que .card-details quedaba
+   fuera del área visible (overflow: hidden del .credit-card).
+   
+   Busca estas reglas en estilos.css y REEMPLÁZALAS por
+   las que aparecen a continuación.
+   ============================================================ */
+
+
+/* ── CHIP (antes margin-bottom: 40px → ahora 20px) ─────────── */
+
 .card-chip {
-    margin-bottom: 40px;
+    margin-bottom: 20px;   /* ← era 40px */
 }
 
+
+/* ── NÚMERO (antes margin-bottom: 30px → ahora 16px) ────────── */
+
 .card-number {
-    font-size: 24px;
+    font-size: 22px;       /* ligero ajuste para que quepa en 1 línea */
     font-weight: 500;
     letter-spacing: 3px;
-    margin-bottom: 30px;
+    margin-bottom: 16px;   /* ← era 30px */
     font-family: 'Courier New', monospace;
 }
+
+
+/* ── DETALLES (titular / válida hasta) ───────────────────────── */
+/* Asegurar que el texto siempre sea visible */
 
 .card-details {
     display: flex;
@@ -492,17 +813,21 @@ body.payment-page {
 }
 
 .card-label {
-    font-size: 10px;
+    font-size: 9px;            /* compacto */
     text-transform: uppercase;
     letter-spacing: 1px;
     opacity: 0.7;
-    margin-bottom: 5px;
+    margin-bottom: 4px;        /* ← era 5px, mínima reducción */
 }
 
 .card-value {
-    font-size: 16px;
+    font-size: 14px;           /* ← era 16px, un pelín más pequeño */
     font-weight: 500;
     text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 160px;          /* evita que un nombre muy largo rompa la tarjeta */
 }
 
 .card-logo {
@@ -770,664 +1095,458 @@ input[type="checkbox"] {
     }
 }
 
+/* ============================================================
+   BREI-BOX — SISTEMA DE CARRITO DE COMPRA
+   Añadir al final de css/estilos.css
+   ============================================================ */
 
-================================================================================
-ARCHIVO 2/13: data\productos.js
-Ruta completa: C:\Users\Breixo\Documents\Brei-box-Nuevo\data\productos.js
-================================================================================
 
-// ============================================================
-// BREI-BOX — js/catalogo.js
-// Sin módulos ES: funciona abriendo el HTML directamente.
-// ============================================================
+/* ── BOTÓN DEL CARRITO EN EL HEADER ─────────────────────── */
 
-var catalogo = {
-
-    guitarras: [
-        {
-            id: "fender-stratocaster-hendrix",
-            nombre: "Fender Stratocaster Jimi Hendrix Olympic White",
-            descripcion:
-                "Réplica oficial de la icónica Stratocaster que Jimi Hendrix tocó invertida en su época dorada. " +
-                "Fabricada en la planta de Ensenada, reproduce fielmente los detalles vintage de finales de los 60: " +
-                "mástil en U suave, golpeador de 3 capas blanco y pickups en posición de zurdo montada en diestro, " +
-                "consiguiendo así el tono brillante y agresivo que Hendrix consagró en Woodstock.",
-            caracteristicas: [
-                "Cuerpo de aliso (Alder) con acabado Olympic White",
-                "Mástil de arce en C suave con radio 9.5 pulgadas (241 mm)",
-                "Diapasón de arce con 21 trastes medium jumbo",
-                "Pickups Jimi Hendrix Vintage Noiseless (juego de 3)",
-                "Puente vintage sincronizado de 6 sillas de acero",
-                "Clavijero estilo Fender reversed (zurdo / montaje diestro)",
-                "Electrónica: 1 volumen, 2 tonos, selector de 5 posiciones",
-                "Longitud de escala: 648 mm (25.5 pulgadas)",
-            ],
-            precio: 1300,
-            imagen: "../img/Fender-Eléctricas/fender-jimi-hendrix-stratocaster-mn-olympic-white.jpg",
-        },
-        {
-            id: "gibson-flying-v",
-            nombre: "Gibson Flying V",
-            descripcion:
-                "La Flying V es uno de los diseños más atrevidos de Gibson, presentado en 1958 y rescatado en los 70 " +
-                "por artistas como Albert King y Jimi Hendrix. Su cuerpo en V de caoba proporciona un sustain " +
-                "extraordinario y un acceso sin rival a los trastes más altos. Perfecta para rock clásico, blues y metal.",
-            caracteristicas: [
-                "Cuerpo de caoba (Mahogany) en forma de V",
-                "Mástil de caoba encolado, perfil Slim Taper",
-                "Diapasón de palisandro con radio 12 pulgadas (305 mm)",
-                "Pastillas Gibson 490R (mástil) y 490T (puente)",
-                "Puente ABR-1 y cordal Stop Bar de aluminio",
-                "Clavijero Kluson-style de 3+3",
-                "Electrónica: 2 volúmenes, 1 tono, selector de 3 posiciones",
-                "Longitud de escala: 628 mm (24.75 pulgadas)",
-            ],
-            precio: 1500,
-            imagen: "../img/Gibson-Eléctricas/Gibson Flying V.png",
-        },
-        {
-            id: "gibson-sg-clapton-fool",
-            nombre: "Eric Clapton Gibson SG The Fool",
-            descripcion:
-                "Réplica de la célebre Gibson SG Standard de 1964 que Eric Clapton utilizó durante su etapa con Cream. " +
-                "The Fool es la guitarra más reconocida de Clapton de esa época, decorada por el colectivo holandés " +
-                "The Fool con motivos psicodélicos. Esta versión captura el peso ligero y el punch del diseño " +
-                "original que definió el blues-rock de los 60.",
-            caracteristicas: [
-                "Cuerpo de caoba (Mahogany) con tapa plana",
-                "Mástil de caoba encolado, perfil vintage en C",
-                "Diapasón de palisandro con 22 trastes medium",
-                "Pastillas PAF-style humbuckers de bobina doble",
-                "Puente Tune-o-Matic y cordal Stop Bar",
-                "Doble cutaway de acceso libre hasta el traste 22",
-                "Electrónica: 2 volúmenes, 2 tonos, selector de 3 posiciones",
-                "Longitud de escala: 628 mm (24.75 pulgadas)",
-            ],
-            precio: 3700,
-            imagen: "../img/Gibson-Eléctricas/78461f02052fd0a04eb02f6c47cab6bc2de01daa-1000x1000.png",
-        },
-        {
-            id: "fender-jazzmaster-troy-van-leeuwen",
-            nombre: "Fender Jazzmaster Troy Van Leeuwen Oxblood",
-            descripcion:
-                "Firma del guitarrista de Queens of the Stone Age, Troy Van Leeuwen, esta Jazzmaster combina la " +
-                "estética offset original de los 60 con modificaciones modernas pensadas para la acción en directo. " +
-                "El acabado Oxblood sobre caoba la distingue de cualquier Jazzmaster estándar y la convierte en una " +
-                "pieza tan coleccionable como funcional.",
-            caracteristicas: [
-                "Cuerpo de caoba (Mahogany) con acabado Oxblood",
-                "Mástil de arce con diapasón de palisandro bound (radio 9.5 pulgadas)",
-                "22 trastes medium jumbo",
-                "Pastillas Troy Van Leeuwen Jazzmaster (custom CuNiFe)",
-                "Sistema de vibrato Jazzmaster rhythm/lead circuit",
-                "Puente ajustable de barril con cordal de rodillo",
-                "Botones Dunlop Straplock de serie",
-                "Longitud de escala: 648 mm (25.5 pulgadas)",
-            ],
-            precio: 2000,
-            imagen: "../img/Fender-Eléctricas/guitarra-electrica-fender-troy-van-leeuwen-signature-jazzmaster-bound-rosewood-oxblood.png",
-        },
-        {
-            id: "gibson-eds-1275-jimmy-page",
-            nombre: "Gibson EDS-1275 Jimmy Page Double Neck",
-            descripcion:
-                "Réplica de la doble mástil que Jimmy Page inmortalizó en la interpretación en directo de Stairway to Heaven. " +
-                "La EDS-1275 combina un mástil de 6 cuerdas y uno de 12 cuerdas en un solo cuerpo SG, " +
-                "permitiendo cambiar instantáneamente de registro sin cambiar de instrumento. Una joya de ingeniería " +
-                "lutherie y uno de los iconos absolutos del rock.",
-            caracteristicas: [
-                "Cuerpo doble de caoba (Mahogany), estilo SG",
-                "Mástil 6 cuerdas + mástil 12 cuerdas (ambos caoba encolados)",
-                "Diapasones de palisandro, perfil vintage en C",
-                "4 pastillas humbuckers 490R/490T (dos por mástil)",
-                "Controles individuales por mástil: 2 volúmenes + 2 tonos",
-                "Selector de mástil activo de 3 posiciones",
-                "Puente Tune-o-Matic y cordal Stop Bar en cada mástil",
-                "Longitud de escala: 628 mm (24.75 pulgadas) en ambos mástiles",
-            ],
-            precio: 20000,
-            imagen: "../img/Gibson-Eléctricas/1989_Gibson_EDS-1275.png",
-        },
-        {
-            id: "fender-stratocaster-gilmour",
-            nombre: "David Gilmour Fender Custom Shop Stratocaster NOS",
-            descripcion:
-                "Réplica exacta de la legendaria Black Strat de David Gilmour, la guitarra que definió el sonido " +
-                "de Pink Floyd en discos como The Dark Side of the Moon, Wish You Were Here y The Wall. " +
-                "Fabricada en el Custom Shop de Fender con las especificaciones que el propio Gilmour aprobó: " +
-                "cuerpo de aliso negro, mástil de arce de los 70 y la combinación de pastillas única que él configuró.",
-            caracteristicas: [
-                "Cuerpo de aliso (Alder) con acabado negro NOS (New Old Stock)",
-                "Mástil de arce de un solo trozo, perfil de los 70 (tipo C/U)",
-                "Diapasón de arce con 21 trastes vintage narrow-tall",
-                "Pastillas: EMG-DG20 (set exclusivo David Gilmour)",
-                "Puente Fender vintage 2-pivot de 6 sillas de acero inox",
-                "Clavijero Sperzel Trim-Lok de bloqueo",
-                "Golpeador de 1 capa negro (sin bisel blanco)",
-                "Longitud de escala: 648 mm (25.5 pulgadas)",
-            ],
-            precio: 4000,
-            imagen: "../img/Fender-Eléctricas/1502952061Fender_Custom_Shop_David_Gilmour_Stratocaster_NOS.jpg",
-        },
-        {
-            id: "gibson-les-paul-classic",
-            nombre: "Gibson Les Paul Classic",
-            descripcion:
-                "La Les Paul Classic recupera el espíritu de las legendarias Burst de 1959 con detalles modernos " +
-                "para el guitarrista contemporáneo. Uno de los diseños más influyentes de la historia, utilizado " +
-                "por artistas como Slash, Jimmy Page o Joe Perry. Combina el calor y el sustain ilimitado de su " +
-                "construcción de caoba con la precisión de sus pastillas 57 Classic.",
-            caracteristicas: [
-                "Cuerpo de caoba (Mahogany) con tapa de arce flameado",
-                "Mástil de caoba encolado, perfil 60s Slim Taper en D",
-                "Diapasón de palisandro con radio 12 pulgadas y 22 trastes medium jumbo",
-                "Pastillas Gibson 57 Classic (mástil) y 57 Classic Plus (puente)",
-                "Puente Tune-o-Matic Nashville y cordal Stop Bar aluminio",
-                "Clavijero Grover Rotomatic de 18:1",
-                "Electrónica: 2 volúmenes CTS push-pull (coil-split), 2 tonos, selector 3 posiciones",
-                "Longitud de escala: 628 mm (24.75 pulgadas)",
-            ],
-            precio: 2500,
-            imagen: "../img/Gibson-Eléctricas/gibson-les-paul-classic-hcs-p-32523.jpg",
-        },
-        {
-            id: "danelectro-dc59",
-            nombre: "Danelectro 3021 DC59",
-            descripcion:
-                "La Danelectro DC59 es una de las guitarras con más carácter y personalidad del mercado. Originaria " +
-                "de los 50, fue utilizada por artistas como Jimmy Page en sesiones de estudio y por Syd Barrett. " +
-                "Su construcción semisólida de masonite le da un tono nasal y twangy único, imposible de replicar " +
-                "con una guitarra convencional. Una opción fantástica para cualquier amante del sonido vintage.",
-            caracteristicas: [
-                "Cuerpo semisólido de masonite sobre bastidor de chopo",
-                "Mástil de arce de un solo trozo con diapasón de palisandro",
-                "21 trastes vintage medium",
-                "Pastillas Lipstick Tube de simple bobina (x2)",
-                "Puente ajustable estilo Danelectro vintage",
-                "Clavijero con botones de nacar (vintage style)",
-                "Electrónica: 2 volúmenes, 1 tono, selector de 3 posiciones",
-                "Longitud de escala: 648 mm (25.5 pulgadas)",
-            ],
-            precio: 650,
-            imagen: "../img/Fender-Eléctricas/Danelectro3021dc59.png",
-        },
-    ],
-
-    amplificadores: [
-        {
-            id: "fender-65-deluxe-reverb",
-            nombre: "Fender 65 Deluxe Reverb",
-            descripcion:
-                "Reissue del amplificador combo que definió el sonido del surf y el blues americano en los años 60. " +
-                "El Fender 65 Deluxe Reverb tiene 22 vatios de pura electrónica de válvulas, reverb de muelle y " +
-                "vibrato incorporados, y el glorioso clean que hizo famoso a Fender. Favorito de Neil Young, " +
-                "Billy Gibbons y referencia en estudios de grabación de todo el mundo.",
-            caracteristicas: [
-                "Potencia: 22 W RMS en clase A/B",
-                "Tecnología: todo válvulas (4x 6V6, 5x 12AX7, 2x 12AT7, 1x GZ34)",
-                "Altavoz: 1x 12 pulgadas Jensen C-12K (8 ohmios)",
-                "Reverb de muelle de tanque largo (circuito Accutronics)",
-                "Vibrato con velocidad e intensidad regulables",
-                "Canales: Normal + Vibrato (con entrada de alta y baja impedancia)",
-                "Controles: volumen, graves, agudos, reverb, velocidad, intensidad",
-                "Dimensiones: 60 x 48 x 24 cm — Peso: 19.5 kg",
-            ],
-            precio: 10000,
-            imagen: "../img/Amplis/fender-65-deluxe-reverb-amplificador.png",
-        },
-        {
-            id: "marshall-1959-plexi",
-            nombre: "Marshall 1959 Super Lead Plexi",
-            descripcion:
-                "El amplificador que inventó el rock clásico. El Marshall Plexi de 100 vatios fue el sonido de Jimi " +
-                "Hendrix, Eric Clapton, Pete Townshend y Jimmy Page en la segunda mitad de los 60. Su nombre proviene " +
-                "del panel frontal de plexiglás y su sonido sucio, cargado de armónicos, es el blueprint del rock " +
-                "clásico y el metal de los 70. Esta reissue reproduce el circuito original al detalle.",
-            caracteristicas: [
-                "Potencia: 100 W RMS en clase A/B",
-                "Tecnología: todo válvulas (4x EL34, 4x 12AX7)",
-                "Configuración de cabezal (head) — sin altavoz incluido",
-                "Salidas de altavoz: 16, 8 y 4 ohmios (para caja 4x12)",
-                "2 canales de alta y baja ganancia con 4 entradas jack",
-                "Controles: presencia, graves, medios, agudos, volumen (x2)",
-                "Panel frontal de aluminio estilo gold plexi original",
-                "Peso: 19 kg",
-            ],
-            precio: 3500,
-            imagen: "../img/Amplis/marshall_plexi_super_lead_1959_gallery_1.png",
-        },
-        {
-            id: "roland-jc-120",
-            nombre: "Roland Jazz Chorus JC-120",
-            descripcion:
-                "Desde 1975, el Roland JC-120 es sinónimo de clean perfecto y chorus cristalino. Amplificador de " +
-                "estado sólido, sus 120 W estéreo a través de dos altavoces de 12 pulgadas producen el limpio " +
-                "más nítido y presente de la historia. Imprescindible en el new wave, el pop y el jazz, lo usaron " +
-                "Andy Summers (The Police), Robert Smith (The Cure) y Jonny Greenwood.",
-            caracteristicas: [
-                "Potencia: 120 W estéreo (60 W + 60 W) en estado sólido",
-                "2 altavoces Jensen JC-120 de 12 pulgadas (8 ohmios cada uno)",
-                "Chorus estéreo incorporado (velocidad e intensidad)",
-                "Vibrato incorporado con intensidad y velocidad",
-                "Reverb de muelle de 3 pistas",
-                "2 canales (Normal y Brillante) con 4 entradas",
-                "Bucle de efectos estéreo en serie",
-                "Dimensiones: 67 x 52 x 26 cm — Peso: 32 kg",
-            ],
-            precio: 1200,
-            imagen: "../img/Amplis/roland-jc-120-jazz-chorus-combo_GIT0000966-000.png",
-        },
-        {
-            id: "vox-ac30",
-            nombre: "Vox AC30",
-            descripcion:
-                "El sonido del British Invasion. El Vox AC30 fue el amplificador de The Beatles, The Rolling Stones " +
-                "y The Kinks en los 60, y sigue siendo uno de los combos de válvulas más valorados del mundo. " +
-                "Sus 30 W de clase A producen un overdrive natural y brillante al subir el volumen, con un carácter " +
-                "tonal inconfundible que ningún pedal ha conseguido replicar del todo.",
-            caracteristicas: [
-                "Potencia: 30 W RMS en clase A pura",
-                "Tecnología: todo válvulas (4x EL84, 3x 12AX7, 1x EZ81)",
-                "2 altavoces Celestion Greenback de 12 pulgadas (16 ohmios)",
-                "Canal Normal + canal Top Boost con EQ independiente",
-                "Reverb de muelle y tremolo incorporados",
-                "Salida de altavoz adicional para extensión de caja",
-                "Carcasa basket-weave grille cloth original estilo 60s",
-                "Dimensiones: 70 x 54 x 27 cm — Peso: 30 kg",
-            ],
-            precio: 899,
-            imagen: "../img/Amplis/VoxAC30.jpg",
-        },
-    ],
-
-    pedales: [
-        {
-            id: "big-muff-pi",
-            nombre: "Electro-Harmonix Big Muff Pi",
-            descripcion:
-                "El pedal de distorsión más icónico de la historia. Desde 1969 el Big Muff Pi ha sido el secreto " +
-                "detrás del tono sustanado y cremoso de Carlos Santana, David Gilmour, Kurt Cobain y J Mascis. " +
-                "Su circuito de cuatro etapas de recorte en silicio produce una distorsión suave, musical y " +
-                "con un sustain prácticamente infinito. Un imprescindible absoluto.",
-            caracteristicas: [
-                "Tipo de efecto: Fuzz / Distorsión sustanada",
-                "Controles: Volumen, Tono, Sustain",
-                "Circuito: 4 etapas de recorte en diodos de silicio",
-                "Alimentación: 9 V DC (centro negativo) o pila 9 V",
-                "Consumo: 3.5 mA",
-                "Entradas / Salidas: 1x jack TS de 6.3 mm (mono)",
-                "True Bypass",
-                "Dimensiones: 92 x 51 x 47 mm — Peso: 280 g",
-            ],
-            precio: 95,
-            imagen: "../img/Pedales/BigMuff.png",
-        },
-        {
-            id: "boss-tr2-tremolo",
-            nombre: "Boss TR-2 Tremolo",
-            descripcion:
-                "El TR-2 lleva más de 25 años siendo la referencia en trémolo compacto. Reproduce con fidelidad el " +
-                "trémolo clásico de los amplificadores vintage de los 50 y 60. Su circuito analógico crea una " +
-                "modulación de amplitud suave y musical que va desde un suave cabeceo a pulsos profundos de tipo " +
-                "helicopter. Favorito de Radiohead, Wilco y Sonic Youth.",
-            caracteristicas: [
-                "Tipo de efecto: Tremolo (modulación de amplitud)",
-                "Controles: Wave (forma de onda), Rate (velocidad), Depth (profundidad)",
-                "Circuito analógico puro (sin conversión digital)",
-                "Alimentación: 9 V DC Boss PSA o pila 9 V",
-                "Consumo: 20 mA",
-                "Entradas / Salidas: 1x jack TS de 6.3 mm mono",
-                "Construcción Boss ABS con interruptor de metal",
-                "Dimensiones: 70 x 120 x 55 mm — Peso: 395 g",
-            ],
-            precio: 115,
-            imagen: "../img/Pedales/boss-tr2-tremolo.png",
-        },
-        {
-            id: "ehx-memory-man",
-            nombre: "Electro-Harmonix Vintage Deluxe Memory Man",
-            descripcion:
-                "El delay analógico más buscado por coleccionistas y guitarristas tonales. El Deluxe Memory Man " +
-                "combina un delay BBD (Bucket Brigade Device) de cálido sonido analógico con chorus y vibrato " +
-                "incorporados. The Edge de U2 construyó todo su sonido alrededor de este pedal en los 80. " +
-                "Esta versión vintage recaptura el circuito original con chips NOS.",
-            caracteristicas: [
-                "Tipo de efecto: Delay analógico BBD + Chorus/Vibrato",
-                "Tiempo de delay: hasta 550 ms (analógico)",
-                "Controles: Blend, Level, Delay, Feedback, Chorus/Vibrato switch",
-                "Chips: MN3005 BBD (circuito original vintage)",
-                "Alimentación: 24 V DC (adaptador incluido)",
-                "Consumo: 70 mA",
-                "Entradas / Salidas: 1x jack TS mono I/O",
-                "Dimensiones: 140 x 112 x 55 mm — Peso: 650 g",
-            ],
-            precio: 900,
-            imagen: "../img/Pedales/MemoryMan.png",
-        },
-        {
-            id: "crybaby-wah",
-            nombre: "Dunlop CryBaby Wah GCB95",
-            descripcion:
-                "El pedal wah más vendido de la historia. El CryBaby GCB95 es el estándar absoluto del wah " +
-                "desde 1967. Jimi Hendrix, Slash, Kirk Hammett y Eric Clapton han hecho de él una extensión de " +
-                "su voz en guitarra. Su circuito inductivo basado en el mítico inductor Fasel produce ese barrido " +
-                "vocal inconfundible que ha definido décadas de rock, funk y blues.",
-            caracteristicas: [
-                "Tipo de efecto: Wah-Wah (filtro de barrido)",
-                "Inductor: Fasel rojo (bobina original)",
-                "Circuito: analógico inductivo basado en el diseño original de Vox",
-                "Alimentación: 9 V DC (centro negativo) o pila 9 V",
-                "Consumo: 1 mA",
-                "Carcasa de metal fundido a presión (die-cast zinc)",
-                "Interruptor de activación por presión de talón",
-                "Dimensiones: 107 x 64 x 115 mm — Peso: 520 g",
-            ],
-            precio: 99,
-            imagen: "../img/Pedales/Wahwah.png",
-        },
-    ],
-};
-
-// ── Helpers ───────────────────────────────────────────────────
-
-function formatearPrecio(precio) {
-    return precio.toLocaleString("es-ES", {
-        style: "currency",
-        currency: "EUR",
-        minimumFractionDigits: 2,
-    });
+.carrito-btn {
+    position: relative;
+    margin-left: auto;          /* empuja el botón al extremo derecho */
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    border: none;
+    background: rgba(37, 99, 235, 0.12);
+    color: #1e293b;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
 }
 
-function crearCard(p) {
-    return '<a class="producto-card" href="Pagina-Producto.html?id=' + p.id + '">' +
-               '<img src="' + p.imagen + '" alt="' + p.nombre + '" loading="lazy">' +
-               '<div class="producto-info">' +
-                   '<p class="producto-nombre">' + p.nombre + '</p>' +
-                   '<p class="producto-precio">' + formatearPrecio(p.precio) + '</p>' +
-               '</div>' +
-           '</a>';
+.carrito-btn:hover {
+    background: rgba(37, 99, 235, 0.2);
+    transform: scale(1.06);
 }
 
-function renderGrid(gridId, productos) {
-    var el = document.getElementById(gridId);
-    if (!el) return;
-    el.innerHTML = productos.map(crearCard).join("");
+/* Badge de número de artículos */
+.carrito-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    background: #ef4444;
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.2s, transform 0.2s;
+    pointer-events: none;
+    line-height: 1;
 }
 
-// ── Punto de entrada ──────────────────────────────────────────
+.carrito-badge.visible {
+    opacity: 1;
+    transform: scale(1);
+}
 
-document.addEventListener("DOMContentLoaded", function () {
-    renderGrid("grid-guitarras",      catalogo.guitarras);
-    renderGrid("grid-amplificadores", catalogo.amplificadores);
-    renderGrid("grid-pedales",        catalogo.pedales);
-});
+
+/* ── OVERLAY OSCURO ──────────────────────────────────────── */
+
+.carrito-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 1100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+.carrito-overlay.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+
+/* ── PANEL DESPLEGABLE ───────────────────────────────────── */
+
+.carrito-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 400px;
+    max-width: 100vw;
+    height: 100vh;
+    background: #fff;
+    box-shadow: -8px 0 40px rgba(0, 0, 0, 0.15);
+    z-index: 1200;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carrito-panel.abierto {
+    transform: translateX(0);
+}
+
+
+/* ── CABECERA DEL PANEL ──────────────────────────────────── */
+
+.carrito-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    border-bottom: 1px solid #e2e8f0;
+    flex-shrink: 0;
+}
+
+.carrito-panel-titulo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0;
+}
+
+.carrito-cerrar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    border: none;
+    background: #f1f5f9;
+    color: #64748b;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.carrito-cerrar:hover {
+    background: #e2e8f0;
+    color: #1e293b;
+}
+
+
+/* ── LISTA DE ITEMS (scroll) ─────────────────────────────── */
+
+.carrito-lista {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px 16px;
+}
+
+.carrito-lista::-webkit-scrollbar       { width: 4px; }
+.carrito-lista::-webkit-scrollbar-track { background: transparent; }
+.carrito-lista::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 2px; }
+
+
+/* ── ESTADO VACÍO ────────────────────────────────────────── */
+
+.carrito-vacio {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 40px 24px;
+    text-align: center;
+}
+
+.carrito-vacio p {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0;
+}
+
+.carrito-vacio span {
+    font-size: 0.875rem;
+    color: #94a3b8;
+}
+
+
+/* ── ITEM DEL CARRITO ────────────────────────────────────── */
+
+.carrito-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 8px;
+    border-bottom: 1px solid #f1f5f9;
+    transition: background 0.15s;
+    border-radius: 8px;
+}
+
+.carrito-item:hover {
+    background: #f8fafc;
+}
+
+.carrito-item:last-child {
+    border-bottom: none;
+}
+
+.carrito-item-img {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+    background: #f1f5f9;
+    border-radius: 8px;
+    padding: 6px;
+    flex-shrink: 0;
+}
+
+.carrito-item-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.carrito-item-nombre {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #1e293b;
+    line-height: 1.3;
+    margin: 0;
+    /* Limitar a 2 líneas */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.carrito-item-precio {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #2563eb;
+    margin: 0;
+}
+
+/* Controles de cantidad */
+.carrito-item-controles {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px;
+}
+
+.qty-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: 1.5px solid #e2e8f0;
+    background: #fff;
+    color: #1e293b;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s, background 0.2s;
+    line-height: 1;
+}
+
+.qty-btn:hover {
+    border-color: #2563eb;
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.qty-valor {
+    min-width: 24px;
+    text-align: center;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+/* Botón de eliminar */
+.carrito-item-eliminar {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    border: none;
+    background: transparent;
+    color: #94a3b8;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, color 0.2s;
+    margin-top: 2px;
+}
+
+.carrito-item-eliminar:hover {
+    background: #fee2e2;
+    color: #ef4444;
+}
+
+
+/* ── FOOTER DEL PANEL (total + pagar) ────────────────────── */
+
+.carrito-footer {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px 24px 28px;
+    border-top: 1px solid #e2e8f0;
+    background: #fff;
+}
+
+.carrito-total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.carrito-total-label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #64748b;
+}
+
+.carrito-total-precio {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #1e293b;
+}
+
+.carrito-pagar-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px 24px;
+    background: #2563eb;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+}
+
+.carrito-pagar-btn:hover {
+    background: #1e40af;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45);
+    color: #fff;
+    text-decoration: none;
+}
+
+.carrito-vaciar-btn {
+    background: none;
+    border: none;
+    color: #94a3b8;
+    font-size: 0.8rem;
+    cursor: pointer;
+    text-align: center;
+    padding: 4px;
+    transition: color 0.2s;
+    text-decoration: underline;
+}
+
+.carrito-vaciar-btn:hover {
+    color: #ef4444;
+}
+
+
+/* ── TOAST DE CONFIRMACIÓN ───────────────────────────────── */
+
+.carrito-toast {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: #1e293b;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 1500;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+    max-width: 90vw;
+}
+
+.carrito-toast.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.carrito-toast svg {
+    flex-shrink: 0;
+    color: #10b981;
+}
+
+
+/* ── BOTÓN "AÑADIR AL CARRITO" (página de producto) ──────── */
+
+.btn-añadir-carrito {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: #2563eb;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+    text-decoration: none;
+}
+
+.btn-añadir-carrito:hover {
+    background: #1e40af;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+}
+
+.btn-añadir-carrito.añadido {
+    background: #10b981;
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+}
+
+
+/* ── AJUSTE DEL HEADER: el h1 ya no ocupa flex:1
+      porque el botón del carrito va al extremo derecho ─────── */
+
+/* El margen auto del .carrito-btn ya lo coloca a la derecha,
+   así que el h1 sigue centrado visualmente. Sin cambios en el CSS
+   del header existente — funciona por el margin-left:auto del botón. */
 
 
 ================================================================================
-ARCHIVO 3/13: documentos.html\index.html
-Ruta completa: C:\Users\Breixo\Documents\Brei-box-Nuevo\documentos.html\index.html
-================================================================================
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brei-Box: Guitarras</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../css/estilos.css">
-</head>
-<body>
-    <header>
-        <a href="index.html">
-            <img id="logo" src="../img/Logo.png" alt="logo">
-        </a>
-        <h1>Brei-Box</h1>
-    </header>
-
-    <main>
-        <p class="Bienvenida">
-            ¡Bienvenido a Brei-Box, tu tienda especializada en guitarras!
-            <br><br>
-            Aquí encontrarás el sonido perfecto que has estado buscando, ya seas principiante o profesional.
-            Explora nuestra selección de guitarras acústicas y eléctricas, todo con la mejor calidad y asesoría personalizada.
-            En Brei-Box, tu pasión por la música encuentra su mejor aliado.
-            <br><br>
-            Échale un vistazo a nuestros productos a continuación.
-        </p>
-
-        <!-- ── CARRUSEL DE MÚSICOS ── -->
-        <section class="carousel-section">
-            <div class="carousel-container">
-                <div class="carousel-track">
-                    <div class="carousel-slide">
-                        <img src="../img/Musicos/hendrix.jpg" alt="Jimi Hendrix">
-                        <div class="carousel-caption">Jimi Hendrix</div>
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="../img/Musicos/Clapton.jpg" alt="Eric Clapton">
-                        <div class="carousel-caption">Eric Clapton</div>
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="../img/Musicos/page.jpg" alt="Jimmy Page">
-                        <div class="carousel-caption">Jimmy Page</div>
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="../img/Musicos/GilmourBlackStrat.jpg" alt="David Gilmour">
-                        <div class="carousel-caption">David Gilmour</div>
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="../img/Musicos/AlbertKing.jpg" alt="Albert King">
-                        <div class="carousel-caption">Albert King</div>
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="../img/Musicos/KevinShields.jpg" alt="Kevin Shields">
-                        <div class="carousel-caption">Kevin Shields</div>
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="../img/Musicos/pageLesPaul.jpg" alt="Jimmy Page Les Paul">
-                        <div class="carousel-caption">Jimmy Page</div>
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="../img/Musicos/danelectroPage.jpg" alt="Jimmy Page Danelectro">
-                        <div class="carousel-caption">Jimmy Page</div>
-                    </div>
-                </div>
-                
-                <!-- Controles del carrusel -->
-                <button class="carousel-btn carousel-btn-prev" aria-label="Anterior">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </button>
-                <button class="carousel-btn carousel-btn-next" aria-label="Siguiente">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </button>
-
-                <!-- Indicadores -->
-                <div class="carousel-indicators">
-                    <button class="carousel-indicator active" data-slide="0"></button>
-                    <button class="carousel-indicator" data-slide="1"></button>
-                    <button class="carousel-indicator" data-slide="2"></button>
-                    <button class="carousel-indicator" data-slide="3"></button>
-                    <button class="carousel-indicator" data-slide="4"></button>
-                    <button class="carousel-indicator" data-slide="5"></button>
-                    <button class="carousel-indicator" data-slide="6"></button>
-                    <button class="carousel-indicator" data-slide="7"></button>
-                </div>
-            </div>
-        </section>
-
-        <!-- ── GUITARRAS ELÉCTRICAS ── -->
-        <h2 class="seccion-titulo">Guitarras Eléctricas</h2>
-        <div class="productos-grid">
-
-            <a class="producto-card" href="Pagina-Producto.html">
-                <img src="../img/Fender-Eléctricas/fender-jimi-hendrix-stratocaster-mn-olympic-white.jpg" alt="Fender Stratocaster Jimi Hendrix">
-                <div class="producto-info">
-                    <p class="producto-nombre">Fender Stratocaster Jimi Hendrix en Olympic White</p>
-                    <p class="producto-precio">1.300,00 €</p>
-                </div>
-            </a>
-
-            <a class="producto-card" href="Pagina-Producto.html">
-                <img src="../img/Gibson-Eléctricas/Gibson Flying V.png" alt="Gibson Flying V">
-                <div class="producto-info">
-                    <p class="producto-nombre">Gibson Flying V</p>
-                    <p class="producto-precio">1.500,00 €</p>
-                </div>
-            </a>
-
-            <a class="producto-card" href="Pagina-Producto.html">
-                <img src="../img/Gibson-Eléctricas/78461f02052fd0a04eb02f6c47cab6bc2de01daa-1000x1000.png" alt="Eric Clapton SG The Fool">
-                <div class="producto-info">
-                    <p class="producto-nombre">Eric Clapton SG "The Fool"</p>
-                    <p class="producto-precio">3.700,00 €</p>
-                </div>
-            </a>
-
-            <a class="producto-card" href="Pagina-Producto.html">
-                <img src="../img/Fender-Eléctricas/guitarra-electrica-fender-troy-van-leeuwen-signature-jazzmaster-bound-rosewood-oxblood.png" alt="Fender Jazzmaster">
-                <div class="producto-info">
-                    <p class="producto-nombre">Fender Jazzmaster Bound Rosewood Oxblood</p>
-                    <p class="producto-precio">2.000,00 €</p>
-                </div>
-            </a>
-
-            <a class="producto-card" href="Pagina-Producto.html">
-                <img src="../img/Gibson-Eléctricas/1989_Gibson_EDS-1275.png" alt="Gibson EDS 1275 Jimmy Page">
-                <div class="producto-info">
-                    <p class="producto-nombre">Gibson EDS 1275 Jimmy Page</p>
-                    <p class="producto-precio">20.000,00 €</p>
-                </div>
-            </a>
-
-            <a class="producto-card" href="Pagina-Producto.html">
-                <img src="../img/Fender-Eléctricas/1502952061Fender_Custom_Shop_David_Gilmour_Stratocaster_NOS.jpg" alt="David Gilmour Stratocaster">
-                <div class="producto-info">
-                    <p class="producto-nombre">David Gilmour Fender Stratocaster</p>
-                    <p class="producto-precio">4.000,00 €</p>
-                </div>
-            </a>
-
-            <a class="producto-card" href="Pagina-Producto.html">
-                <img src="../img/Gibson-Eléctricas/gibson-les-paul-classic-hcs-p-32523.jpg" alt="Gibson Les Paul">
-                <div class="producto-info">
-                    <p class="producto-nombre">Gibson Les Paul</p>
-                    <p class="producto-precio">2.500,00 €</p>
-                </div>
-            </a>
-
-            <a class="producto-card" href="Pagina-Producto.html">
-                <img src="../img/Fender-Eléctricas/Danelectro3021dc59.png" alt="Danelectro 3021 DC59">
-                <div class="producto-info">
-                    <p class="producto-nombre">Danelectro 3021 DC59</p>
-                    <p class="producto-precio">650,00 €</p>
-                </div>
-            </a>
-
-        </div>
-
-        <!-- ── AMPLIFICADORES ── -->
-        <h2 class="seccion-titulo">Amplificadores</h2>
-        <div class="productos-grid">
-
-            <a class="producto-card" href="Pagina-Producto.html">
-                <img src="../img/Amplis/fender-65-deluxe-reverb-amplificador.png" alt="Fender 65 Deluxe Reverb">
-                <div class="producto-info">
-                    <p class="producto-nombre">Fender 65 Deluxe Reverb</p>
-                    <p class="producto-precio">10.000,00 €</p>
-                </div>
-            </a>
-
-            <a class="producto-card" href="Pagina-Producto.html">
-                <img src="../img/Amplis/marshall_plexi_super_lead_1959_gallery_1.png" alt="Marshall Plexi">
-                <div class="producto-info">
-                    <p class="producto-nombre">Marshall 1959 Super Lead Plexi</p>
-                    <p class="producto-precio">3.500,00 €</p>
-                </div>
-            </a>
-
-            <a class="producto-card" href="Pagina-Producto.html">
-                <img src="../img/Amplis/roland-jc-120-jazz-chorus-combo_GIT0000966-000.png" alt="Roland Jazz Chorus">
-                <div class="producto-info">
-                    <p class="producto-nombre">Roland Jazz Chorus JC-120</p>
-                    <p class="producto-precio">1.200,00 €</p>
-                </div>
-            </a>
-
-            <a class="producto-card" href="Pagina-Producto.html">
-                <img src="../img/Amplis/VoxAC30.jpg" alt="Vox AC30">
-                <div class="producto-info">
-                    <p class="producto-nombre">Vox AC30</p>
-                    <p class="producto-precio">899,00 €</p>
-                </div>
-            </a>
-
-        </div>
-
-        <!-- ── PEDALES DE EFECTOS ── -->
-        <h2 class="seccion-titulo">Pedales de Efectos</h2>
-        <div class="productos-grid">
-
-            <a class="producto-card" href="Pagina-Producto.html">
-                <img src="../img/Pedales/BigMuff.png" alt="Big Muff Pi">
-                <div class="producto-info">
-                    <p class="producto-nombre">Big Muff Pi</p>
-                    <p class="producto-precio">95,00 €</p>
-                </div>
-            </a>
-
-            <a class="producto-card" href="Pagina-Producto.html">
-                <img src="../img/Pedales/boss-tr2-tremolo.png" alt="Boss TR-2 Tremolo">
-                <div class="producto-info">
-                    <p class="producto-nombre">Boss TR-2 Tremolo</p>
-                    <p class="producto-precio">115,00 €</p>
-                </div>
-            </a>
-
-            <a class="producto-card" href="Pagina-Producto.html">
-                <img src="../img/Pedales/MemoryMan.png" alt="Memory Man">
-                <div class="producto-info">
-                    <p class="producto-nombre">Electro-Harmonix Vintage Deluxe Memory Man</p>
-                    <p class="producto-precio">900,00 €</p>
-                </div>
-            </a>
-
-            <a class="producto-card" href="Pagina-Producto.html">
-                <img src="../img/Pedales/Wahwah.png" alt="CryBaby Wah">
-                <div class="producto-info">
-                    <p class="producto-nombre">CryBaby Wah</p>
-                    <p class="producto-precio">99,00 €</p>
-                </div>
-            </a>
-
-        </div>
-    </main>
-
-    <footer class="container">
-        <form action="">
-            <div class="mb-3 datos">
-                <label for="emailFooter" class="form-label">Correo electrónico</label>
-                <input type="email" class="form-control" id="emailFooter" placeholder="nombre@ejemplo.com">
-            </div>
-            <input class="form-control ENVIAR" type="submit" value="ENVIAR">
-        </form>
-        <a class="datos" href="tel:+34678567876">Teléfono de Contacto</a>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13799.704674040484!2d-8.408104816067125!3d43.35547160691261!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2e7c9ba3b31737%3A0x3c7557c3e9b93042!2sEl%20Corte%20Ingl%C3%A9s%20Coru%C3%B1a!5e0!3m2!1ses!2ses!4v1729609519956!5m2!1ses!2ses" width="300" height="100" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </footer>
-
-    <script src="../js/carousel.js"></script>
-</body>
-</html>
-
-
-================================================================================
-ARCHIVO 4/13: extractor_codigo.py
-Ruta completa: C:\Users\Breixo\Documents\Brei-box-Nuevo\extractor_codigo.py
+ARCHIVO 2/14: extractor_codigo.py
+Ruta completa: C:\Users\Breixo\Desktop\Brei-box-Nuevo\extractor_codigo.py
 ================================================================================
 
 #!/usr/bin/env python3
@@ -1598,8 +1717,436 @@ if __name__ == "__main__":
 
 
 ================================================================================
-ARCHIVO 5/13: html\CreditCard.html
-Ruta completa: C:\Users\Breixo\Documents\Brei-box-Nuevo\html\CreditCard.html
+ARCHIVO 3/14: html\Confirmacion.html
+Ruta completa: C:\Users\Breixo\Desktop\Brei-box-Nuevo\html\Confirmacion.html
+================================================================================
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brei-Box: Pedido Confirmado</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilos.css">
+    <style>
+
+        /* ── Layout general de la página ── */
+
+        body.payment-page {
+            background: linear-gradient(135deg, #f0f7ff 0%, #e8f4fd 50%, #f0fdf4 100%);
+            min-height: 100vh;
+        }
+
+        .confirm-container {
+            margin-top: 100px;
+            padding: 40px 24px 60px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ── Cabecera de éxito ── */
+
+        .confirm-hero {
+            text-align: center;
+            padding: 48px 24px 40px;
+            animation: heroEntrada 0.6s ease both;
+        }
+
+        @keyframes heroEntrada {
+            from { opacity: 0; transform: translateY(-20px); }
+            to   { opacity: 1; transform: translateY(0);     }
+        }
+
+        .confirm-check {
+            width: 88px;
+            height: 88px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #10b981, #059669);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            box-shadow: 0 12px 32px rgba(16, 185, 129, 0.35);
+            animation: checkPop 0.5s 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+        }
+
+        @keyframes checkPop {
+            from { transform: scale(0); opacity: 0; }
+            to   { transform: scale(1); opacity: 1; }
+        }
+
+        .confirm-titulo {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #1e293b;
+            margin: 0 0 10px;
+        }
+
+        .confirm-subtitulo {
+            font-size: 1rem;
+            color: #64748b;
+            margin: 0 0 8px;
+            line-height: 1.6;
+        }
+
+        .confirm-numero {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #fff;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 999px;
+            padding: 6px 18px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #2563eb;
+            margin-top: 8px;
+            box-shadow: 0 2px 8px rgba(37,99,235,0.08);
+        }
+
+        /* ── Tarjetas del resumen ── */
+
+        .confirm-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+            animation: gridEntrada 0.5s 0.15s ease both;
+        }
+
+        @keyframes gridEntrada {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0);    }
+        }
+
+        @media (max-width: 640px) {
+            .confirm-grid { grid-template-columns: 1fr; }
+            .confirm-titulo { font-size: 1.5rem; }
+        }
+
+        .confirm-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid #f1f5f9;
+        }
+
+        .confirm-card-full {
+            grid-column: 1 / -1;
+        }
+
+        .confirm-card-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #94a3b8;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .confirm-card-title svg {
+            color: #2563eb;
+        }
+
+        /* ── Datos de envío ── */
+
+        .envio-dato {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid #f8fafc;
+        }
+
+        .envio-dato:last-child { border-bottom: none; }
+
+        .envio-dato-icono {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: #eff6ff;
+            color: #2563eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .envio-dato-contenido {
+            flex: 1;
+        }
+
+        .envio-dato-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #94a3b8;
+            margin-bottom: 2px;
+        }
+
+        .envio-dato-valor {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #1e293b;
+            line-height: 1.4;
+        }
+
+        /* ── Método de envío badge ── */
+
+        .metodo-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #f0fdf4;
+            color: #16a34a;
+            border: 1px solid #bbf7d0;
+            border-radius: 999px;
+            padding: 4px 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 6px;
+        }
+
+        /* ── Lista de productos ── */
+
+        .producto-confirm-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 14px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .producto-confirm-item:last-child { border-bottom: none; }
+
+        .producto-confirm-img {
+            width: 72px;
+            height: 72px;
+            object-fit: contain;
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 6px;
+            flex-shrink: 0;
+            border: 1px solid #f1f5f9;
+        }
+
+        .producto-confirm-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .producto-confirm-nombre {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #1e293b;
+            line-height: 1.3;
+            margin: 0 0 4px;
+            /* Limitar a 2 líneas */
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .producto-confirm-cantidad {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        .producto-confirm-precio {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #2563eb;
+            flex-shrink: 0;
+            text-align: right;
+        }
+
+        /* ── Fila de total ── */
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0 0;
+            margin-top: 8px;
+            border-top: 2px solid #f1f5f9;
+        }
+
+        .total-row-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #64748b;
+        }
+
+        .total-row-precio {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #1e293b;
+        }
+
+        .envio-coste {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-top: 2px;
+            text-align: right;
+        }
+
+        /* ── Notas ── */
+
+        .notas-box {
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            border-radius: 10px;
+            padding: 12px 16px;
+            font-size: 0.875rem;
+            color: #92400e;
+            line-height: 1.5;
+            margin-top: 8px;
+        }
+
+        /* ── Botón volver ── */
+
+        .confirm-actions {
+            text-align: center;
+            margin-top: 32px;
+            animation: gridEntrada 0.5s 0.3s ease both;
+        }
+
+        .btn-volver-tienda {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 40px;
+            background: #2563eb;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
+        }
+
+        .btn-volver-tienda:hover {
+            background: #1e40af;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(37, 99, 235, 0.45);
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* ── Estado vacío (si alguien llega sin datos) ── */
+
+        .confirm-vacio {
+            text-align: center;
+            padding: 60px 24px;
+            color: #94a3b8;
+        }
+
+        .confirm-vacio p {
+            font-size: 1.1rem;
+            margin: 16px 0 24px;
+            color: #64748b;
+        }
+
+    </style>
+</head>
+<body class="payment-page">
+
+    <header>
+        <a href="index.html">
+            <img src="../img/Logo.png" alt="logo">
+        </a>
+        <h1>Brei-Box</h1>
+    </header>
+
+    <div class="confirm-container">
+
+        <!-- Contenido inyectado por confirmacion.js -->
+        <div id="confirm-contenido"></div>
+
+    </div>
+
+    <!-- Footer compacto -->
+    <footer class="site-footer">
+        <div class="footer-main">
+            <div class="footer-col footer-brand">
+                <a href="index.html" class="footer-logo-link">
+                    <img src="../img/Logo.png" alt="Brei-Box logo" class="footer-logo">
+                    <span class="footer-brand-name">Brei-Box</span>
+                </a>
+                <p class="footer-tagline">Tu tienda especializada en guitarras, amplificadores y pedales de efectos.</p>
+            </div>
+            <div class="footer-col">
+                <h3 class="footer-heading">Contacto</h3>
+                <ul class="footer-contact-list">
+                    <li><a href="tel:+34678567876" class="footer-contact-item">
+                        <span class="contact-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.61 1.24h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.96-.96a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.92 16.92z"/></svg></span>
+                        +34 678 567 876
+                    </a></li>
+                    <li><a href="mailto:hola@brei-box.com" class="footer-contact-item">
+                        <span class="contact-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+                        hola@brei-box.com
+                    </a></li>
+                    <li><a href="https://maps.google.com/?q=43.35547160691261,-8.408104816067125" target="_blank" rel="noopener noreferrer" class="footer-contact-item">
+                        <span class="contact-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+                        <span>Calle Real 42, Local 3<br>15001 A Coruña, España</span>
+                    </a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3 class="footer-heading">La Tienda</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Guitarras Eléctricas</a></li>
+                    <li><a href="index.html">Amplificadores</a></li>
+                    <li><a href="index.html">Pedales de Efectos</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3 class="footer-heading">Información</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Sobre Brei-Box</a></li>
+                    <li><a href="#">Política de Devoluciones</a></li>
+                    <li><a href="#">Envíos y Plazos</a></li>
+                    <li><a href="#">Aviso Legal</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="footer-copy">© 2025 Brei-Box. Todos los derechos reservados.</p>
+            <div class="footer-payment-methods">
+                <span class="payment-label">Pagos seguros con:</span>
+                <span class="payment-badge" title="Visa"><svg width="38" height="24" viewBox="0 0 38 24"><rect width="38" height="24" rx="4" fill="#1A1F71"/><text x="19" y="16" text-anchor="middle" fill="white" font-size="11" font-family="Arial" font-weight="bold" font-style="italic">VISA</text></svg></span>
+                <span class="payment-badge" title="Mastercard"><svg width="38" height="24" viewBox="0 0 38 24"><rect width="38" height="24" rx="4" fill="#252525"/><circle cx="14" cy="12" r="7" fill="#EB001B" opacity=".9"/><circle cx="24" cy="12" r="7" fill="#F79E1B" opacity=".9"/></svg></span>
+                <span class="payment-badge" title="PayPal"><svg width="38" height="24" viewBox="0 0 38 24"><rect width="38" height="24" rx="4" fill="#003087"/><text x="19" y="16" text-anchor="middle" fill="white" font-size="8" font-family="Arial" font-weight="bold">PayPal</text></svg></span>
+                <span class="payment-badge" title="Bizum"><svg width="38" height="24" viewBox="0 0 38 24"><rect width="38" height="24" rx="4" fill="#00ADEF"/><text x="19" y="16" text-anchor="middle" fill="white" font-size="8" font-family="Arial" font-weight="bold">Bizum</text></svg></span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/carrito.js"></script>
+    <script src="../js/confirmacion.js"></script>
+</body>
+</html>
+
+
+================================================================================
+ARCHIVO 4/14: html\CreditCard.html
+Ruta completa: C:\Users\Breixo\Desktop\Brei-box-Nuevo\html\CreditCard.html
 ================================================================================
 
 <!DOCTYPE html>
@@ -1776,26 +2323,809 @@ Ruta completa: C:\Users\Breixo\Documents\Brei-box-Nuevo\html\CreditCard.html
         </div>
     </main>
 
-    <footer class="container">
-        <form action="">
-            <div class="mb-3 datos">
-                <label for="emailFooter" class="form-label">Correo electrónico</label>
-                <input type="email" class="form-control" id="emailFooter" placeholder="nombre@ejemplo.com">
-            </div>
-            <input class="form-control ENVIAR" type="submit" value="ENVIAR">
-        </form>
-        <a class="datos" href="tel:+34678567876">Teléfono de Contacto</a>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13799.704674040484!2d-8.408104816067125!3d43.35547160691261!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2e7c9ba3b31737%3A0x3c7557c3e9b93042!2sEl%20Corte%20Ingl%C3%A9s%20Coru%C3%B1a!5e0!3m2!1ses!2ses!4v1729609519956!5m2!1ses!2ses" width="300" height="100" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </footer>
+    <footer class="site-footer">
 
+    <div class="footer-main">
+
+        <!-- Columna 1: Marca -->
+        <div class="footer-col footer-brand">
+            <a href="index.html" class="footer-logo-link">
+                <img src="../img/Logo.png" alt="Brei-Box logo" class="footer-logo">
+                <span class="footer-brand-name">Brei-Box</span>
+            </a>
+            <p class="footer-tagline">
+                Tu tienda especializada en guitarras, amplificadores y pedales de efectos.
+                Sonido auténtico desde A Coruña.
+            </p>
+            <div class="footer-socials">
+                <a href="#" class="social-btn" aria-label="Instagram">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="2" width="20" height="20" rx="5"/>
+                        <circle cx="12" cy="12" r="5"/>
+                        <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-btn" aria-label="Facebook">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-btn" aria-label="YouTube">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
+                        <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-btn" aria-label="TikTok">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Columna 2: Contacto -->
+        <div class="footer-col">
+            <h3 class="footer-heading">Contacto</h3>
+            <ul class="footer-contact-list">
+
+                <!-- Teléfono -->
+                <li>
+                    <a href="tel:+34678567876" class="footer-contact-item">
+                        <span class="contact-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.61 1.24h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.96-.96a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.92 16.92z"/>
+                            </svg>
+                        </span>
+                        +34 678 567 876
+                    </a>
+                </li>
+
+                <!-- Email -->
+                <li>
+                    <a href="mailto:hola@brei-box.com" class="footer-contact-item">
+                        <span class="contact-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                        </span>
+                        hola@brei-box.com
+                    </a>
+                </li>
+
+                <!-- Dirección → enlace a Google Maps (CAMBIO PRINCIPAL) -->
+                <li>
+                    <a
+                        href="https://maps.google.com/?q=43.35547160691261,-8.408104816067125"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="footer-contact-item"
+                    >
+                        <span class="contact-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                        </span>
+                        <span>
+                            Calle Real 42, Local 3<br>
+                            15001 A Coruña, España
+                        </span>
+                    </a>
+                </li>
+
+                <!-- Horario -->
+                <li>
+                    <span class="footer-contact-item">
+                        <span class="contact-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                        </span>
+                        <span>
+                            Lun–Vie: 10:00–20:00<br>
+                            <span style="padding-left: 24px;">Sáb: 10:00–14:00</span>
+                        </span>
+                    </span>
+                </li>
+
+            </ul>
+        </div>
+
+        <!-- Columna 3: La Tienda -->
+        <div class="footer-col">
+            <h3 class="footer-heading">La Tienda</h3>
+            <ul class="footer-links">
+                <li><a href="index.html">Guitarras Eléctricas</a></li>
+                <li><a href="index.html">Amplificadores</a></li>
+                <li><a href="index.html">Pedales de Efectos</a></li>
+                <li><a href="#">Novedades</a></li>
+                <li><a href="#">Segunda Mano</a></li>
+                <li><a href="#">Ofertas</a></li>
+            </ul>
+        </div>
+
+        <!-- Columna 4: Información + Newsletter -->
+        <div class="footer-col">
+            <h3 class="footer-heading">Información</h3>
+            <ul class="footer-links">
+                <li><a href="#">Sobre Brei-Box</a></li>
+                <li><a href="#">Política de Devoluciones</a></li>
+                <li><a href="#">Envíos y Plazos</a></li>
+                <li><a href="#">Garantías</a></li>
+                <li><a href="#">Aviso Legal</a></li>
+                <li><a href="#">Política de Privacidad</a></li>
+            </ul>
+
+            <div class="footer-newsletter">
+                <p class="newsletter-label">Recibe nuestras novedades</p>
+                <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+                    <input
+                        type="email"
+                        class="newsletter-input"
+                        placeholder="tu@correo.com"
+                        aria-label="Email para newsletter"
+                        required
+                    >
+                    <button type="submit" class="newsletter-btn" aria-label="Suscribirse">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <!-- ↑ El bloque .footer-map-row con el <iframe> ha sido eliminado ↑ -->
+
+    <!-- Franja inferior: copyright + métodos de pago -->
+    <div class="footer-bottom">
+        <p class="footer-copy">© 2025 Brei-Box. Todos los derechos reservados.</p>
+        <div class="footer-payment-methods">
+            <span class="payment-label">Pagos seguros con:</span>
+            <span class="payment-badge" title="Visa">
+                <svg width="38" height="24" viewBox="0 0 38 24">
+                    <rect width="38" height="24" rx="4" fill="#1A1F71"/>
+                    <text x="19" y="16" text-anchor="middle" fill="white" font-size="11" font-family="Arial" font-weight="bold" font-style="italic">VISA</text>
+                </svg>
+            </span>
+            <span class="payment-badge" title="Mastercard">
+                <svg width="38" height="24" viewBox="0 0 38 24">
+                    <rect width="38" height="24" rx="4" fill="#252525"/>
+                    <circle cx="14" cy="12" r="7" fill="#EB001B" opacity=".9"/>
+                    <circle cx="24" cy="12" r="7" fill="#F79E1B" opacity=".9"/>
+                </svg>
+            </span>
+            <span class="payment-badge" title="PayPal">
+                <svg width="38" height="24" viewBox="0 0 38 24">
+                    <rect width="38" height="24" rx="4" fill="#003087"/>
+                    <text x="19" y="16" text-anchor="middle" fill="white" font-size="8" font-family="Arial" font-weight="bold">PayPal</text>
+                </svg>
+            </span>
+            <span class="payment-badge" title="Bizum">
+                <svg width="38" height="24" viewBox="0 0 38 24">
+                    <rect width="38" height="24" rx="4" fill="#00ADEF"/>
+                    <text x="19" y="16" text-anchor="middle" fill="white" font-size="8" font-family="Arial" font-weight="bold">Bizum</text>
+                </svg>
+            </span>
+        </div>
+    </div>
+
+</footer>
+
+<script>
+function handleNewsletter(e) {
+    e.preventDefault();
+    var input = e.target.querySelector('.newsletter-input');
+    var btn   = e.target.querySelector('.newsletter-btn');
+    btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>';
+    btn.style.background = '#10b981';
+    input.value = '';
+    input.placeholder = '¡Suscrito! Gracias.';
+    setTimeout(function() {
+        btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+        btn.style.background = '';
+        input.placeholder = 'tu@correo.com';
+    }, 3000);
+}
+</script>
+
+<script>
+function handleNewsletter(e) {
+    e.preventDefault();
+    var input = e.target.querySelector('.newsletter-input');
+    var btn   = e.target.querySelector('.newsletter-btn');
+    btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>';
+    btn.style.background = '#10b981';
+    input.value = '';
+    input.placeholder = '¡Suscrito! Gracias.';
+    setTimeout(function() {
+        btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+        btn.style.background = '';
+        input.placeholder = 'tu@correo.com';
+    }, 3000);
+}
+</script>
+    <script src="../js/carrito.js"></script>
     <script src="../js/credit-card.js"></script>
 </body>
 </html>
 
 
 ================================================================================
-ARCHIVO 6/13: html\index.html
-Ruta completa: C:\Users\Breixo\Documents\Brei-box-Nuevo\html\index.html
+ARCHIVO 5/14: html\Envio.html
+Ruta completa: C:\Users\Breixo\Desktop\Brei-box-Nuevo\html\Envio.html
+================================================================================
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brei-Box: Dirección de Envío</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilos.css">
+    <style>
+        /* ── Ilustración de envío (panel izquierdo) ── */
+
+        .shipping-preview {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 28px;
+            padding: 20px;
+        }
+
+        .shipping-illustration {
+            width: 100%;
+            max-width: 300px;
+        }
+
+        /* Caja del paquete animada */
+        .ship-box {
+            animation: flotar 3s ease-in-out infinite;
+        }
+
+        @keyframes flotar {
+            0%, 100% { transform: translateY(0px);   }
+            50%       { transform: translateY(-10px); }
+        }
+
+        .shipping-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            width: 100%;
+            max-width: 280px;
+        }
+
+        .shipping-step {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .step-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .step-icon.done   { background: #dcfce7; color: #16a34a; }
+        .step-icon.active { background: #dbeafe; color: #2563eb; }
+        .step-icon.next   { background: #f1f5f9; color: #94a3b8; }
+
+        .step-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .step-text strong {
+            font-size: 0.9rem;
+            color: #1e293b;
+        }
+
+        .step-text span {
+            font-size: 0.78rem;
+            color: #94a3b8;
+        }
+
+        .step-text.active-text strong { color: #2563eb; }
+        .step-text.done-text  strong  { color: #16a34a; }
+
+        /* Separador de pasos */
+        .step-divider {
+            width: 2px;
+            height: 16px;
+            background: #e2e8f0;
+            margin-left: 19px;
+        }
+
+        /* ── Selector de tipo de envío ── */
+
+        .shipping-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .shipping-option {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 16px;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s;
+            position: relative;
+        }
+
+        .shipping-option:hover {
+            border-color: #2563eb;
+            background: #eff6ff;
+        }
+
+        .shipping-option input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #2563eb;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .shipping-option input[type="radio"]:checked ~ .option-body {
+            color: #1e293b;
+        }
+
+        .shipping-option:has(input:checked) {
+            border-color: #2563eb;
+            background: #eff6ff;
+        }
+
+        .option-body {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .option-info strong {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #1e293b;
+            display: block;
+        }
+
+        .option-info span {
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+
+        .option-price {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #2563eb;
+        }
+
+        .option-price.free {
+            color: #16a34a;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .shipping-preview { display: none; }
+            .payment-wrapper  { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body class="payment-page">
+
+    <header>
+        <a href="index.html">
+            <img src="../img/Logo.png" alt="logo">
+        </a>
+        <h1>Brei-Box</h1>
+    </header>
+
+    <main class="payment-container">
+        <div class="payment-wrapper">
+
+            <!-- ── PANEL IZQUIERDO: ilustración + progreso ── -->
+            <div class="card-preview-section shipping-preview">
+
+                <!-- Ilustración SVG del paquete -->
+                <svg class="shipping-illustration" viewBox="0 0 280 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Sombra del suelo -->
+                    <ellipse cx="140" cy="185" rx="70" ry="8" fill="#e2e8f0" opacity="0.6"/>
+
+                    <!-- Grupo animado -->
+                    <g class="ship-box">
+                        <!-- Cuerpo del paquete -->
+                        <rect x="70" y="80" width="140" height="100" rx="6" fill="#1e293b"/>
+                        <!-- Cara frontal más clara -->
+                        <rect x="70" y="80" width="140" height="100" rx="6" fill="url(#boxGrad)"/>
+                        <!-- Tapa del paquete -->
+                        <path d="M65 80 L140 55 L215 80 L140 105 Z" fill="#2563eb"/>
+                        <path d="M65 80 L140 105 L140 180 L65 155 Z" fill="#1e40af"/>
+                        <path d="M215 80 L140 105 L140 180 L215 155 Z" fill="#1d4ed8"/>
+                        <!-- Cinta horizontal -->
+                        <rect x="70" y="118" width="140" height="12" fill="#3b82f6" opacity="0.5"/>
+                        <!-- Cinta vertical -->
+                        <path d="M134 80 L134 180" stroke="#3b82f6" stroke-width="12" opacity="0.5"/>
+                        <!-- Lazo arriba -->
+                        <path d="M130 55 Q120 35 110 45 Q100 55 120 60 Q130 55 140 55 Q150 55 160 60 Q180 55 170 45 Q160 35 150 55" fill="#60a5fa" opacity="0.9"/>
+                        <!-- Estrella / logo Brei -->
+                        <circle cx="165" cy="132" r="18" fill="white" opacity="0.12"/>
+                        <text x="165" y="138" text-anchor="middle" fill="white" font-size="16" font-weight="bold" opacity="0.5">BB</text>
+                    </g>
+
+                    <!-- Partículas decorativas -->
+                    <circle cx="58"  cy="70"  r="4" fill="#bfdbfe" opacity="0.7"/>
+                    <circle cx="225" cy="65"  r="3" fill="#bfdbfe" opacity="0.5"/>
+                    <circle cx="45"  cy="130" r="2" fill="#93c5fd" opacity="0.6"/>
+                    <circle cx="240" cy="120" r="5" fill="#bfdbfe" opacity="0.4"/>
+
+                    <defs>
+                        <linearGradient id="boxGrad" x1="70" y1="80" x2="210" y2="180" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%"   stop-color="#334155"/>
+                            <stop offset="100%" stop-color="#1e293b"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+
+                <!-- Pasos del proceso de compra -->
+                <div class="shipping-steps">
+
+                    <div class="shipping-step">
+                        <div class="step-icon done">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                        </div>
+                        <div class="step-text done-text">
+                            <strong>Pago completado</strong>
+                            <span>Tarjeta verificada</span>
+                        </div>
+                    </div>
+
+                    <div class="step-divider"></div>
+
+                    <div class="shipping-step">
+                        <div class="step-icon active">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                        </div>
+                        <div class="step-text active-text">
+                            <strong>Dirección de envío</strong>
+                            <span>Paso actual</span>
+                        </div>
+                    </div>
+
+                    <div class="step-divider"></div>
+
+                    <div class="shipping-step">
+                        <div class="step-icon next">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                        </div>
+                        <div class="step-text">
+                            <strong>Confirmación</strong>
+                            <span>Resumen del pedido</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ── PANEL DERECHO: formulario ── -->
+            <div class="payment-form-section">
+                <h2 class="form-title">Dirección de Envío</h2>
+                <p class="form-subtitle">¿Dónde enviamos tu pedido?</p>
+
+                <form id="shippingForm" class="modern-form">
+
+                    <!-- Nombre completo -->
+                    <div class="form-group">
+                        <label for="shipName" class="form-label">Nombre completo</label>
+                        <input
+                            type="text"
+                            id="shipName"
+                            name="shipName"
+                            class="form-input"
+                            placeholder="Nombre y apellidos"
+                            required
+                        >
+                        <div class="input-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
+                                <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Dirección -->
+                    <div class="form-group">
+                        <label for="shipAddress" class="form-label">Dirección</label>
+                        <input
+                            type="text"
+                            id="shipAddress"
+                            name="shipAddress"
+                            class="form-input"
+                            placeholder="Calle, número, piso, puerta…"
+                            required
+                        >
+                        <div class="input-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke="currentColor" stroke-width="2"/>
+                                <polyline points="9 22 9 12 15 12 15 22" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Código postal + Ciudad -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="shipPostal" class="form-label">Código Postal</label>
+                            <input
+                                type="text"
+                                id="shipPostal"
+                                name="shipPostal"
+                                class="form-input"
+                                placeholder="15001"
+                                maxlength="5"
+                                required
+                            >
+                            <div class="input-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="currentColor" stroke-width="2"/>
+                                    <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="shipCity" class="form-label">Ciudad</label>
+                            <input
+                                type="text"
+                                id="shipCity"
+                                name="shipCity"
+                                class="form-input"
+                                placeholder="A Coruña"
+                                required
+                            >
+                            <div class="input-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect x="2" y="7" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Provincia + País -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="shipProvince" class="form-label">Provincia</label>
+                            <input
+                                type="text"
+                                id="shipProvince"
+                                name="shipProvince"
+                                class="form-input"
+                                placeholder="A Coruña"
+                                required
+                            >
+                            <div class="input-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="shipCountry" class="form-label">País</label>
+                            <select id="shipCountry" name="shipCountry" class="form-input" required style="cursor:pointer;">
+                                <option value=""           disabled selected>Selecciona…</option>
+                                <option value="ES"         selected>España</option>
+                                <option value="PT">Portugal</option>
+                                <option value="FR">Francia</option>
+                                <option value="DE">Alemania</option>
+                                <option value="IT">Italia</option>
+                                <option value="GB">Reino Unido</option>
+                                <option value="OTHER">Otro</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Teléfono de contacto -->
+                    <div class="form-group">
+                        <label for="shipPhone" class="form-label">Teléfono de contacto</label>
+                        <input
+                            type="tel"
+                            id="shipPhone"
+                            name="shipPhone"
+                            class="form-input"
+                            placeholder="+34 600 000 000"
+                            required
+                        >
+                        <div class="input-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.61 1.24h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.96-.96a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.92 16.92z" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Tipo de envío -->
+                    <div class="form-group">
+                        <label class="form-label">Método de envío</label>
+                        <div class="shipping-options">
+
+                            <label class="shipping-option">
+                                <input type="radio" name="shipMethod" value="standard" checked>
+                                <div class="option-body">
+                                    <div class="option-info">
+                                        <strong>Envío estándar</strong>
+                                        <span>3–5 días laborables</span>
+                                    </div>
+                                    <span class="option-price free">Gratis</span>
+                                </div>
+                            </label>
+
+                            <label class="shipping-option">
+                                <input type="radio" name="shipMethod" value="express">
+                                <div class="option-body">
+                                    <div class="option-info">
+                                        <strong>Envío express</strong>
+                                        <span>1–2 días laborables</span>
+                                    </div>
+                                    <span class="option-price">9,99 €</span>
+                                </div>
+                            </label>
+
+                            <label class="shipping-option">
+                                <input type="radio" name="shipMethod" value="pickup">
+                                <div class="option-body">
+                                    <div class="option-info">
+                                        <strong>Recogida en tienda</strong>
+                                        <span>Disponible en 24 h — A Coruña</span>
+                                    </div>
+                                    <span class="option-price free">Gratis</span>
+                                </div>
+                            </label>
+
+                        </div>
+                    </div>
+
+                    <!-- Notas adicionales -->
+                    <div class="form-group">
+                        <label for="shipNotes" class="form-label">
+                            Instrucciones adicionales
+                            <span style="font-weight:400; color:#94a3b8;">(opcional)</span>
+                        </label>
+                        <textarea
+                            id="shipNotes"
+                            name="shipNotes"
+                            class="form-input"
+                            placeholder="Timbre roto, dejar en conserjería…"
+                            rows="2"
+                            style="resize:vertical; padding-right:16px;"
+                        ></textarea>
+                    </div>
+
+                    <!-- Acciones -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                            Confirmar Pedido
+                        </button>
+                        <button type="button" class="btn-cancel" onclick="window.history.back()">Volver</button>
+                    </div>
+
+                    <!-- Badges de seguridad -->
+                    <div class="security-badges">
+                        <div class="badge-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2L3 7v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V7l-9-5z" stroke="#10b981" stroke-width="2"/>
+                                <path d="M9 12l2 2 4-4" stroke="#10b981" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                            Envío asegurado
+                        </div>
+                        <div class="badge-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" stroke="#10b981" stroke-width="2"/>
+                            </svg>
+                            Devolución gratuita
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-main">
+            <div class="footer-col footer-brand">
+                <a href="index.html" class="footer-logo-link">
+                    <img src="../img/Logo.png" alt="Brei-Box logo" class="footer-logo">
+                    <span class="footer-brand-name">Brei-Box</span>
+                </a>
+                <p class="footer-tagline">Tu tienda especializada en guitarras, amplificadores y pedales de efectos.</p>
+            </div>
+            <div class="footer-col">
+                <h3 class="footer-heading">Contacto</h3>
+                <ul class="footer-contact-list">
+                    <li><a href="tel:+34678567876" class="footer-contact-item">
+                        <span class="contact-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.61 1.24h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.96-.96a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.92 16.92z"/></svg></span>
+                        +34 678 567 876
+                    </a></li>
+                    <li><a href="mailto:hola@brei-box.com" class="footer-contact-item">
+                        <span class="contact-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+                        hola@brei-box.com
+                    </a></li>
+                    <li><a href="https://maps.google.com/?q=43.35547160691261,-8.408104816067125" target="_blank" rel="noopener noreferrer" class="footer-contact-item">
+                        <span class="contact-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+                        <span>Calle Real 42, Local 3<br>15001 A Coruña, España</span>
+                    </a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3 class="footer-heading">La Tienda</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Guitarras Eléctricas</a></li>
+                    <li><a href="index.html">Amplificadores</a></li>
+                    <li><a href="index.html">Pedales de Efectos</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3 class="footer-heading">Información</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Sobre Brei-Box</a></li>
+                    <li><a href="#">Política de Devoluciones</a></li>
+                    <li><a href="#">Envíos y Plazos</a></li>
+                    <li><a href="#">Aviso Legal</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="footer-copy">© 2025 Brei-Box. Todos los derechos reservados.</p>
+            <div class="footer-payment-methods">
+                <span class="payment-label">Pagos seguros con:</span>
+                <span class="payment-badge" title="Visa"><svg width="38" height="24" viewBox="0 0 38 24"><rect width="38" height="24" rx="4" fill="#1A1F71"/><text x="19" y="16" text-anchor="middle" fill="white" font-size="11" font-family="Arial" font-weight="bold" font-style="italic">VISA</text></svg></span>
+                <span class="payment-badge" title="Mastercard"><svg width="38" height="24" viewBox="0 0 38 24"><rect width="38" height="24" rx="4" fill="#252525"/><circle cx="14" cy="12" r="7" fill="#EB001B" opacity=".9"/><circle cx="24" cy="12" r="7" fill="#F79E1B" opacity=".9"/></svg></span>
+                <span class="payment-badge" title="PayPal"><svg width="38" height="24" viewBox="0 0 38 24"><rect width="38" height="24" rx="4" fill="#003087"/><text x="19" y="16" text-anchor="middle" fill="white" font-size="8" font-family="Arial" font-weight="bold">PayPal</text></svg></span>
+                <span class="payment-badge" title="Bizum"><svg width="38" height="24" viewBox="0 0 38 24"><rect width="38" height="24" rx="4" fill="#00ADEF"/><text x="19" y="16" text-anchor="middle" fill="white" font-size="8" font-family="Arial" font-weight="bold">Bizum</text></svg></span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/carrito.js"></script>
+    <script src="../js/envio.js"></script>
+</body>
+</html>
+
+
+================================================================================
+ARCHIVO 6/14: html\index.html
+Ruta completa: C:\Users\Breixo\Desktop\Brei-box-Nuevo\html\index.html
 ================================================================================
 
 <!DOCTYPE html>
@@ -1904,29 +3234,245 @@ Ruta completa: C:\Users\Breixo\Documents\Brei-box-Nuevo\html\index.html
         <div id="grid-pedales" class="productos-grid"></div>
     </main>
 
-    <footer class="container">
-        <form action="">
-            <div class="mb-3 datos">
-                <label for="emailFooter" class="form-label">Correo electrónico</label>
-                <input type="email" class="form-control" id="emailFooter" placeholder="nombre@ejemplo.com">
+    <footer class="site-footer">
+
+    <div class="footer-main">
+
+        <!-- Columna 1: Marca -->
+        <div class="footer-col footer-brand">
+            <a href="index.html" class="footer-logo-link">
+                <img src="../img/Logo.png" alt="Brei-Box logo" class="footer-logo">
+                <span class="footer-brand-name">Brei-Box</span>
+            </a>
+            <p class="footer-tagline">
+                Tu tienda especializada en guitarras, amplificadores y pedales de efectos.
+                Sonido auténtico desde A Coruña.
+            </p>
+            <div class="footer-socials">
+                <a href="#" class="social-btn" aria-label="Instagram">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="2" width="20" height="20" rx="5"/>
+                        <circle cx="12" cy="12" r="5"/>
+                        <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-btn" aria-label="Facebook">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-btn" aria-label="YouTube">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
+                        <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-btn" aria-label="TikTok">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/>
+                    </svg>
+                </a>
             </div>
-            <input class="form-control ENVIAR" type="submit" value="ENVIAR">
-        </form>
-        <a class="datos" href="tel:+34678567876">Teléfono de Contacto</a>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13799.704674040484!2d-8.408104816067125!3d43.35547160691261!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2e7c9ba3b31737%3A0x3c7557c3e9b93042!2sEl%20Corte%20Ingl%C3%A9s%20Coru%C3%B1a!5e0!3m2!1ses!2ses!4v1729609519956!5m2!1ses!2ses" width="300" height="100" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </footer>
+        </div>
+
+        <!-- Columna 2: Contacto -->
+        <div class="footer-col">
+            <h3 class="footer-heading">Contacto</h3>
+            <ul class="footer-contact-list">
+
+                <!-- Teléfono -->
+                <li>
+                    <a href="tel:+34678567876" class="footer-contact-item">
+                        <span class="contact-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.61 1.24h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.96-.96a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.92 16.92z"/>
+                            </svg>
+                        </span>
+                        +34 648 91 67 76
+                    </a>
+                </li>
+
+                <!-- Email -->
+                <li>
+                    <a href="mailto:soporte@brei-box.com" class="footer-contact-item">
+                        <span class="contact-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                        </span>
+                        soporte@brei-box.com
+                    </a>
+                </li>
+
+                <!-- Dirección → enlace a Google Maps (CAMBIO PRINCIPAL) -->
+                <li>
+                    <a
+                        href="https://maps.google.com/?q=43.35547160691261,-8.408104816067125"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="footer-contact-item"
+                    >
+                        <span class="contact-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                        </span>
+                        <span>
+                            Calle Real 42, Local 3<br>
+                            15001 A Coruña, España
+                        </span>
+                    </a>
+                </li>
+
+                <!-- Horario -->
+                <li>
+                    <span class="footer-contact-item">
+                        <span class="contact-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                        </span>
+                        <span>
+                            Lun–Vie: 10:00–20:00<br>
+                            <span style="padding-left: 24px;">Sáb: 10:00–14:00</span>
+                        </span>
+                    </span>
+                </li>
+
+            </ul>
+        </div>
+
+        <!-- Columna 3: La Tienda -->
+        <div class="footer-col">
+            <h3 class="footer-heading">La Tienda</h3>
+            <ul class="footer-links">
+                <li><a href="index.html">Guitarras Eléctricas</a></li>
+                <li><a href="index.html">Amplificadores</a></li>
+                <li><a href="index.html">Pedales de Efectos</a></li>
+                <li><a href="#">Novedades</a></li>
+                <li><a href="#">Segunda Mano</a></li>
+                <li><a href="#">Ofertas</a></li>
+            </ul>
+        </div>
+
+        <!-- Columna 4: Información + Newsletter -->
+        <div class="footer-col">
+            <h3 class="footer-heading">Información</h3>
+            <ul class="footer-links">
+                <li><a href="#">Sobre Brei-Box</a></li>
+                <li><a href="#">Política de Devoluciones</a></li>
+                <li><a href="#">Envíos y Plazos</a></li>
+                <li><a href="#">Garantías</a></li>
+                <li><a href="#">Aviso Legal</a></li>
+                <li><a href="#">Política de Privacidad</a></li>
+            </ul>
+
+            <div class="footer-newsletter">
+                <p class="newsletter-label">Recibe nuestras novedades</p>
+                <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+                    <input
+                        type="email"
+                        class="newsletter-input"
+                        placeholder="tu@correo.com"
+                        aria-label="Email para newsletter"
+                        required
+                    >
+                    <button type="submit" class="newsletter-btn" aria-label="Suscribirse">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <!-- ↑ El bloque .footer-map-row con el <iframe> ha sido eliminado ↑ -->
+
+    <!-- Franja inferior: copyright + métodos de pago -->
+    <div class="footer-bottom">
+        <p class="footer-copy">© 2025 Brei-Box. Todos los derechos reservados.</p>
+        <div class="footer-payment-methods">
+            <span class="payment-label">Pagos seguros con:</span>
+            <span class="payment-badge" title="Visa">
+                <svg width="38" height="24" viewBox="0 0 38 24">
+                    <rect width="38" height="24" rx="4" fill="#1A1F71"/>
+                    <text x="19" y="16" text-anchor="middle" fill="white" font-size="11" font-family="Arial" font-weight="bold" font-style="italic">VISA</text>
+                </svg>
+            </span>
+            <span class="payment-badge" title="Mastercard">
+                <svg width="38" height="24" viewBox="0 0 38 24">
+                    <rect width="38" height="24" rx="4" fill="#252525"/>
+                    <circle cx="14" cy="12" r="7" fill="#EB001B" opacity=".9"/>
+                    <circle cx="24" cy="12" r="7" fill="#F79E1B" opacity=".9"/>
+                </svg>
+            </span>
+            <span class="payment-badge" title="PayPal">
+                <svg width="38" height="24" viewBox="0 0 38 24">
+                    <rect width="38" height="24" rx="4" fill="#003087"/>
+                    <text x="19" y="16" text-anchor="middle" fill="white" font-size="8" font-family="Arial" font-weight="bold">PayPal</text>
+                </svg>
+            </span>
+            <span class="payment-badge" title="Bizum">
+                <svg width="38" height="24" viewBox="0 0 38 24">
+                    <rect width="38" height="24" rx="4" fill="#00ADEF"/>
+                    <text x="19" y="16" text-anchor="middle" fill="white" font-size="8" font-family="Arial" font-weight="bold">Bizum</text>
+                </svg>
+            </span>
+        </div>
+    </div>
+
+</footer>
+
+<script>
+function handleNewsletter(e) {
+    e.preventDefault();
+    var input = e.target.querySelector('.newsletter-input');
+    var btn   = e.target.querySelector('.newsletter-btn');
+    btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>';
+    btn.style.background = '#10b981';
+    input.value = '';
+    input.placeholder = '¡Suscrito! Gracias.';
+    setTimeout(function() {
+        btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+        btn.style.background = '';
+        input.placeholder = 'tu@correo.com';
+    }, 3000);
+}
+</script>
+
+<script>
+function handleNewsletter(e) {
+    e.preventDefault();
+    var input = e.target.querySelector('.newsletter-input');
+    var btn   = e.target.querySelector('.newsletter-btn');
+    btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>';
+    btn.style.background = '#10b981';
+    input.value = '';
+    input.placeholder = '¡Suscrito! Gracias.';
+    setTimeout(function() {
+        btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+        btn.style.background = '';
+        input.placeholder = 'tu@correo.com';
+    }, 3000);
+}
+</script>
 
     <!-- carrusel.js primero (solo toca el DOM del carrusel) -->
     <!-- catalogo.js después (rellena las grids de productos) -->
     <script src="../js/carrusel.js"></script>
     <script src="../js/catalogo.js"></script>
+    <script src="../js/carrito.js"></script>
 </body>
 </html>
 
 
 ================================================================================
-ARCHIVO 7/13: html\Pagina-Producto.html
-Ruta completa: C:\Users\Breixo\Documents\Brei-box-Nuevo\html\Pagina-Producto.html
+ARCHIVO 7/14: html\Pagina-Producto.html
+Ruta completa: C:\Users\Breixo\Desktop\Brei-box-Nuevo\html\Pagina-Producto.html
 ================================================================================
 
 <!DOCTYPE html>
@@ -1996,180 +3542,566 @@ Ruta completa: C:\Users\Breixo\Documents\Brei-box-Nuevo\html\Pagina-Producto.htm
 
             </div>
             <br>
-            <a href="CreditCard.html">
-                <button type="button" class="btn btn-primary btn-lg">Comprar</button>
-            </a>
+            <button
+        id="btn-añadir-carrito"
+        type="button"
+        class="btn-añadir-carrito"
+    >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+        Añadir al carrito
+    </button>
         </div>
     </main>
 
-    <footer class="container">
-        <form action="">
-            <div class="mb-3 datos">
-                <label for="emailFooter" class="form-label">Correo electrónico</label>
-                <input type="email" class="form-control" id="emailFooter" placeholder="nombre@ejemplo.com">
-            </div>
-            <input class="form-control ENVIAR" type="submit" value="ENVIAR">
-        </form>
-        <a class="datos" href="tel:+34678567876">Teléfono de Contacto</a>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13799.704674040484!2d-8.408104816067125!3d43.35547160691261!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2e7c9ba3b31737%3A0x3c7557c3e9b93042!2sEl%20Corte%20Ingl%C3%A9s%20Coru%C3%B1a!5e0!3m2!1ses!2ses!4v1729609519956!5m2!1ses!2ses" width="300" height="100" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </footer>
+    <footer class="site-footer">
 
+    <div class="footer-main">
+
+        <!-- Columna 1: Marca -->
+        <div class="footer-col footer-brand">
+            <a href="index.html" class="footer-logo-link">
+                <img src="../img/Logo.png" alt="Brei-Box logo" class="footer-logo">
+                <span class="footer-brand-name">Brei-Box</span>
+            </a>
+            <p class="footer-tagline">
+                Tu tienda especializada en guitarras, amplificadores y pedales de efectos.
+                Sonido auténtico desde A Coruña.
+            </p>
+            <div class="footer-socials">
+                <a href="#" class="social-btn" aria-label="Instagram">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="2" width="20" height="20" rx="5"/>
+                        <circle cx="12" cy="12" r="5"/>
+                        <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-btn" aria-label="Facebook">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-btn" aria-label="YouTube">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
+                        <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-btn" aria-label="TikTok">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Columna 2: Contacto -->
+        <div class="footer-col">
+            <h3 class="footer-heading">Contacto</h3>
+            <ul class="footer-contact-list">
+
+                <!-- Teléfono -->
+                <li>
+                    <a href="tel:+34678567876" class="footer-contact-item">
+                        <span class="contact-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.61 1.24h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.96-.96a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.92 16.92z"/>
+                            </svg>
+                        </span>
+                        +34 678 567 876
+                    </a>
+                </li>
+
+                <!-- Email -->
+                <li>
+                    <a href="mailto:hola@brei-box.com" class="footer-contact-item">
+                        <span class="contact-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                        </span>
+                        hola@brei-box.com
+                    </a>
+                </li>
+
+                <!-- Dirección → enlace a Google Maps (CAMBIO PRINCIPAL) -->
+                <li>
+                    <a
+                        href="https://maps.google.com/?q=43.35547160691261,-8.408104816067125"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="footer-contact-item"
+                    >
+                        <span class="contact-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                        </span>
+                        <span>
+                            Calle Real 42, Local 3<br>
+                            15001 A Coruña, España
+                        </span>
+                    </a>
+                </li>
+
+                <!-- Horario -->
+                <li>
+                    <span class="footer-contact-item">
+                        <span class="contact-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                        </span>
+                        <span>
+                            Lun–Vie: 10:00–20:00<br>
+                            <span style="padding-left: 24px;">Sáb: 10:00–14:00</span>
+                        </span>
+                    </span>
+                </li>
+
+            </ul>
+        </div>
+
+        <!-- Columna 3: La Tienda -->
+        <div class="footer-col">
+            <h3 class="footer-heading">La Tienda</h3>
+            <ul class="footer-links">
+                <li><a href="index.html">Guitarras Eléctricas</a></li>
+                <li><a href="index.html">Amplificadores</a></li>
+                <li><a href="index.html">Pedales de Efectos</a></li>
+                <li><a href="#">Novedades</a></li>
+                <li><a href="#">Segunda Mano</a></li>
+                <li><a href="#">Ofertas</a></li>
+            </ul>
+        </div>
+
+        <!-- Columna 4: Información + Newsletter -->
+        <div class="footer-col">
+            <h3 class="footer-heading">Información</h3>
+            <ul class="footer-links">
+                <li><a href="#">Sobre Brei-Box</a></li>
+                <li><a href="#">Política de Devoluciones</a></li>
+                <li><a href="#">Envíos y Plazos</a></li>
+                <li><a href="#">Garantías</a></li>
+                <li><a href="#">Aviso Legal</a></li>
+                <li><a href="#">Política de Privacidad</a></li>
+            </ul>
+
+            <div class="footer-newsletter">
+                <p class="newsletter-label">Recibe nuestras novedades</p>
+                <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+                    <input
+                        type="email"
+                        class="newsletter-input"
+                        placeholder="tu@correo.com"
+                        aria-label="Email para newsletter"
+                        required
+                    >
+                    <button type="submit" class="newsletter-btn" aria-label="Suscribirse">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <!-- ↑ El bloque .footer-map-row con el <iframe> ha sido eliminado ↑ -->
+
+    <!-- Franja inferior: copyright + métodos de pago -->
+    <div class="footer-bottom">
+        <p class="footer-copy">© 2025 Brei-Box. Todos los derechos reservados.</p>
+        <div class="footer-payment-methods">
+            <span class="payment-label">Pagos seguros con:</span>
+            <span class="payment-badge" title="Visa">
+                <svg width="38" height="24" viewBox="0 0 38 24">
+                    <rect width="38" height="24" rx="4" fill="#1A1F71"/>
+                    <text x="19" y="16" text-anchor="middle" fill="white" font-size="11" font-family="Arial" font-weight="bold" font-style="italic">VISA</text>
+                </svg>
+            </span>
+            <span class="payment-badge" title="Mastercard">
+                <svg width="38" height="24" viewBox="0 0 38 24">
+                    <rect width="38" height="24" rx="4" fill="#252525"/>
+                    <circle cx="14" cy="12" r="7" fill="#EB001B" opacity=".9"/>
+                    <circle cx="24" cy="12" r="7" fill="#F79E1B" opacity=".9"/>
+                </svg>
+            </span>
+            <span class="payment-badge" title="PayPal">
+                <svg width="38" height="24" viewBox="0 0 38 24">
+                    <rect width="38" height="24" rx="4" fill="#003087"/>
+                    <text x="19" y="16" text-anchor="middle" fill="white" font-size="8" font-family="Arial" font-weight="bold">PayPal</text>
+                </svg>
+            </span>
+            <span class="payment-badge" title="Bizum">
+                <svg width="38" height="24" viewBox="0 0 38 24">
+                    <rect width="38" height="24" rx="4" fill="#00ADEF"/>
+                    <text x="19" y="16" text-anchor="middle" fill="white" font-size="8" font-family="Arial" font-weight="bold">Bizum</text>
+                </svg>
+            </span>
+        </div>
+    </div>
+
+</footer>
+
+<script>
+function handleNewsletter(e) {
+    e.preventDefault();
+    var input = e.target.querySelector('.newsletter-input');
+    var btn   = e.target.querySelector('.newsletter-btn');
+    btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>';
+    btn.style.background = '#10b981';
+    input.value = '';
+    input.placeholder = '¡Suscrito! Gracias.';
+    setTimeout(function() {
+        btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+        btn.style.background = '';
+        input.placeholder = 'tu@correo.com';
+    }, 3000);
+}
+</script>
+
+<script>
+function handleNewsletter(e) {
+    e.preventDefault();
+    var input = e.target.querySelector('.newsletter-input');
+    var btn   = e.target.querySelector('.newsletter-btn');
+    btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>';
+    btn.style.background = '#10b981';
+    input.value = '';
+    input.placeholder = '¡Suscrito! Gracias.';
+    setTimeout(function() {
+        btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+        btn.style.background = '';
+        input.placeholder = 'tu@correo.com';
+    }, 3000);
+}
+</script>
+    <script src="../js/carrito.js"></script>
     <script src="../js/producto.js"></script>
 </body>
 </html>
 
 
 ================================================================================
-ARCHIVO 8/13: js\carousel.js
-Ruta completa: C:\Users\Breixo\Documents\Brei-box-Nuevo\js\carousel.js
+ARCHIVO 8/14: js\carrito.js
+Ruta completa: C:\Users\Breixo\Desktop\Brei-box-Nuevo\js\carrito.js
 ================================================================================
 
-// ============================================
-// CARRUSEL AUTOMÁTICO DE IMÁGENES
-// ============================================
+// ============================================================
+// BREI-BOX — js/carrito.js
+// Sistema de carrito de compra
+//
+// Uso: añadir <script src="../js/carrito.js"></script>
+// justo antes de </body> en index.html, Pagina-Producto.html
+// y CreditCard.html. El script inyecta automáticamente el
+// icono y el panel desplegable en el <header> existente.
+// ============================================================
 
-document.addEventListener('DOMContentLoaded', function() {
-    const track = document.querySelector('.carousel-track');
-    const slides = document.querySelectorAll('.carousel-slide');
-    const prevBtn = document.querySelector('.carousel-btn-prev');
-    const nextBtn = document.querySelector('.carousel-btn-next');
-    const indicators = document.querySelectorAll('.carousel-indicator');
-    
-    let currentIndex = 0;
-    let autoplayInterval;
-    const AUTOPLAY_DELAY = 4000; // 4 segundos
-    
-    // Función para actualizar la posición del carrusel
-    function updateCarousel(index) {
-        // Asegurar que el índice esté en el rango válido
-        if (index < 0) {
-            index = slides.length - 1;
-        } else if (index >= slides.length) {
-            index = 0;
+(function () {
+    'use strict';
+
+    // ── CLAVE DE ALMACENAMIENTO ──────────────────────────────
+    var STORAGE_KEY = 'breibox_carrito';
+
+    // ── LEER / ESCRIBIR CARRITO (localStorage) ───────────────
+
+    function leerCarrito() {
+        try {
+            return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+        } catch (e) {
+            return [];
         }
-        
-        currentIndex = index;
-        
-        // Mover el track
-        const offset = -currentIndex * 100;
-        track.style.transform = `translateX(${offset}%)`;
-        
-        // Actualizar indicadores
-        indicators.forEach((indicator, i) => {
-            if (i === currentIndex) {
-                indicator.classList.add('active');
+    }
+
+    function guardarCarrito(items) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+    }
+
+    // ── API PÚBLICA (usada por producto.js) ──────────────────
+
+    window.BreiBoxCarrito = {
+
+        /** Añade un producto o incrementa su cantidad si ya existe */
+        añadir: function (producto) {
+            var items = leerCarrito();
+            var existente = items.find(function (i) { return i.id === producto.id; });
+            if (existente) {
+                existente.cantidad += 1;
             } else {
-                indicator.classList.remove('active');
+                items.push({
+                    id:       producto.id,
+                    nombre:   producto.nombre,
+                    precio:   producto.precio,
+                    imagen:   producto.imagen,
+                    cantidad: 1
+                });
             }
+            guardarCarrito(items);
+            renderizar();
+            abrirPanel();
+            mostrarToast(producto.nombre);
+        },
+
+        /** Elimina un producto por su id */
+        eliminar: function (id) {
+            var items = leerCarrito().filter(function (i) { return i.id !== id; });
+            guardarCarrito(items);
+            renderizar();
+        },
+
+        /** Cambia la cantidad de un producto (mínimo 1) */
+        cambiarCantidad: function (id, delta) {
+            var items = leerCarrito();
+            var item  = items.find(function (i) { return i.id === id; });
+            if (!item) return;
+            item.cantidad = Math.max(1, item.cantidad + delta);
+            guardarCarrito(items);
+            renderizar();
+        },
+
+        /** Vacía el carrito */
+        vaciar: function () {
+            guardarCarrito([]);
+            renderizar();
+        }
+    };
+
+    // ── INYECTAR HTML EN EL HEADER ───────────────────────────
+
+    function inyectarHeader() {
+        var header = document.querySelector('header');
+        if (!header) return;
+
+        // Botón del carrito
+        var btn = document.createElement('button');
+        btn.id            = 'carrito-btn';
+        btn.className     = 'carrito-btn';
+        btn.setAttribute('aria-label', 'Carrito de compra');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.innerHTML =
+            '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+                '<path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>' +
+                '<line x1="3" y1="6" x2="21" y2="6"/>' +
+                '<path d="M16 10a4 4 0 0 1-8 0"/>' +
+            '</svg>' +
+            '<span id="carrito-badge" class="carrito-badge" aria-hidden="true">0</span>';
+
+        header.appendChild(btn);
+
+        // Panel desplegable
+        var panel = document.createElement('div');
+        panel.id        = 'carrito-panel';
+        panel.className = 'carrito-panel';
+        panel.setAttribute('role', 'dialog');
+        panel.setAttribute('aria-label', 'Carrito de compra');
+        panel.innerHTML =
+            '<div class="carrito-panel-header">' +
+                '<h2 class="carrito-panel-titulo">' +
+                    '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+                        '<path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>' +
+                        '<line x1="3" y1="6" x2="21" y2="6"/>' +
+                        '<path d="M16 10a4 4 0 0 1-8 0"/>' +
+                    '</svg>' +
+                    'Mi carrito' +
+                '</h2>' +
+                '<button id="carrito-cerrar" class="carrito-cerrar" aria-label="Cerrar carrito">' +
+                    '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">' +
+                        '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>' +
+                    '</svg>' +
+                '</button>' +
+            '</div>' +
+            '<div id="carrito-lista" class="carrito-lista"></div>' +
+            '<div id="carrito-vacio" class="carrito-vacio">' +
+                '<svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' +
+                    '<path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>' +
+                    '<line x1="3" y1="6" x2="21" y2="6"/>' +
+                    '<path d="M16 10a4 4 0 0 1-8 0"/>' +
+                '</svg>' +
+                '<p>Tu carrito está vacío</p>' +
+                '<span>Añade productos desde el catálogo</span>' +
+            '</div>' +
+            '<div id="carrito-footer" class="carrito-footer">' +
+                '<div class="carrito-total-row">' +
+                    '<span class="carrito-total-label">Total</span>' +
+                    '<span id="carrito-total" class="carrito-total-precio">0,00 €</span>' +
+                '</div>' +
+                '<a id="carrito-pagar-btn" href="CreditCard.html" class="carrito-pagar-btn">' +
+                    '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">' +
+                        '<rect x="2" y="5" width="20" height="14" rx="2"/>' +
+                        '<path d="M2 10h20"/>' +
+                    '</svg>' +
+                    'Proceder al pago' +
+                '</a>' +
+                '<button class="carrito-vaciar-btn" onclick="BreiBoxCarrito.vaciar()">' +
+                    'Vaciar carrito' +
+                '</button>' +
+            '</div>';
+
+        document.body.appendChild(panel);
+
+        // Overlay para cerrar al hacer clic fuera
+        var overlay = document.createElement('div');
+        overlay.id        = 'carrito-overlay';
+        overlay.className = 'carrito-overlay';
+        document.body.appendChild(overlay);
+
+        // Toast de confirmación
+        var toast = document.createElement('div');
+        toast.id        = 'carrito-toast';
+        toast.className = 'carrito-toast';
+        document.body.appendChild(toast);
+
+        // ── Eventos ──────────────────────────────────────────
+        btn.addEventListener('click', togglePanel);
+        document.getElementById('carrito-cerrar').addEventListener('click', cerrarPanel);
+        overlay.addEventListener('click', cerrarPanel);
+
+        // Cerrar con Escape
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') cerrarPanel();
         });
     }
-    
-    // Función para ir a la siguiente diapositiva
-    function nextSlide() {
-        updateCarousel(currentIndex + 1);
+
+    // ── ABRIR / CERRAR PANEL ─────────────────────────────────
+
+    function abrirPanel() {
+        var panel   = document.getElementById('carrito-panel');
+        var overlay = document.getElementById('carrito-overlay');
+        var btn     = document.getElementById('carrito-btn');
+        if (!panel) return;
+        panel.classList.add('abierto');
+        overlay.classList.add('visible');
+        btn.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
     }
-    
-    // Función para ir a la diapositiva anterior
-    function prevSlide() {
-        updateCarousel(currentIndex - 1);
+
+    function cerrarPanel() {
+        var panel   = document.getElementById('carrito-panel');
+        var overlay = document.getElementById('carrito-overlay');
+        var btn     = document.getElementById('carrito-btn');
+        if (!panel) return;
+        panel.classList.remove('abierto');
+        overlay.classList.remove('visible');
+        btn.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
     }
-    
-    // Función para iniciar la reproducción automática
-    function startAutoplay() {
-        autoplayInterval = setInterval(nextSlide, AUTOPLAY_DELAY);
-    }
-    
-    // Función para detener la reproducción automática
-    function stopAutoplay() {
-        clearInterval(autoplayInterval);
-    }
-    
-    // Función para reiniciar el autoplay
-    function resetAutoplay() {
-        stopAutoplay();
-        startAutoplay();
-    }
-    
-    // Event listeners para los botones
-    prevBtn.addEventListener('click', function() {
-        prevSlide();
-        resetAutoplay();
-    });
-    
-    nextBtn.addEventListener('click', function() {
-        nextSlide();
-        resetAutoplay();
-    });
-    
-    // Event listeners para los indicadores
-    indicators.forEach((indicator, index) => {
-        indicator.addEventListener('click', function() {
-            updateCarousel(index);
-            resetAutoplay();
-        });
-    });
-    
-    // Pausar autoplay cuando el ratón está sobre el carrusel
-    const carouselContainer = document.querySelector('.carousel-container');
-    
-    carouselContainer.addEventListener('mouseenter', stopAutoplay);
-    carouselContainer.addEventListener('mouseleave', startAutoplay);
-    
-    // Soporte para gestos táctiles en móviles
-    let touchStartX = 0;
-    let touchEndX = 0;
-    
-    carouselContainer.addEventListener('touchstart', function(e) {
-        touchStartX = e.changedTouches[0].screenX;
-        stopAutoplay();
-    });
-    
-    carouselContainer.addEventListener('touchend', function(e) {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-        startAutoplay();
-    });
-    
-    function handleSwipe() {
-        const swipeThreshold = 50; // mínimo de píxeles para considerar un swipe
-        
-        if (touchStartX - touchEndX > swipeThreshold) {
-            // Swipe a la izquierda - siguiente
-            nextSlide();
-        } else if (touchEndX - touchStartX > swipeThreshold) {
-            // Swipe a la derecha - anterior
-            prevSlide();
-        }
-    }
-    
-    // Soporte para navegación con teclado
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'ArrowLeft') {
-            prevSlide();
-            resetAutoplay();
-        } else if (e.key === 'ArrowRight') {
-            nextSlide();
-            resetAutoplay();
-        }
-    });
-    
-    // Iniciar el autoplay cuando se carga la página
-    startAutoplay();
-    
-    // Pausar cuando la pestaña no está visible
-    document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-            stopAutoplay();
+
+    function togglePanel() {
+        var panel = document.getElementById('carrito-panel');
+        if (!panel) return;
+        if (panel.classList.contains('abierto')) {
+            cerrarPanel();
         } else {
-            startAutoplay();
+            abrirPanel();
         }
+    }
+
+    // ── RENDERIZAR CONTENIDO DEL PANEL ───────────────────────
+
+    function formatearPrecio(precio) {
+        return precio.toLocaleString('es-ES', {
+            style: 'currency',
+            currency: 'EUR',
+            minimumFractionDigits: 2
+        });
+    }
+
+    function renderizar() {
+        var items  = leerCarrito();
+        var badge  = document.getElementById('carrito-badge');
+        var lista  = document.getElementById('carrito-lista');
+        var vacio  = document.getElementById('carrito-vacio');
+        var footer = document.getElementById('carrito-footer');
+        var total  = document.getElementById('carrito-total');
+        var pagarBtn = document.getElementById('carrito-pagar-btn');
+
+        if (!badge || !lista) return;
+
+        // Badge: suma de cantidades
+        var totalItems = items.reduce(function (acc, i) { return acc + i.cantidad; }, 0);
+        badge.textContent = totalItems;
+        badge.classList.toggle('visible', totalItems > 0);
+
+        // Estado vacío
+        var hayItems = items.length > 0;
+        lista.style.display  = hayItems ? 'block' : 'none';
+        vacio.style.display  = hayItems ? 'none'  : 'flex';
+        footer.style.display = hayItems ? 'flex'  : 'none';
+
+        if (!hayItems) return;
+
+        // Generar items
+        lista.innerHTML = items.map(function (item) {
+            return (
+                '<div class="carrito-item" data-id="' + item.id + '">' +
+                    '<img class="carrito-item-img" src="' + item.imagen + '" alt="' + item.nombre + '" onerror="this.style.display=\'none\'">' +
+                    '<div class="carrito-item-info">' +
+                        '<p class="carrito-item-nombre">' + item.nombre + '</p>' +
+                        '<p class="carrito-item-precio">' + formatearPrecio(item.precio) + '</p>' +
+                        '<div class="carrito-item-controles">' +
+                            '<button class="qty-btn" onclick="BreiBoxCarrito.cambiarCantidad(\'' + item.id + '\', -1)" aria-label="Restar uno">−</button>' +
+                            '<span class="qty-valor">' + item.cantidad + '</span>' +
+                            '<button class="qty-btn" onclick="BreiBoxCarrito.cambiarCantidad(\'' + item.id + '\', 1)" aria-label="Sumar uno">+</button>' +
+                        '</div>' +
+                    '</div>' +
+                    '<button class="carrito-item-eliminar" onclick="BreiBoxCarrito.eliminar(\'' + item.id + '\')" aria-label="Eliminar ' + item.nombre + '">' +
+                        '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">' +
+                            '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>' +
+                        '</svg>' +
+                    '</button>' +
+                '</div>'
+            );
+        }).join('');
+
+        // Total
+        var suma = items.reduce(function (acc, i) { return acc + (i.precio * i.cantidad); }, 0);
+        total.textContent = formatearPrecio(suma);
+
+        // Ajustar ruta del botón de pago según la página actual
+        var estaEnHtml = window.location.pathname.indexOf('/html/') !== -1;
+        pagarBtn.href  = estaEnHtml ? 'CreditCard.html' : 'html/CreditCard.html';
+    }
+
+    // ── TOAST DE CONFIRMACIÓN ────────────────────────────────
+
+    function mostrarToast(nombreProducto) {
+        var toast = document.getElementById('carrito-toast');
+        if (!toast) return;
+        var nombre = nombreProducto.length > 30
+            ? nombreProducto.substring(0, 30) + '…'
+            : nombreProducto;
+        toast.innerHTML =
+            '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">' +
+                '<polyline points="20 6 9 17 4 12"/>' +
+            '</svg>' +
+            '<span><strong>' + nombre + '</strong> añadido al carrito</span>';
+        toast.classList.add('visible');
+        clearTimeout(toast._timer);
+        toast._timer = setTimeout(function () {
+            toast.classList.remove('visible');
+        }, 2800);
+    }
+
+    // ── INICIALIZACIÓN ───────────────────────────────────────
+
+    document.addEventListener('DOMContentLoaded', function () {
+        inyectarHeader();
+        renderizar();
     });
-});
+
+})();
 
 
 ================================================================================
-ARCHIVO 9/13: js\carrusel.js
-Ruta completa: C:\Users\Breixo\Documents\Brei-box-Nuevo\js\carrusel.js
+ARCHIVO 9/14: js\carrusel.js
+Ruta completa: C:\Users\Breixo\Desktop\Brei-box-Nuevo\js\carrusel.js
 ================================================================================
 
 // ============================================================
@@ -2263,8 +4195,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 ================================================================================
-ARCHIVO 10/13: js\catalogo.js
-Ruta completa: C:\Users\Breixo\Documents\Brei-box-Nuevo\js\catalogo.js
+ARCHIVO 10/14: js\catalogo.js
+Ruta completa: C:\Users\Breixo\Desktop\Brei-box-Nuevo\js\catalogo.js
 ================================================================================
 
 // ============================================================
@@ -2655,262 +4587,438 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 ================================================================================
-ARCHIVO 11/13: js\credit-card.js
-Ruta completa: C:\Users\Breixo\Documents\Brei-box-Nuevo\js\credit-card.js
+ARCHIVO 11/14: js\confirmacion.js
+Ruta completa: C:\Users\Breixo\Desktop\Brei-box-Nuevo\js\confirmacion.js
 ================================================================================
 
-// ============================================
-// CREDIT CARD FORM - INTERACTIVE PREVIEW
-// ============================================
+// ============================================================
+// BREI-BOX — js/confirmacion.js
+// Lee el carrito y los datos de envío de localStorage y
+// renderiza el resumen completo del pedido.
+// ============================================================
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Get form elements
-    const cardNumberInput = document.getElementById('cardNumber');
-    const cardHolderInput = document.getElementById('cardHolder');
-    const cardExpiryInput = document.getElementById('cardExpiry');
-    const cardCVVInput = document.getElementById('cardCVV');
+document.addEventListener('DOMContentLoaded', function () {
 
-    // Get display elements
-    const displayCardNumber = document.getElementById('displayCardNumber');
-    const displayCardHolder = document.getElementById('displayCardHolder');
-    const displayCardExpiry = document.getElementById('displayCardExpiry');
+    var contenedor = document.getElementById('confirm-contenido');
+    if (!contenedor) return;
 
-    // Get form
-    const paymentForm = document.getElementById('paymentForm');
+    // ── Leer datos ────────────────────────────────────────────
 
-    // ============================================
-    // FORMAT AND UPDATE CARD NUMBER
-    // ============================================
-    cardNumberInput.addEventListener('input', function(e) {
-        let value = e.target.value.replace(/\s/g, ''); // Remove spaces
-        let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value; // Add space every 4 digits
-        
-        e.target.value = formattedValue;
-        
-        // Update display
-        if (value.length === 0) {
+    var carrito   = leerJSON('breibox_carrito') || [];
+    var envio     = leerJSON('breibox_envio')   || null;
+
+    // Si no hay datos de envío: alguien llegó directamente a esta página
+    if (!envio && carrito.length === 0) {
+        contenedor.innerHTML = vistaSinDatos();
+        return;
+    }
+
+    // ── Calcular totales ──────────────────────────────────────
+
+    var subtotal    = carrito.reduce(function (s, i) { return s + i.precio * i.cantidad; }, 0);
+    var costoEnvio  = (envio && envio.precioEnvio === '9,99 €') ? 9.99 : 0;
+    var total       = subtotal + costoEnvio;
+
+    // ── Renderizar ────────────────────────────────────────────
+
+    contenedor.innerHTML =
+        heroHTML(envio) +
+        '<div class="confirm-grid">' +
+            productosHTML(carrito, subtotal, costoEnvio, total) +
+            envioHTML(envio) +
+        '</div>' +
+        accionesHTML();
+
+    // ── Limpiar localStorage después de mostrar ───────────────
+    // (lo hacemos con un pequeño delay para que el render sea visible)
+    setTimeout(function () {
+        try {
+            localStorage.removeItem('breibox_envio');
+            localStorage.removeItem('breibox_carrito');
+        } catch (e) { /* silencioso */ }
+    }, 500);
+});
+
+
+// ── Helpers de lectura ────────────────────────────────────────
+
+function leerJSON(clave) {
+    try {
+        return JSON.parse(localStorage.getItem(clave));
+    } catch (e) {
+        return null;
+    }
+}
+
+function formatearPrecio(n) {
+    return n.toLocaleString('es-ES', {
+        style: 'currency', currency: 'EUR', minimumFractionDigits: 2
+    });
+}
+
+
+// ── Bloques HTML ──────────────────────────────────────────────
+
+function heroHTML(envio) {
+    var numeroPedido = envio ? envio.numeroPedido : 'BB-' + Date.now().toString(36).toUpperCase();
+    return (
+        '<div class="confirm-hero">' +
+            '<div class="confirm-check">' +
+                '<svg width="44" height="44" viewBox="0 0 24 24" fill="none">' +
+                    '<polyline points="20 6 9 17 4 12" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>' +
+                '</svg>' +
+            '</div>' +
+            '<h1 class="confirm-titulo">¡Pedido completado!</h1>' +
+            '<p class="confirm-subtitulo">' +
+                'Gracias por tu compra. Hemos recibido tu pedido y lo procesaremos lo antes posible.<br>' +
+                'Recibirás un email de confirmación con el seguimiento de tu envío.' +
+            '</p>' +
+            '<span class="confirm-numero">' +
+                '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>' +
+                'Nº de pedido: <strong>' + numeroPedido + '</strong>' +
+            '</span>' +
+        '</div>'
+    );
+}
+
+function productosHTML(carrito, subtotal, costoEnvio, total) {
+    if (carrito.length === 0) {
+        return (
+            '<div class="confirm-card confirm-card-full">' +
+                '<div class="confirm-card-title">' +
+                    iconoSVG('box') + 'Productos adquiridos' +
+                '</div>' +
+                '<p style="color:#94a3b8;text-align:center;padding:20px 0;">No hay productos en este pedido.</p>' +
+            '</div>'
+        );
+    }
+
+    var itemsHTML = carrito.map(function (item) {
+        return (
+            '<div class="producto-confirm-item">' +
+                '<img class="producto-confirm-img" src="' + item.imagen + '" alt="' + item.nombre + '" onerror="this.style.display=\'none\'">' +
+                '<div class="producto-confirm-info">' +
+                    '<p class="producto-confirm-nombre">' + item.nombre + '</p>' +
+                    '<span class="producto-confirm-cantidad">Cantidad: ' + item.cantidad + '</span>' +
+                '</div>' +
+                '<div class="producto-confirm-precio">' +
+                    formatearPrecio(item.precio * item.cantidad) +
+                '</div>' +
+            '</div>'
+        );
+    }).join('');
+
+    var envioFila = costoEnvio > 0
+        ? '<div style="display:flex;justify-content:space-between;font-size:.875rem;color:#64748b;padding:8px 0;">' +
+              '<span>Gastos de envío</span><span>' + formatearPrecio(costoEnvio) + '</span>' +
+          '</div>'
+        : '<div style="display:flex;justify-content:space-between;font-size:.875rem;color:#16a34a;padding:8px 0;">' +
+              '<span>Gastos de envío</span><span style="font-weight:600;">Gratis</span>' +
+          '</div>';
+
+    return (
+        '<div class="confirm-card confirm-card-full">' +
+            '<div class="confirm-card-title">' +
+                iconoSVG('box') + 'Productos adquiridos' +
+            '</div>' +
+            itemsHTML +
+            envioFila +
+            '<div class="total-row">' +
+                '<span class="total-row-label">Total pagado</span>' +
+                '<span class="total-row-precio">' + formatearPrecio(total) + '</span>' +
+            '</div>' +
+        '</div>'
+    );
+}
+
+function envioHTML(envio) {
+    if (!envio) {
+        return (
+            '<div class="confirm-card">' +
+                '<div class="confirm-card-title">' + iconoSVG('pin') + 'Datos de envío</div>' +
+                '<p style="color:#94a3b8;">No se encontraron datos de envío.</p>' +
+            '</div>'
+        );
+    }
+
+    var linea1 = envio.direccion + ', ' + envio.postal;
+    var linea2 = envio.ciudad + ', ' + envio.provincia;
+
+    var notasHTML = envio.notas
+        ? '<div class="envio-dato">' +
+              '<div class="envio-dato-icono">' + iconoSVG('nota') + '</div>' +
+              '<div class="envio-dato-contenido">' +
+                  '<div class="envio-dato-label">Instrucciones</div>' +
+                  '<div class="envio-dato-valor">' + envio.notas + '</div>' +
+              '</div>' +
+          '</div>'
+        : '';
+
+    return (
+        '<div class="confirm-card">' +
+            '<div class="confirm-card-title">' + iconoSVG('pin') + 'Datos de envío</div>' +
+
+            dato('persona', 'Destinatario',  envio.nombre) +
+            datoMultilinea('home', 'Dirección', linea1, linea2 + ', ' + envio.pais) +
+            dato('phone', 'Teléfono', envio.telefono) +
+            datoMetodo(envio) +
+            notasHTML +
+
+        '</div>'
+    );
+}
+
+function accionesHTML() {
+    return (
+        '<div class="confirm-actions">' +
+            '<a href="index.html" class="btn-volver-tienda">' +
+                '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">' +
+                    '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>' +
+                    '<polyline points="9 22 9 12 15 12 15 22"/>' +
+                '</svg>' +
+                'Volver a la tienda' +
+            '</a>' +
+        '</div>'
+    );
+}
+
+
+// ── Sub-helpers de renderizado ────────────────────────────────
+
+function dato(icono, label, valor) {
+    return (
+        '<div class="envio-dato">' +
+            '<div class="envio-dato-icono">' + iconoSVG(icono) + '</div>' +
+            '<div class="envio-dato-contenido">' +
+                '<div class="envio-dato-label">' + label + '</div>' +
+                '<div class="envio-dato-valor">' + valor + '</div>' +
+            '</div>' +
+        '</div>'
+    );
+}
+
+function datoMultilinea(icono, label, linea1, linea2) {
+    return (
+        '<div class="envio-dato">' +
+            '<div class="envio-dato-icono">' + iconoSVG(icono) + '</div>' +
+            '<div class="envio-dato-contenido">' +
+                '<div class="envio-dato-label">' + label + '</div>' +
+                '<div class="envio-dato-valor">' + linea1 + '<br>' + linea2 + '</div>' +
+            '</div>' +
+        '</div>'
+    );
+}
+
+function datoMetodo(envio) {
+    return (
+        '<div class="envio-dato">' +
+            '<div class="envio-dato-icono">' + iconoSVG('truck') + '</div>' +
+            '<div class="envio-dato-contenido">' +
+                '<div class="envio-dato-label">Método de envío</div>' +
+                '<div class="envio-dato-valor">' + envio.metodo + '</div>' +
+                '<div class="metodo-badge">' +
+                    '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>' +
+                    envio.plazo + ' · ' + envio.precioEnvio +
+                '</div>' +
+            '</div>' +
+        '</div>'
+    );
+}
+
+function vistaSinDatos() {
+    return (
+        '<div class="confirm-vacio">' +
+            '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>' +
+            '<p>No hay ningún pedido que mostrar.</p>' +
+            '<a href="index.html" class="btn-volver-tienda">Ir a la tienda</a>' +
+        '</div>'
+    );
+}
+
+// Iconos SVG reutilizables
+function iconoSVG(tipo) {
+    var iconos = {
+        box:     '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>',
+        pin:     '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>',
+        persona: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg>',
+        home:    '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
+        phone:   '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.61 1.24h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.96-.96a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.92 16.92z"/></svg>',
+        truck:   '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>',
+        nota:    '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>'
+    };
+    return iconos[tipo] || '';
+}
+
+
+================================================================================
+ARCHIVO 12/14: js\credit-card.js
+Ruta completa: C:\Users\Breixo\Desktop\Brei-box-Nuevo\js\credit-card.js
+================================================================================
+
+// ============================================================
+// BREI-BOX — js/credit-card.js
+// Formulario de tarjeta de crédito con preview interactivo
+// ============================================================
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    // ── Elementos del formulario ─────────────────────────────
+    var cardNumberInput = document.getElementById('cardNumber');
+    var cardHolderInput = document.getElementById('cardHolder');
+    var cardExpiryInput = document.getElementById('cardExpiry');
+    var cardCVVInput    = document.getElementById('cardCVV');
+    var paymentForm     = document.getElementById('paymentForm');
+
+    // ── Elementos de la vista previa de la tarjeta ───────────
+    var displayCardNumber = document.getElementById('displayCardNumber');
+    var displayCardHolder = document.getElementById('displayCardHolder');
+    var displayCardExpiry = document.getElementById('displayCardExpiry');
+
+    // Comprobación de seguridad: si algún elemento no existe, salir
+    if (!cardNumberInput || !cardHolderInput || !cardExpiryInput || !cardCVVInput) {
+        console.warn('credit-card.js: no se encontraron los campos del formulario.');
+        return;
+    }
+    if (!displayCardNumber || !displayCardHolder || !displayCardExpiry) {
+        console.warn('credit-card.js: no se encontraron los elementos de la vista previa.');
+        return;
+    }
+
+    // ── NÚMERO DE TARJETA ────────────────────────────────────
+
+    cardNumberInput.addEventListener('input', function () {
+        var raw       = this.value.replace(/\D/g, '').substring(0, 16);
+        var formatted = raw.match(/.{1,4}/g) ? raw.match(/.{1,4}/g).join(' ') : raw;
+        this.value    = formatted;
+
+        if (raw.length === 0) {
             displayCardNumber.textContent = '•••• •••• •••• ••••';
         } else {
-            // Show entered numbers and fill rest with dots
-            let displayValue = formattedValue;
-            let remaining = 19 - formattedValue.length; // 16 digits + 3 spaces = 19 chars
-            
-            if (remaining > 0) {
-                displayValue += ' ' + '•'.repeat(Math.min(remaining, 4));
+            // Rellena los dígitos restantes con puntos
+            var padded = formatted;
+            var missing = 19 - formatted.length;
+            if (missing > 0) {
+                padded += '•'.repeat(missing);
             }
-            
-            displayCardNumber.textContent = displayValue;
+            displayCardNumber.textContent = padded;
         }
     });
 
-    // Only allow numbers in card number
-    cardNumberInput.addEventListener('keypress', function(e) {
-        if (!/[0-9]/.test(e.key) && e.key !== 'Backspace' && e.key !== 'Delete') {
-            e.preventDefault();
-        }
+    cardNumberInput.addEventListener('keypress', function (e) {
+        if (!/[0-9]/.test(e.key)) e.preventDefault();
     });
 
-    // ============================================
-    // UPDATE CARD HOLDER NAME
-    // ============================================
-    cardHolderInput.addEventListener('input', function(e) {
-        let value = e.target.value.toUpperCase();
-        
-        if (value.length === 0) {
-            displayCardHolder.textContent = 'NOMBRE APELLIDOS';
-        } else {
-            displayCardHolder.textContent = value;
-        }
+
+    // ── NOMBRE DEL TITULAR ───────────────────────────────────
+
+    cardHolderInput.addEventListener('input', function () {
+        var val = this.value.toUpperCase().trim();
+        displayCardHolder.textContent = val.length > 0 ? val : 'NOMBRE APELLIDOS';
     });
 
-    // Only allow letters and spaces in cardholder name
-    cardHolderInput.addEventListener('keypress', function(e) {
-        if (!/[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/.test(e.key)) {
-            e.preventDefault();
-        }
+    // Actualizar también al salir del campo (por si el usuario pegó texto con Ctrl+V)
+    cardHolderInput.addEventListener('change', function () {
+        var val = this.value.toUpperCase().trim();
+        displayCardHolder.textContent = val.length > 0 ? val : 'NOMBRE APELLIDOS';
     });
 
-    // ============================================
-    // FORMAT AND UPDATE EXPIRY DATE
-    // ============================================
-    cardExpiryInput.addEventListener('input', function(e) {
-        let value = e.target.value.replace(/\D/g, ''); // Remove non-digits
-        
-        if (value.length >= 2) {
-            value = value.substring(0, 2) + '/' + value.substring(2, 4);
-        }
-        
-        e.target.value = value;
-        
-        // Update display
-        if (value.length === 0) {
-            displayCardExpiry.textContent = 'MM/AA';
-        } else {
-            displayCardExpiry.textContent = value;
-        }
+    cardHolderInput.addEventListener('keypress', function (e) {
+        if (!/[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]/.test(e.key)) e.preventDefault();
     });
 
-    // Simplified validation for school project
-    cardExpiryInput.addEventListener('blur', function(e) {
-        let value = e.target.value;
-        
-        if (value.length === 5) {
-            let month = parseInt(value.substring(0, 2));
-            
-            // Just check if month is valid (1-12)
+
+    // ── FECHA DE EXPIRACIÓN ──────────────────────────────────
+
+    cardExpiryInput.addEventListener('input', function () {
+        var raw = this.value.replace(/\D/g, '').substring(0, 4);
+        var formatted = raw.length >= 3 ? raw.substring(0, 2) + '/' + raw.substring(2) : raw;
+        this.value = formatted;
+        displayCardExpiry.textContent = formatted.length > 0 ? formatted : 'MM/AA';
+    });
+
+    cardExpiryInput.addEventListener('change', function () {
+        var val = this.value;
+        displayCardExpiry.textContent = val.length > 0 ? val : 'MM/AA';
+    });
+
+    cardExpiryInput.addEventListener('blur', function () {
+        var val = this.value;
+        if (val.length === 5) {
+            var month = parseInt(val.substring(0, 2), 10);
             if (month < 1 || month > 12) {
                 alert('Mes inválido. Debe estar entre 01 y 12.');
-                e.target.value = '';
+                this.value = '';
                 displayCardExpiry.textContent = 'MM/AA';
             }
         }
     });
 
-    // ============================================
-    // FORMAT CVV
-    // ============================================
-    cardCVVInput.addEventListener('input', function(e) {
-        e.target.value = e.target.value.replace(/\D/g, '').substring(0, 3);
+
+    // ── CVV ──────────────────────────────────────────────────
+
+    cardCVVInput.addEventListener('input', function () {
+        this.value = this.value.replace(/\D/g, '').substring(0, 3);
     });
 
-    // Only allow numbers in CVV
-    cardCVVInput.addEventListener('keypress', function(e) {
-        if (!/[0-9]/.test(e.key)) {
-            e.preventDefault();
-        }
+    cardCVVInput.addEventListener('keypress', function (e) {
+        if (!/[0-9]/.test(e.key)) e.preventDefault();
     });
 
-    // ============================================
-    // FORM SUBMISSION (SIMPLIFIED FOR SCHOOL PROJECT)
-    // ============================================
-    paymentForm.addEventListener('submit', function(e) {
+
+    // ── ENVÍO DEL FORMULARIO ─────────────────────────────────
+
+    paymentForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        
-        // Basic validation - accepts any card for demo purposes
-        const cardNumber = cardNumberInput.value.replace(/\s/g, '');
-        const cardHolder = cardHolderInput.value.trim();
-        const cardExpiry = cardExpiryInput.value;
-        const cardCVV = cardCVVInput.value;
-        const termsAccept = document.getElementById('termsAccept').checked;
-        
-        // Simple validation - just check if fields are filled
+
+        var cardNumber = cardNumberInput.value.replace(/\s/g, '');
+        var cardHolder = cardHolderInput.value.trim();
+        var cardExpiry = cardExpiryInput.value;
+        var cardCVV    = cardCVVInput.value;
+        var terms      = document.getElementById('termsAccept');
+
         if (cardNumber.length < 13) {
-            alert('Por favor, ingresa un número de tarjeta (mínimo 13 dígitos).');
+            alert('Por favor, introduce un número de tarjeta válido (mínimo 13 dígitos).');
             cardNumberInput.focus();
             return;
         }
-        
-        // Validate cardholder name
         if (cardHolder.length < 3) {
-            alert('Por favor, ingresa el nombre del titular.');
+            alert('Por favor, introduce el nombre del titular.');
             cardHolderInput.focus();
             return;
         }
-        
-        // Validate expiry format
         if (cardExpiry.length !== 5 || !cardExpiry.includes('/')) {
-            alert('Fecha de expiración inválida. Usa el formato MM/AA.');
+            alert('Fecha de expiración inválida. Formato: MM/AA');
             cardExpiryInput.focus();
             return;
         }
-        
-        // Validate CVV
         if (cardCVV.length < 3) {
-            alert('CVV inválido. Debe tener al menos 3 dígitos.');
+            alert('CVV inválido. Debe tener 3 dígitos.');
             cardCVVInput.focus();
             return;
         }
-        
-        // Validate terms
-        if (!termsAccept) {
+        if (terms && !terms.checked) {
             alert('Debes aceptar los términos y condiciones.');
             return;
         }
-        
-        // Show success message - accepts any card for demo
-        showSuccessMessage();
-    });
 
-    // ============================================
-    // SUCCESS MESSAGE
-    // ============================================
-    function showSuccessMessage() {
-        // Create overlay
-        const overlay = document.createElement('div');
-        overlay.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-            animation: fadeIn 0.3s ease;
-        `;
-        
-        // Create success card
-        const successCard = document.createElement('div');
-        successCard.style.cssText = `
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            max-width: 400px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-            animation: scaleIn 0.3s ease;
-        `;
-        
-        successCard.innerHTML = `
-            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" style="margin: 0 auto 20px;">
-                <circle cx="12" cy="12" r="10" fill="#10b981"/>
-                <path d="M8 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-            <h2 style="color: #1e293b; margin-bottom: 12px; font-size: 24px;">¡Pago Exitoso!</h2>
-            <p style="color: #64748b; margin-bottom: 24px;">Tu pedido ha sido procesado correctamente.</p>
-            <button onclick="window.location.href='1 index.html'" style="
-                background: #2563eb;
-                color: white;
-                border: none;
-                padding: 12px 32px;
-                border-radius: 10px;
-                font-size: 16px;
-                font-weight: 600;
-                cursor: pointer;
-            ">Volver a la Tienda</button>
-        `;
-        
-        overlay.appendChild(successCard);
-        document.body.appendChild(overlay);
-        
-        // Add CSS animations
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes fadeIn {
-                from { opacity: 0; }
-                to { opacity: 1; }
-            }
-            @keyframes scaleIn {
-                from { transform: scale(0.9); opacity: 0; }
-                to { transform: scale(1); opacity: 1; }
-            }
-        `;
-        document.head.appendChild(style);
-    }
+        // Pago validado → ir a la página de dirección de envío
+        window.location.href = 'Envio.html';
+    });
 });
 
 
 ================================================================================
-ARCHIVO 12/13: js\producto.js
-Ruta completa: C:\Users\Breixo\Documents\Brei-box-Nuevo\js\producto.js
+ARCHIVO 13/14: js\producto.js
+Ruta completa: C:\Users\Breixo\Desktop\Brei-box-Nuevo\js\producto.js
 ================================================================================
 
 // ============================================================
-// BREI-BOX — js/producto.js
-// Sin módulos ES: funciona abriendo el HTML directamente.
+// BREI-BOX — js/producto.js  (versión actualizada)
+// Página de detalle de producto — carga datos y gestiona
+// el botón "Añadir al carrito".
 // ============================================================
+
+// ── Catálogo de productos ─────────────────────────────────
 
 var catalogo = {
 
@@ -3111,9 +5219,7 @@ var catalogo = {
             nombre: "Marshall 1959 Super Lead Plexi",
             descripcion:
                 "El amplificador que inventó el rock clásico. El Marshall Plexi de 100 vatios fue el sonido de Jimi " +
-                "Hendrix, Eric Clapton, Pete Townshend y Jimmy Page en la segunda mitad de los 60. Su nombre proviene " +
-                "del panel frontal de plexiglás y su sonido sucio, cargado de armónicos, es el blueprint del rock " +
-                "clásico y el metal de los 70. Esta reissue reproduce el circuito original al detalle.",
+                "Hendrix, Eric Clapton, Pete Townshend y Jimmy Page en la segunda mitad de los 60.",
             caracteristicas: [
                 "Potencia: 100 W RMS en clase A/B",
                 "Tecnología: todo válvulas (4x EL34, 4x 12AX7)",
@@ -3131,10 +5237,7 @@ var catalogo = {
             id: "roland-jc-120",
             nombre: "Roland Jazz Chorus JC-120",
             descripcion:
-                "Desde 1975, el Roland JC-120 es sinónimo de clean perfecto y chorus cristalino. Amplificador de " +
-                "estado sólido, sus 120 W estéreo a través de dos altavoces de 12 pulgadas producen el limpio " +
-                "más nítido y presente de la historia. Imprescindible en el new wave, el pop y el jazz, lo usaron " +
-                "Andy Summers (The Police), Robert Smith (The Cure) y Jonny Greenwood.",
+                "Desde 1975, el Roland JC-120 es sinónimo de clean perfecto y chorus cristalino.",
             caracteristicas: [
                 "Potencia: 120 W estéreo (60 W + 60 W) en estado sólido",
                 "2 altavoces Jensen JC-120 de 12 pulgadas (8 ohmios cada uno)",
@@ -3153,9 +5256,7 @@ var catalogo = {
             nombre: "Vox AC30",
             descripcion:
                 "El sonido del British Invasion. El Vox AC30 fue el amplificador de The Beatles, The Rolling Stones " +
-                "y The Kinks en los 60, y sigue siendo uno de los combos de válvulas más valorados del mundo. " +
-                "Sus 30 W de clase A producen un overdrive natural y brillante al subir el volumen, con un carácter " +
-                "tonal inconfundible que ningún pedal ha conseguido replicar del todo.",
+                "y The Kinks en los 60.",
             caracteristicas: [
                 "Potencia: 30 W RMS en clase A pura",
                 "Tecnología: todo válvulas (4x EL84, 3x 12AX7, 1x EZ81)",
@@ -3177,9 +5278,7 @@ var catalogo = {
             nombre: "Electro-Harmonix Big Muff Pi",
             descripcion:
                 "El pedal de distorsión más icónico de la historia. Desde 1969 el Big Muff Pi ha sido el secreto " +
-                "detrás del tono sustanado y cremoso de Carlos Santana, David Gilmour, Kurt Cobain y J Mascis. " +
-                "Su circuito de cuatro etapas de recorte en silicio produce una distorsión suave, musical y " +
-                "con un sustain prácticamente infinito. Un imprescindible absoluto.",
+                "detrás del tono sustanado y cremoso de Carlos Santana, David Gilmour, Kurt Cobain y J Mascis.",
             caracteristicas: [
                 "Tipo de efecto: Fuzz / Distorsión sustanada",
                 "Controles: Volumen, Tono, Sustain",
@@ -3197,10 +5296,7 @@ var catalogo = {
             id: "boss-tr2-tremolo",
             nombre: "Boss TR-2 Tremolo",
             descripcion:
-                "El TR-2 lleva más de 25 años siendo la referencia en trémolo compacto. Reproduce con fidelidad el " +
-                "trémolo clásico de los amplificadores vintage de los 50 y 60. Su circuito analógico crea una " +
-                "modulación de amplitud suave y musical que va desde un suave cabeceo a pulsos profundos de tipo " +
-                "helicopter. Favorito de Radiohead, Wilco y Sonic Youth.",
+                "El TR-2 lleva más de 25 años siendo la referencia en trémolo compacto.",
             caracteristicas: [
                 "Tipo de efecto: Tremolo (modulación de amplitud)",
                 "Controles: Wave (forma de onda), Rate (velocidad), Depth (profundidad)",
@@ -3218,10 +5314,7 @@ var catalogo = {
             id: "ehx-memory-man",
             nombre: "Electro-Harmonix Vintage Deluxe Memory Man",
             descripcion:
-                "El delay analógico más buscado por coleccionistas y guitarristas tonales. El Deluxe Memory Man " +
-                "combina un delay BBD (Bucket Brigade Device) de cálido sonido analógico con chorus y vibrato " +
-                "incorporados. The Edge de U2 construyó todo su sonido alrededor de este pedal en los 80. " +
-                "Esta versión vintage recaptura el circuito original con chips NOS.",
+                "El delay analógico más buscado por coleccionistas y guitarristas tonales.",
             caracteristicas: [
                 "Tipo de efecto: Delay analógico BBD + Chorus/Vibrato",
                 "Tiempo de delay: hasta 550 ms (analógico)",
@@ -3239,10 +5332,8 @@ var catalogo = {
             id: "crybaby-wah",
             nombre: "Dunlop CryBaby Wah GCB95",
             descripcion:
-                "El pedal wah más vendido de la historia. El CryBaby GCB95 es el estándar absoluto del wah " +
-                "desde 1967. Jimi Hendrix, Slash, Kirk Hammett y Eric Clapton han hecho de él una extensión de " +
-                "su voz en guitarra. Su circuito inductivo basado en el mítico inductor Fasel produce ese barrido " +
-                "vocal inconfundible que ha definido décadas de rock, funk y blues.",
+                "El pedal wah más vendido de la historia. Jimi Hendrix, Slash, Kirk Hammett y Eric Clapton lo han " +
+                "convertido en extensión de su voz.",
             caracteristicas: [
                 "Tipo de efecto: Wah-Wah (filtro de barrido)",
                 "Inductor: Fasel rojo (bobina original)",
@@ -3280,31 +5371,65 @@ function buscarProducto(id) {
 // ── Punto de entrada ──────────────────────────────────────────
 
 document.addEventListener("DOMContentLoaded", function () {
-    var params  = new URLSearchParams(window.location.search);
-    var id      = params.get("id");
-    var p       = id ? buscarProducto(id) : null;
+    var params = new URLSearchParams(window.location.search);
+    var id     = params.get("id");
+    var p      = id ? buscarProducto(id) : null;
 
     if (!p) {
-        document.getElementById("producto-nombre").textContent = "Producto no encontrado";
+        var nombreEl = document.getElementById("producto-nombre");
+        if (nombreEl) nombreEl.textContent = "Producto no encontrado";
         return;
     }
 
+    // Actualizar el título de la pestaña
     document.title = "Brei-Box: " + p.nombre;
 
-    document.getElementById("producto-imagen").src = p.imagen;
-    document.getElementById("producto-imagen").alt = p.nombre;
-    document.getElementById("producto-nombre").textContent = p.nombre;
-    document.getElementById("producto-precio").textContent = formatearPrecio(p.precio);
+    // Rellenar datos en el DOM
+    var imgEl = document.getElementById("producto-imagen");
+    if (imgEl) { imgEl.src = p.imagen; imgEl.alt = p.nombre; }
+    document.getElementById("producto-nombre").textContent  = p.nombre;
+    document.getElementById("producto-precio").textContent  = formatearPrecio(p.precio);
     document.getElementById("producto-descripcion").textContent = p.descripcion;
 
     var items = p.caracteristicas.map(function (c) { return "<li>" + c + "</li>"; }).join("");
     document.getElementById("producto-caracteristicas").innerHTML = "<ul>" + items + "</ul>";
+
+    // ── Botón "Añadir al carrito" ─────────────────────────────
+    var btn = document.getElementById("btn-añadir-carrito");
+    if (!btn) return;
+
+    btn.addEventListener("click", function () {
+        if (typeof window.BreiBoxCarrito === "undefined") {
+            console.warn("carrito.js no está cargado.");
+            return;
+        }
+        window.BreiBoxCarrito.añadir(p);
+
+        // Feedback visual en el botón
+        btn.classList.add("añadido");
+        btn.innerHTML =
+            '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">' +
+                '<polyline points="20 6 9 17 4 12"/>' +
+            '</svg>' +
+            '¡Añadido!';
+
+        setTimeout(function () {
+            btn.classList.remove("añadido");
+            btn.innerHTML =
+                '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+                    '<path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>' +
+                    '<line x1="3" y1="6" x2="21" y2="6"/>' +
+                    '<path d="M16 10a4 4 0 0 1-8 0"/>' +
+                '</svg>' +
+                'Añadir al carrito';
+        }, 2000);
+    });
 });
 
 
 ================================================================================
-ARCHIVO 13/13: types\productos.js
-Ruta completa: C:\Users\Breixo\Documents\Brei-box-Nuevo\types\productos.js
+ARCHIVO 14/14: types\productos.js
+Ruta completa: C:\Users\Breixo\Desktop\Brei-box-Nuevo\types\productos.js
 ================================================================================
 
 // ============================================================
