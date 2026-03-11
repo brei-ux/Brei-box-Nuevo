@@ -144,51 +144,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        mostrarExito();
+        // Pago validado → ir a la página de dirección de envío
+        window.location.href = 'Envio.html';
     });
-
-
-    // ── MODAL DE ÉXITO ───────────────────────────────────────
-
-    function mostrarExito() {
-        var overlay = document.createElement('div');
-        overlay.style.cssText = [
-            'position:fixed', 'inset:0',
-            'background:rgba(0,0,0,.55)',
-            'display:flex', 'align-items:center', 'justify-content:center',
-            'z-index:9999', 'animation:ccFadeIn .3s ease'
-        ].join(';');
-
-        var card = document.createElement('div');
-        card.style.cssText = [
-            'background:#fff', 'padding:48px 40px',
-            'border-radius:20px', 'text-align:center',
-            'max-width:400px', 'width:90%',
-            'box-shadow:0 20px 40px rgba(0,0,0,.15)',
-            'animation:ccScaleIn .3s ease'
-        ].join(';');
-
-        card.innerHTML =
-            '<svg width="72" height="72" viewBox="0 0 24 24" fill="none" style="margin:0 auto 20px;">' +
-                '<circle cx="12" cy="12" r="10" fill="#10b981"/>' +
-                '<path d="M8 12l2 2 4-4" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>' +
-            '</svg>' +
-            '<h2 style="color:#1e293b;margin:0 0 10px;font-size:1.5rem;font-weight:700;">¡Pago realizado!</h2>' +
-            '<p style="color:#64748b;margin:0 0 28px;line-height:1.5;">Tu pedido ha sido procesado correctamente.<br>Recibirás un email de confirmación.</p>' +
-            '<button onclick="window.location.href=\'index.html\'" style="' +
-                'background:#2563eb;color:#fff;border:none;' +
-                'padding:13px 32px;border-radius:10px;' +
-                'font-size:1rem;font-weight:600;cursor:pointer;' +
-                'transition:background .2s' +
-            '">Volver a la tienda</button>';
-
-        overlay.appendChild(card);
-        document.body.appendChild(overlay);
-
-        var style = document.createElement('style');
-        style.textContent =
-            '@keyframes ccFadeIn  { from{opacity:0} to{opacity:1} }' +
-            '@keyframes ccScaleIn { from{transform:scale(.9);opacity:0} to{transform:scale(1);opacity:1} }';
-        document.head.appendChild(style);
-    }
 });

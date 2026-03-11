@@ -1,0 +1,181 @@
+// ============================================================
+// BREI-BOX — js/envio.js
+// Validación del formulario de envío y modal de confirmación
+// ============================================================
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    var form = document.getElementById('shippingForm');
+    if (!form) return;
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // ── Recoger valores ───────────────────────────────────
+        var nombre    = document.getElementById('shipName').value.trim();
+        var direccion = document.getElementById('shipAddress').value.trim();
+        var postal    = document.getElementById('shipPostal').value.trim();
+        var ciudad    = document.getElementById('shipCity').value.trim();
+        var provincia = document.getElementById('shipProvince').value.trim();
+        var pais      = document.getElementById('shipCountry').value;
+        var telefono  = document.getElementById('shipPhone').value.trim();
+        var metodo    = document.querySelector('input[name="shipMethod"]:checked');
+
+        // ── Validación básica ─────────────────────────────────
+        if (nombre.length < 3) {
+            mostrarError('shipName', 'Introduce tu nombre completo.');
+            return;
+        }
+        if (direccion.length < 5) {
+            mostrarError('shipAddress', 'Introduce una dirección válida.');
+            return;
+        }
+        if (!/^\d{5}$/.test(postal)) {
+            mostrarError('shipPostal', 'El código postal debe tener 5 dígitos.');
+            return;
+        }
+        if (ciudad.length < 2) {
+            mostrarError('shipCity', 'Introduce tu ciudad.');
+            return;
+        }
+        if (provincia.length < 2) {
+            mostrarError('shipProvince', 'Introduce tu provincia.');
+            return;
+        }
+        if (!pais) {
+            mostrarError('shipCountry', 'Selecciona un país.');
+            return;
+        }
+        if (telefono.replace(/[\s+\-]/g, '').length < 9) {
+            mostrarError('shipPhone', 'Introduce un teléfono válido.');
+            return;
+        }
+
+        // ── Construir resumen ─────────────────────────────────
+        var metodoTexto = {
+            standard: 'Envío estándar (3–5 días)  —  Gratis',
+            express:  'Envío express (1–2 días)   —  9,99 €',
+            pickup:   'Recogida en tienda (24 h)  —  Gratis'
+        }[metodo ? metodo.value : 'standard'];
+
+        var resumen = {
+            nombre:    nombre,
+            direccion: direccion + ', ' + postal + ' ' + ciudad + ', ' + provincia,
+            pais:      pais,
+            telefono:  telefono,
+            metodo:    metodoTexto
+        };
+
+        // Vaciar el carrito tras confirmar el pedido
+        if (window.BreiBoxCarrito) {
+            window.BreiBoxCarrito.vaciar();
+        }
+
+        mostrarExito(resumen);
+    });
+
+
+    // ── Resaltar campo con error ──────────────────────────────
+
+    function mostrarError(campoId, mensaje) {
+        var campo = document.getElementById(campoId);
+        if (!campo) return;
+
+        campo.style.borderColor = '#ef4444';
+        campo.focus();
+
+        // Quitar el estilo de error cuando el usuario corrija
+        campo.addEventListener('input', function quitarError() {
+            campo.style.borderColor = '';
+            campo.removeEventListener('input', quitarError);
+        }, { once: true });
+
+        // Mini tooltip de error
+        var tooltip = document.createElement('span');
+        tooltip.style.cssText = 'display:block;font-size:0.78rem;color:#ef4444;margin-top:4px;';
+        tooltip.textContent = mensaje;
+
+        var existing = campo.parentNode.querySelector('.error-msg');
+        if (existing) existing.remove();
+        tooltip.className = 'error-msg';
+        campo.parentNode.appendChild(tooltip);
+
+        setTimeout(function () { tooltip.remove(); }, 3500);
+    }
+
+
+    // ── Modal de confirmación final ───────────────────────────
+
+    function mostrarExito(resumen) {
+        var overlay = document.createElement('div');
+        overlay.style.cssText = [
+            'position:fixed', 'inset:0',
+            'background:rgba(0,0,0,.55)',
+            'display:flex', 'align-items:center', 'justify-content:center',
+            'z-index:9999', 'padding:20px',
+            'animation:envioFadeIn .3s ease'
+        ].join(';');
+
+        var card = document.createElement('div');
+        card.style.cssText = [
+            'background:#fff', 'padding:40px 36px',
+            'border-radius:20px', 'text-align:center',
+            'max-width:480px', 'width:100%',
+            'box-shadow:0 24px 48px rgba(0,0,0,.18)',
+            'animation:envioScaleIn .35s ease'
+        ].join(';');
+
+        card.innerHTML =
+            // Icono animado
+            '<div style="width:80px;height:80px;border-radius:50%;background:#dcfce7;' +
+                'display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">' +
+                '<svg width="40" height="40" viewBox="0 0 24 24" fill="none">' +
+                    '<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" stroke="#16a34a" stroke-width="2"/>' +
+                    '<polyline points="3.27 6.96 12 12.01 20.73 6.96" stroke="#16a34a" stroke-width="2"/>' +
+                    '<line x1="12" y1="22.08" x2="12" y2="12" stroke="#16a34a" stroke-width="2"/>' +
+                '</svg>' +
+            '</div>' +
+            '<h2 style="color:#1e293b;font-size:1.5rem;font-weight:800;margin:0 0 8px;">¡Pedido confirmado!</h2>' +
+            '<p style="color:#64748b;font-size:.9rem;margin:0 0 24px;line-height:1.6;">' +
+                'Recibirás un email de confirmación con el seguimiento de tu envío.' +
+            '</p>' +
+
+            // Resumen de envío
+            '<div style="background:#f8fafc;border-radius:12px;padding:16px 20px;text-align:left;margin-bottom:24px;">' +
+                '<p style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8;margin:0 0 12px;">Resumen de envío</p>' +
+                '<div style="display:flex;flex-direction:column;gap:8px;">' +
+                    filaResumen('👤', resumen.nombre) +
+                    filaResumen('📍', resumen.direccion) +
+                    filaResumen('🌍', resumen.pais) +
+                    filaResumen('📱', resumen.telefono) +
+                    filaResumen('📦', resumen.metodo) +
+                '</div>' +
+            '</div>' +
+
+            // Botón de vuelta a la tienda
+            '<button onclick="window.location.href=\'index.html\'" style="' +
+                'width:100%;background:#2563eb;color:#fff;border:none;' +
+                'padding:14px 24px;border-radius:12px;' +
+                'font-size:1rem;font-weight:700;cursor:pointer;' +
+                'transition:background .2s;' +
+            '">Volver a la tienda</button>';
+
+        overlay.appendChild(card);
+        document.body.appendChild(overlay);
+
+        // Animaciones CSS
+        var style = document.createElement('style');
+        style.textContent =
+            '@keyframes envioFadeIn  { from{opacity:0}            to{opacity:1} }' +
+            '@keyframes envioScaleIn { from{transform:scale(.9);opacity:0} to{transform:scale(1);opacity:1} }';
+        document.head.appendChild(style);
+    }
+
+    function filaResumen(icono, texto) {
+        return '<div style="display:flex;align-items:flex-start;gap:10px;font-size:.85rem;">' +
+                   '<span style="flex-shrink:0;">' + icono + '</span>' +
+                   '<span style="color:#1e293b;">' + texto + '</span>' +
+               '</div>';
+    }
+
+});

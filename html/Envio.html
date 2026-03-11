@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brei-Box: Dirección de Envío</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/estilos.css">
+    <style>
+        /* ── Ilustración de envío (panel izquierdo) ── */
+
+        .shipping-preview {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 28px;
+            padding: 20px;
+        }
+
+        .shipping-illustration {
+            width: 100%;
+            max-width: 300px;
+        }
+
+        /* Caja del paquete animada */
+        .ship-box {
+            animation: flotar 3s ease-in-out infinite;
+        }
+
+        @keyframes flotar {
+            0%, 100% { transform: translateY(0px);   }
+            50%       { transform: translateY(-10px); }
+        }
+
+        .shipping-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            width: 100%;
+            max-width: 280px;
+        }
+
+        .shipping-step {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .step-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .step-icon.done   { background: #dcfce7; color: #16a34a; }
+        .step-icon.active { background: #dbeafe; color: #2563eb; }
+        .step-icon.next   { background: #f1f5f9; color: #94a3b8; }
+
+        .step-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .step-text strong {
+            font-size: 0.9rem;
+            color: #1e293b;
+        }
+
+        .step-text span {
+            font-size: 0.78rem;
+            color: #94a3b8;
+        }
+
+        .step-text.active-text strong { color: #2563eb; }
+        .step-text.done-text  strong  { color: #16a34a; }
+
+        /* Separador de pasos */
+        .step-divider {
+            width: 2px;
+            height: 16px;
+            background: #e2e8f0;
+            margin-left: 19px;
+        }
+
+        /* ── Selector de tipo de envío ── */
+
+        .shipping-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .shipping-option {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 16px;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s;
+            position: relative;
+        }
+
+        .shipping-option:hover {
+            border-color: #2563eb;
+            background: #eff6ff;
+        }
+
+        .shipping-option input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #2563eb;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .shipping-option input[type="radio"]:checked ~ .option-body {
+            color: #1e293b;
+        }
+
+        .shipping-option:has(input:checked) {
+            border-color: #2563eb;
+            background: #eff6ff;
+        }
+
+        .option-body {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .option-info strong {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #1e293b;
+            display: block;
+        }
+
+        .option-info span {
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+
+        .option-price {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #2563eb;
+        }
+
+        .option-price.free {
+            color: #16a34a;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .shipping-preview { display: none; }
+            .payment-wrapper  { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body class="payment-page">
+
+    <header>
+        <a href="index.html">
+            <img src="../img/Logo.png" alt="logo">
+        </a>
+        <h1>Brei-Box</h1>
+    </header>
+
+    <main class="payment-container">
+        <div class="payment-wrapper">
+
+            <!-- ── PANEL IZQUIERDO: ilustración + progreso ── -->
+            <div class="card-preview-section shipping-preview">
+
+                <!-- Ilustración SVG del paquete -->
+                <svg class="shipping-illustration" viewBox="0 0 280 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Sombra del suelo -->
+                    <ellipse cx="140" cy="185" rx="70" ry="8" fill="#e2e8f0" opacity="0.6"/>
+
+                    <!-- Grupo animado -->
+                    <g class="ship-box">
+                        <!-- Cuerpo del paquete -->
+                        <rect x="70" y="80" width="140" height="100" rx="6" fill="#1e293b"/>
+                        <!-- Cara frontal más clara -->
+                        <rect x="70" y="80" width="140" height="100" rx="6" fill="url(#boxGrad)"/>
+                        <!-- Tapa del paquete -->
+                        <path d="M65 80 L140 55 L215 80 L140 105 Z" fill="#2563eb"/>
+                        <path d="M65 80 L140 105 L140 180 L65 155 Z" fill="#1e40af"/>
+                        <path d="M215 80 L140 105 L140 180 L215 155 Z" fill="#1d4ed8"/>
+                        <!-- Cinta horizontal -->
+                        <rect x="70" y="118" width="140" height="12" fill="#3b82f6" opacity="0.5"/>
+                        <!-- Cinta vertical -->
+                        <path d="M134 80 L134 180" stroke="#3b82f6" stroke-width="12" opacity="0.5"/>
+                        <!-- Lazo arriba -->
+                        <path d="M130 55 Q120 35 110 45 Q100 55 120 60 Q130 55 140 55 Q150 55 160 60 Q180 55 170 45 Q160 35 150 55" fill="#60a5fa" opacity="0.9"/>
+                        <!-- Estrella / logo Brei -->
+                        <circle cx="165" cy="132" r="18" fill="white" opacity="0.12"/>
+                        <text x="165" y="138" text-anchor="middle" fill="white" font-size="16" font-weight="bold" opacity="0.5">BB</text>
+                    </g>
+
+                    <!-- Partículas decorativas -->
+                    <circle cx="58"  cy="70"  r="4" fill="#bfdbfe" opacity="0.7"/>
+                    <circle cx="225" cy="65"  r="3" fill="#bfdbfe" opacity="0.5"/>
+                    <circle cx="45"  cy="130" r="2" fill="#93c5fd" opacity="0.6"/>
+                    <circle cx="240" cy="120" r="5" fill="#bfdbfe" opacity="0.4"/>
+
+                    <defs>
+                        <linearGradient id="boxGrad" x1="70" y1="80" x2="210" y2="180" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%"   stop-color="#334155"/>
+                            <stop offset="100%" stop-color="#1e293b"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+
+                <!-- Pasos del proceso de compra -->
+                <div class="shipping-steps">
+
+                    <div class="shipping-step">
+                        <div class="step-icon done">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                        </div>
+                        <div class="step-text done-text">
+                            <strong>Pago completado</strong>
+                            <span>Tarjeta verificada</span>
+                        </div>
+                    </div>
+
+                    <div class="step-divider"></div>
+
+                    <div class="shipping-step">
+                        <div class="step-icon active">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                        </div>
+                        <div class="step-text active-text">
+                            <strong>Dirección de envío</strong>
+                            <span>Paso actual</span>
+                        </div>
+                    </div>
+
+                    <div class="step-divider"></div>
+
+                    <div class="shipping-step">
+                        <div class="step-icon next">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                        </div>
+                        <div class="step-text">
+                            <strong>Confirmación</strong>
+                            <span>Resumen del pedido</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ── PANEL DERECHO: formulario ── -->
+            <div class="payment-form-section">
+                <h2 class="form-title">Dirección de Envío</h2>
+                <p class="form-subtitle">¿Dónde enviamos tu pedido?</p>
+
+                <form id="shippingForm" class="modern-form">
+
+                    <!-- Nombre completo -->
+                    <div class="form-group">
+                        <label for="shipName" class="form-label">Nombre completo</label>
+                        <input
+                            type="text"
+                            id="shipName"
+                            name="shipName"
+                            class="form-input"
+                            placeholder="Nombre y apellidos"
+                            required
+                        >
+                        <div class="input-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
+                                <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Dirección -->
+                    <div class="form-group">
+                        <label for="shipAddress" class="form-label">Dirección</label>
+                        <input
+                            type="text"
+                            id="shipAddress"
+                            name="shipAddress"
+                            class="form-input"
+                            placeholder="Calle, número, piso, puerta…"
+                            required
+                        >
+                        <div class="input-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke="currentColor" stroke-width="2"/>
+                                <polyline points="9 22 9 12 15 12 15 22" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Código postal + Ciudad -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="shipPostal" class="form-label">Código Postal</label>
+                            <input
+                                type="text"
+                                id="shipPostal"
+                                name="shipPostal"
+                                class="form-input"
+                                placeholder="15001"
+                                maxlength="5"
+                                required
+                            >
+                            <div class="input-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="currentColor" stroke-width="2"/>
+                                    <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="shipCity" class="form-label">Ciudad</label>
+                            <input
+                                type="text"
+                                id="shipCity"
+                                name="shipCity"
+                                class="form-input"
+                                placeholder="A Coruña"
+                                required
+                            >
+                            <div class="input-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect x="2" y="7" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Provincia + País -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="shipProvince" class="form-label">Provincia</label>
+                            <input
+                                type="text"
+                                id="shipProvince"
+                                name="shipProvince"
+                                class="form-input"
+                                placeholder="A Coruña"
+                                required
+                            >
+                            <div class="input-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="shipCountry" class="form-label">País</label>
+                            <select id="shipCountry" name="shipCountry" class="form-input" required style="cursor:pointer;">
+                                <option value=""           disabled selected>Selecciona…</option>
+                                <option value="ES"         selected>España</option>
+                                <option value="PT">Portugal</option>
+                                <option value="FR">Francia</option>
+                                <option value="DE">Alemania</option>
+                                <option value="IT">Italia</option>
+                                <option value="GB">Reino Unido</option>
+                                <option value="OTHER">Otro</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Teléfono de contacto -->
+                    <div class="form-group">
+                        <label for="shipPhone" class="form-label">Teléfono de contacto</label>
+                        <input
+                            type="tel"
+                            id="shipPhone"
+                            name="shipPhone"
+                            class="form-input"
+                            placeholder="+34 600 000 000"
+                            required
+                        >
+                        <div class="input-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.61 1.24h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.96-.96a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.92 16.92z" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Tipo de envío -->
+                    <div class="form-group">
+                        <label class="form-label">Método de envío</label>
+                        <div class="shipping-options">
+
+                            <label class="shipping-option">
+                                <input type="radio" name="shipMethod" value="standard" checked>
+                                <div class="option-body">
+                                    <div class="option-info">
+                                        <strong>Envío estándar</strong>
+                                        <span>3–5 días laborables</span>
+                                    </div>
+                                    <span class="option-price free">Gratis</span>
+                                </div>
+                            </label>
+
+                            <label class="shipping-option">
+                                <input type="radio" name="shipMethod" value="express">
+                                <div class="option-body">
+                                    <div class="option-info">
+                                        <strong>Envío express</strong>
+                                        <span>1–2 días laborables</span>
+                                    </div>
+                                    <span class="option-price">9,99 €</span>
+                                </div>
+                            </label>
+
+                            <label class="shipping-option">
+                                <input type="radio" name="shipMethod" value="pickup">
+                                <div class="option-body">
+                                    <div class="option-info">
+                                        <strong>Recogida en tienda</strong>
+                                        <span>Disponible en 24 h — A Coruña</span>
+                                    </div>
+                                    <span class="option-price free">Gratis</span>
+                                </div>
+                            </label>
+
+                        </div>
+                    </div>
+
+                    <!-- Notas adicionales -->
+                    <div class="form-group">
+                        <label for="shipNotes" class="form-label">
+                            Instrucciones adicionales
+                            <span style="font-weight:400; color:#94a3b8;">(opcional)</span>
+                        </label>
+                        <textarea
+                            id="shipNotes"
+                            name="shipNotes"
+                            class="form-input"
+                            placeholder="Timbre roto, dejar en conserjería…"
+                            rows="2"
+                            style="resize:vertical; padding-right:16px;"
+                        ></textarea>
+                    </div>
+
+                    <!-- Acciones -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                            Confirmar Pedido
+                        </button>
+                        <button type="button" class="btn-cancel" onclick="window.history.back()">Volver</button>
+                    </div>
+
+                    <!-- Badges de seguridad -->
+                    <div class="security-badges">
+                        <div class="badge-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2L3 7v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V7l-9-5z" stroke="#10b981" stroke-width="2"/>
+                                <path d="M9 12l2 2 4-4" stroke="#10b981" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                            Envío asegurado
+                        </div>
+                        <div class="badge-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" stroke="#10b981" stroke-width="2"/>
+                            </svg>
+                            Devolución gratuita
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-main">
+            <div class="footer-col footer-brand">
+                <a href="index.html" class="footer-logo-link">
+                    <img src="../img/Logo.png" alt="Brei-Box logo" class="footer-logo">
+                    <span class="footer-brand-name">Brei-Box</span>
+                </a>
+                <p class="footer-tagline">Tu tienda especializada en guitarras, amplificadores y pedales de efectos.</p>
+            </div>
+            <div class="footer-col">
+                <h3 class="footer-heading">Contacto</h3>
+                <ul class="footer-contact-list">
+                    <li><a href="tel:+34678567876" class="footer-contact-item">
+                        <span class="contact-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.61 1.24h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.96-.96a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.92 16.92z"/></svg></span>
+                        +34 678 567 876
+                    </a></li>
+                    <li><a href="mailto:hola@brei-box.com" class="footer-contact-item">
+                        <span class="contact-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+                        hola@brei-box.com
+                    </a></li>
+                    <li><a href="https://maps.google.com/?q=43.35547160691261,-8.408104816067125" target="_blank" rel="noopener noreferrer" class="footer-contact-item">
+                        <span class="contact-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+                        <span>Calle Real 42, Local 3<br>15001 A Coruña, España</span>
+                    </a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3 class="footer-heading">La Tienda</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Guitarras Eléctricas</a></li>
+                    <li><a href="index.html">Amplificadores</a></li>
+                    <li><a href="index.html">Pedales de Efectos</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3 class="footer-heading">Información</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Sobre Brei-Box</a></li>
+                    <li><a href="#">Política de Devoluciones</a></li>
+                    <li><a href="#">Envíos y Plazos</a></li>
+                    <li><a href="#">Aviso Legal</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="footer-copy">© 2025 Brei-Box. Todos los derechos reservados.</p>
+            <div class="footer-payment-methods">
+                <span class="payment-label">Pagos seguros con:</span>
+                <span class="payment-badge" title="Visa"><svg width="38" height="24" viewBox="0 0 38 24"><rect width="38" height="24" rx="4" fill="#1A1F71"/><text x="19" y="16" text-anchor="middle" fill="white" font-size="11" font-family="Arial" font-weight="bold" font-style="italic">VISA</text></svg></span>
+                <span class="payment-badge" title="Mastercard"><svg width="38" height="24" viewBox="0 0 38 24"><rect width="38" height="24" rx="4" fill="#252525"/><circle cx="14" cy="12" r="7" fill="#EB001B" opacity=".9"/><circle cx="24" cy="12" r="7" fill="#F79E1B" opacity=".9"/></svg></span>
+                <span class="payment-badge" title="PayPal"><svg width="38" height="24" viewBox="0 0 38 24"><rect width="38" height="24" rx="4" fill="#003087"/><text x="19" y="16" text-anchor="middle" fill="white" font-size="8" font-family="Arial" font-weight="bold">PayPal</text></svg></span>
+                <span class="payment-badge" title="Bizum"><svg width="38" height="24" viewBox="0 0 38 24"><rect width="38" height="24" rx="4" fill="#00ADEF"/><text x="19" y="16" text-anchor="middle" fill="white" font-size="8" font-family="Arial" font-weight="bold">Bizum</text></svg></span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/carrito.js"></script>
+    <script src="../js/envio.js"></script>
+</body>
+</html>
